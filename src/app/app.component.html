@@ -1,7 +1,3 @@
 <p-toast />
 
-<div *ngIf="authService.currentUserSig() === null">LOGIN OR REGISTER</div>
-
-<div *ngIf="authService.currentUserSig()">WELCOME {{authService.currentUserSig()?.fullName}}</div>
-
 <router-outlet></router-outlet>
