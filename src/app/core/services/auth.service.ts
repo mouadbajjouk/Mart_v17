@@ -6,4 +6,10 @@ import { User } from '../../user.interface';
 })
 export class AuthService {
   currentUserSig = signal<User | undefined | null>(undefined);
+
+  isLoggedIn(): boolean {
+    if (!localStorage.getItem('token')) return false;
+
+    return true;
+  }
 }

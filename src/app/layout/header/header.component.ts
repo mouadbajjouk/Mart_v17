@@ -35,11 +35,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.items = HeaderData;
-    console.log('header component init');
-    console.log(
-      'header component init sig is ',
-      this.authService.currentUserSig()
-    );
   }
 
   navigateTo(link: string): void {
@@ -48,7 +43,7 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
-
-    location.href = '/'
+    this.authService.currentUserSig.set(null);
+    location.href = '/';
   }
 }
