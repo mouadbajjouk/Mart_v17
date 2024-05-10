@@ -9,10 +9,20 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class HttpService {
   httpClient = inject(HttpClient);
 
-  post<T>(endpoint: Endpoint, data: any, options?: any) {
-    return this.httpClient
-      .post<T>('https://localhost:5001/api' + endpoint, data, options);
-      // .pipe(catchError(error => this.handleError(error)));
+  get<T>(endpoint: Endpoint, options?: any): Observable<T> {
+    return this.httpClient.get<T>(
+      'https://localhost:5001/api' + endpoint,
+      options
+    ) as Observable<T>;
+  }
+
+  post<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
+    return this.httpClient.post<T>(
+      'https://localhost:5001/api' + endpoint,
+      data,
+      options
+    ) as Observable<T>;
+    // .pipe(catchError(error => this.handleError(error)));
   }
 
   // handleError(error: HttpErrorResponse)/*: Observable<any>*/ {

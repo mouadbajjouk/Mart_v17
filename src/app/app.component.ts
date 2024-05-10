@@ -1,5 +1,5 @@
+import { HttpService } from './core/services/http.service';
 import { AuthService } from './core/services/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
@@ -8,23 +8,30 @@ import { CommonModule } from '@angular/common';
 import { User } from './user.interface';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { Endpoint } from './core/enums/endpoint';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ToastModule, HeaderComponent, FooterComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    ToastModule,
+    HeaderComponent,
+    FooterComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [MessageService],
 })
 export class AppComponent implements OnInit {
   authService = inject(AuthService);
-  httpClient = inject(HttpClient);
+  httpService = inject(HttpService);
 
   title = 'mart';
 
   ngOnInit(): void {
-    this.httpClient.get<User>('https://localhost:5001/api/users/me').subscribe({
+    this.httpService.get<User>(Endpoint.ME).subscribe({
       next: response => {
         this.authService.currentUserSig.set(response);
       },

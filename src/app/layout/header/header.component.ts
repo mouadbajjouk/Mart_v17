@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
@@ -10,6 +10,7 @@ import { RippleModule } from 'primeng/ripple';
 import { AuthService } from '../../core/services/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
+import { HeaderData } from './header.data';
 
 @Component({
   selector: 'app-header',
@@ -33,68 +34,21 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
 
   ngOnInit() {
-    this.items = [
-      {
-        label: 'Home',
-        icon: 'pi pi-home',
-      },
-      {
-        label: 'Features',
-        icon: 'pi pi-star',
-      },
-      {
-        label: 'Projects',
-        icon: 'pi pi-search',
-        items: [
-          {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S',
-          },
-          {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B',
-          },
-          {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U',
-          },
-          {
-            separator: true,
-          },
-          {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2',
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        badge: '3',
-      },
-    ];
+    this.items = HeaderData;
+    console.log('header component init');
+    console.log(
+      'header component init sig is ',
+      this.authService.currentUserSig()
+    );
   }
 
-  goToLogin(): void {
-    this.router.navigate(['auth/login']);
+  navigateTo(link: string): void {
+    this.router.navigateByUrl(link);
   }
 
-  goToRegister(): void {
-    this.router.navigate(['auth/register']);
+  logout(): void {
+    localStorage.removeItem('token');
+
+    location.href = '/'
   }
 }

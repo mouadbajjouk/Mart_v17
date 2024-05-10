@@ -65,8 +65,12 @@
           fill="var(--primary-color-text)" />
       </svg>
     </ng-template>
+
     <ng-template pTemplate="item" let-item let-root="root">
-      <a pRipple class="flex align-items-center p-menuitem-link">
+      <a
+        pRipple
+        class="flex align-items-center p-menuitem-link"
+        [routerLink]="item.routerLink">
         <span [class]="item.icon"></span>
         <span class="ml-2">{{ item.label }}</span>
         <p-badge
@@ -86,24 +90,35 @@
           ]"></i>
       </a>
     </ng-template>
+
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
-        <!-- <input
-          type="text"
-          pInputText
-          placeholder="Search"
-          class="w-8rem sm:w-auto" /> -->
 
         <div *ngIf="authService.currentUserSig() === null">
-          <p-button label="Login" size="small" class="mr-3" (onClick)="goToLogin()"/>
-          <p-button label="Register" size="small" severity="success" (onClick)="goToRegister()"/>
+          <p-button
+            label="Login"
+            size="small"
+            class="mr-3"
+            (onClick)="navigateTo('auth/login')" />
+          <p-button
+            label="Register"
+            size="small"
+            severity="success"
+            (onClick)="navigateTo('auth/register')" />
         </div>
 
-        <div *ngIf="authService.currentUserSig()">
-          WELCOME {{ authService.currentUserSig()?.fullName
-          }}<p-avatar
+        <div class="flex align-items-center gap-2" *ngIf="authService.currentUserSig()">
+          Welcome {{ authService.currentUserSig()?.fullName }}
+
+          <p-avatar
             image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
             shape="circle" />
+
+          <p-button
+            label="Logout"
+            size="small"
+            (click)="logout()"
+            />
         </div>
       </div>
     </ng-template>

@@ -36,15 +36,14 @@ export class RegisterComponent {
   };
 
   onSubmit() {
-    this.httpService
-      .post(Endpoint.REGISTER, this.userRegister)
-      .subscribe();
-
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Registered successfully!',
-      detail: 'Please login with your account.',
-      life: 3000
+    this.httpService.post(Endpoint.REGISTER, this.userRegister).subscribe({
+      next: () =>
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registered successfully!',
+          detail: 'Please login with your account.',
+          life: 3000,
+        }),
     });
 
     this.router.navigate(['auth/login']);
