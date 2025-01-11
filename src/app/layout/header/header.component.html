@@ -94,7 +94,7 @@
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
 
-        <div *ngIf="authService.currentUserSig() === null">
+        <div *ngIf="!authService.isLoggedIn()">
           <p-button
             label="Login"
             size="small"
@@ -107,7 +107,7 @@
             (onClick)="navigateTo('auth/register')" />
         </div>
 
-        <div class="flex align-items-center gap-2" *ngIf="authService.currentUserSig()">
+        <div class="flex align-items-center gap-2" *ngIf="authService.isLoggedIn()">
           Welcome {{ authService.currentUserSig()?.fullName }}
 
           <p-avatar

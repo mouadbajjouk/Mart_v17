@@ -8,6 +8,13 @@
   class="flex w-screen h-screen align-items-center justify-content-center surface-100">
   <div
     class="flex flex-column align-items-center border-round-2xl surface-0 w-4 pb-7 pt-4 w-11 sm:w-10 lg:w-5 xl:w-4">
+    <div class="flex align-self-start justify-content-center ml-4">
+      <p-button
+        [link]="true"
+        icon="pi pi-arrow-left"
+        label="Back to home"
+        (onClick)="goToHome()"></p-button>
+    </div>
     <h3 class="text-center text-2xl pt-3">Register</h3>
 
     <form
@@ -29,26 +36,26 @@
         </div>
 
         <div class="flex flex-column gap-2">
-            <label for="firstName">First Name</label>
-            <input
-              id="firstName"
-              placeholder="Your first name"
-              pInputText
-              aria-describedby="first-name-help"
-              [(ngModel)]="userRegister.firstName"
-              name="firstName" />
-          </div>
+          <label for="firstName">First Name</label>
+          <input
+            id="firstName"
+            placeholder="Your first name"
+            pInputText
+            aria-describedby="first-name-help"
+            [(ngModel)]="userRegister.firstName"
+            name="firstName" />
+        </div>
 
-          <div class="flex flex-column gap-2">
-            <label for="lastName">Last Name</label>
-            <input
-              id="lastName"
-              placeholder="Your last name"
-              pInputText
-              aria-describedby="last-name-help"
-              [(ngModel)]="userRegister.lastName"
-              name="lastName" />
-          </div>
+        <div class="flex flex-column gap-2">
+          <label for="lastName">Last Name</label>
+          <input
+            id="lastName"
+            placeholder="Your last name"
+            pInputText
+            aria-describedby="last-name-help"
+            [(ngModel)]="userRegister.lastName"
+            name="lastName" />
+        </div>
 
         <div class="flex flex-column mb-3 gap-2">
           <label for="password">Password</label>
@@ -64,7 +71,12 @@
         </div>
 
         <div>
-          <button pButton label="Register" class="w-12" [disabled]="!registerForm.form.valid" type="submit"></button>
+          <button
+            pButton
+            label="Register"
+            class="w-12"
+            [disabled]="!registerForm.form.valid"
+            type="submit"></button>
         </div>
 
         <div class="flex align-items-center justify-content-between">
