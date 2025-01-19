@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { UserLogin } from './userLogin.interface';
 import { AuthService } from '../../../core/services/auth.service';
 import { Token } from './token.interface';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -28,17 +29,33 @@ export class LoginComponent {
   httpService = inject(HttpService);
   router = inject(Router);
   authService = inject(AuthService);
+  messageService = inject(MessageService);
 
   userLogin: UserLogin = { email: '', password: '' };
 
   onSubmit() {
-    this.httpService
-      .post<Token>(Endpoint.LOGIN, this.userLogin)
-      .subscribe(response => {
+    this.httpService.post<Token>(Endpoint.LOGIN, this.userLogin).subscribe(
+      response => {
         localStorage.setItem('token', response.accessToken);
 
         location.href = '/home';
-      });
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registered successfully!',
+          detail: 'Please login with your account.',
+          life: 3000,
+        });
+      },
+      () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Registered successfully!',
+          detail: 'Please login with your account.',
+          life: 3000,
+        });
+      }
+    );
   }
 
   goToRegister() {

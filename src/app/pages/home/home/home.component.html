@@ -1,1 +1,198 @@
-<p>home works!</p>
+<div class="flex flex-column align-items-center justify-content-center">
+  <div class="flex align-items-center">
+    <p class="text-8xl">Welcome to Mart!</p>
+  </div>
+
+  <div class="card w-12 mb-8">
+    <div class="flex justify-content-center align-items-center mb-2">
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+      <span class="font-semibold text-3xl mx-2">Hot deals</span>
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+    </div>
+    <p-carousel
+      [value]="products!"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-product pTemplate="item">
+        <div class="border-1 surface-border border-round m-2 p-3">
+          <div class="mb-3">
+            <div class="relative mx-auto">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+                  product.image
+                }}"
+                [alt]="product.name"
+                class="w-full border-round" />
+              <p-tag
+                [value]="product.inventoryStatus"
+                [severity]="getSeverity(product.inventoryStatus)"
+                class="absolute"
+                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+            </div>
+          </div>
+          <div class="mb-3 font-medium">
+            {{ product.name }}
+          </div>
+          <div class="flex justify-content-between align-items-center">
+            <div class="mt-0 font-semibold text-xl">
+              {{ '$' + product.price }}
+            </div>
+            <span>
+              <p-button
+                icon="pi pi-heart"
+                severity="secondary"
+                [outlined]="true" />
+              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div class="card w-12 my-8">
+    <div class="flex justify-content-center align-items-center mb-2">
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+      <span class="font-semibold text-3xl mx-2">Low cost</span>
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+    </div>
+    <p-carousel
+      [value]="products!"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-product pTemplate="item">
+        <div class="border-1 surface-border border-round m-2 p-3">
+          <div class="mb-3">
+            <div class="relative mx-auto">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+                  product.image
+                }}"
+                [alt]="product.name"
+                class="w-full border-round" />
+              <p-tag
+                [value]="product.inventoryStatus"
+                [severity]="getSeverity(product.inventoryStatus)"
+                class="absolute"
+                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+            </div>
+          </div>
+          <div class="mb-3 font-medium">
+            {{ product.name }}
+          </div>
+          <div class="flex justify-content-between align-items-center">
+            <div class="mt-0 font-semibold text-xl">
+              {{ '$' + product.price }}
+            </div>
+            <span>
+              <p-button
+                icon="pi pi-heart"
+                severity="secondary"
+                [outlined]="true" />
+              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div class="card w-12 my-8">
+    <div class="flex justify-content-center align-items-center mb-2">
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+      <span class="font-semibold text-3xl mx-2">New arrivals</span>
+      <img
+        src="assets/flame.svg"
+        alt="hot deal icon"
+        class="w-2rem flame-color" />
+    </div>
+    <p-carousel
+      [value]="products!"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions">
+      <ng-template let-product pTemplate="item">
+        <div class="border-1 surface-border border-round m-2 p-3">
+          <div class="mb-3">
+            <div class="relative mx-auto">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+                  product.image
+                }}"
+                [alt]="product.name"
+                class="w-full border-round" />
+              <p-tag
+                [value]="product.inventoryStatus"
+                [severity]="getSeverity(product.inventoryStatus)"
+                class="absolute"
+                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+            </div>
+          </div>
+          <div class="mb-3 font-medium">
+            {{ product.name }}
+          </div>
+          <div class="flex justify-content-between align-items-center">
+            <div class="mt-0 font-semibold text-xl">
+              {{ '$' + product.price }}
+            </div>
+            <span>
+              <p-button
+                icon="pi pi-heart"
+                severity="secondary"
+                [outlined]="true" />
+              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+
+  <div class="flex justify-content-center align-items-center my-8">
+    <img
+      src="assets/flame.svg"
+      alt="hot deal icon"
+      class="w-2rem flame-color" />
+    <span class="font-semibold text-3xl mx-2">OUR ADVANTAGES!</span>
+    <img
+      src="assets/flame.svg"
+      alt="hot deal icon"
+      class="w-2rem flame-color" />
+  </div>
+  <div class="flex w-12 justify-content-around mb-8">
+    <div class="flex flex-column align-items-center">
+      <i class="pi pi-truck text-8xl mb-4 text-primary"></i>
+      <div class="text-xl font-bold">Fast delivery inside Morocco</div>
+    </div>
+
+    <div class="flex flex-column align-items-center">
+      <i class="pi pi-check-circle text-8xl mb-4 text-primary"></i>
+      <div class="text-xl font-bold">Agent Warranty</div>
+    </div>
+
+    <div class="flex flex-column align-items-center">
+      <i class="pi pi-credit-card text-8xl mb-4 text-primary"></i>
+      <div class="text-xl font-bold">Secure Payment</div>
+    </div>
+  </div>
+</div>
