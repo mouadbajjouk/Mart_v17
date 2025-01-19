@@ -39,18 +39,11 @@ export class LoginComponent {
         localStorage.setItem('token', response.accessToken);
 
         location.href = '/home';
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Registered successfully!',
-          detail: 'Please login with your account.',
-          life: 3000,
-        });
       },
       () => {
         this.messageService.add({
-          severity: 'success',
-          summary: 'Registered successfully!',
+          severity: 'error',
+          summary: 'Invalid credentials!',
           detail: 'Please login with your account.',
           life: 3000,
         });
