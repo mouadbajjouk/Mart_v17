@@ -7,6 +7,10 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/auth/auth.routes'),
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.routes'),
+  },
+  {
     path: '',
     component: LayoutComponent,
     loadChildren: () => import('./pages/home/home.routes').then(t => t.routes),

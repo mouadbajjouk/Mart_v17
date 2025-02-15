@@ -93,7 +93,6 @@
 
     <ng-template pTemplate="end">
       <div class="flex align-items-center gap-2">
-
         <div *ngIf="!authService.isLoggedIn()">
           <p-button
             label="Login"
@@ -107,7 +106,9 @@
             (onClick)="navigateTo('auth/register')" />
         </div>
 
-        <div class="flex align-items-center gap-2" *ngIf="authService.isLoggedIn()">
+        <div
+          class="flex align-items-center gap-2"
+          *ngIf="authService.isLoggedIn()">
           Welcome {{ authService.currentUserSig()?.fullName }}
 
           <p-avatar
@@ -115,10 +116,12 @@
             shape="circle" />
 
           <p-button
-            label="Logout"
+            *ngIf="authService.isAdmin()"
+            label="Dashboard"
             size="small"
-            (click)="logout()"
-            />
+            (click)="goToDashboard()" />
+
+          <p-button label="Logout" size="small" (click)="logout()" />
         </div>
       </div>
     </ng-template>

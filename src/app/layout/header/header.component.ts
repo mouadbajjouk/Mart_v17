@@ -41,6 +41,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl(link);
   }
 
+  goToDashboard(): void {
+    this.navigateTo('admin/dashboard');
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     this.authService.currentUserSig.set(null);

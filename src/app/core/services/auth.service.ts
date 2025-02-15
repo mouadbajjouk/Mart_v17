@@ -12,4 +12,14 @@ export class AuthService {
 
     return true;
   }
+
+  isAdmin(): boolean {
+    // if (localStorage.getItem('token')) return true;
+
+
+    console.log(
+     JSON.parse(atob(localStorage.getItem('token')!.split('.')[1])))
+
+    return false;
+  }
 }
