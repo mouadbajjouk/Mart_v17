@@ -14,12 +14,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    // if (localStorage.getItem('token')) return true;
-
-
-    console.log(
-     JSON.parse(atob(localStorage.getItem('token')!.split('.')[1])))
-
+    if (this.currentUserSig()?.roles.includes('Admin')) return true;
     return false;
   }
 }
