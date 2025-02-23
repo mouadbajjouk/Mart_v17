@@ -5,13 +5,13 @@ import { Component } from '@angular/core';
   selector: 'app-admin-footer',
   styleUrl: '../styles/global.scss',
   template: `<div class="layout-footer">
-    SAKAI by
+    Mart
     <a
       href="https://primeng.org"
       target="_blank"
       rel="noopener noreferrer"
       class="text-primary font-bold hover:underline"
-      >PrimeNG</a
+      >Dashboard</a
     >
   </div>`,
 })

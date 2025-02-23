@@ -6,11 +6,12 @@ import { AppAdminSidebar } from './components/admin-sidebar';
 import { AppAdminTopbar } from './components/admin-topbar';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from './services/layout.service';
+import { StatsWidget } from "../../../pages/admin/dashboard/components/stats-widget";
 
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
-  imports: [RouterModule,CommonModule, AppAdminTopbar, AppAdminSidebar, RouterModule, AppAdminFooter],
+  imports: [RouterModule, CommonModule, AppAdminTopbar, AppAdminSidebar, RouterModule, AppAdminFooter, StatsWidget],
   templateUrl: './admin-layout.component.html',
   styleUrl: './styles/global.scss',
   encapsulation: ViewEncapsulation.None, // to fix global.scss affecting other loayouts (like home)
