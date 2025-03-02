@@ -6,11 +6,10 @@ import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CarouselModule, TagModule, ButtonModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    imports: [CarouselModule, TagModule, ButtonModule],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   products: Product[] | undefined;

@@ -13,17 +13,16 @@ import { Token } from './token.interface';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    InputTextModule,
-    ButtonModule,
-    PasswordModule,
-    FormsModule,
-    JsonPipe,
-  ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+    selector: 'app-login',
+    imports: [
+        InputTextModule,
+        ButtonModule,
+        PasswordModule,
+        FormsModule,
+        JsonPipe,
+    ],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   httpService = inject(HttpService);

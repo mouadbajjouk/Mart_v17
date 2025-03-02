@@ -6,10 +6,9 @@ import { CommonModule } from '@angular/common';
 // import { Product, ProductService } from '../../service/product.service';
 
 @Component({
-  standalone: true,
-  selector: 'app-recent-sales-widget',
-  imports: [CommonModule, TableModule, ButtonModule, RippleModule],
-  template: `<div class="card !mb-8">
+    selector: 'app-recent-sales-widget',
+    imports: [CommonModule, TableModule, ButtonModule, RippleModule],
+    template: `<div class="card !mb-8">
     <div class="font-semibold text-xl mb-4">Recent Sales</div>
     <p-table
       [value]="products"
@@ -52,8 +51,7 @@ import { CommonModule } from '@angular/common';
         </tr>
       </ng-template>
     </p-table>
-  </div>`,
-  //   providers: [ProductService],
+  </div>`
 })
 export class RecentSalesWidget {
   products!: Prod[];

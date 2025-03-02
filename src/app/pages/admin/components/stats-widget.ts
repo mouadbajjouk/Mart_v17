@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  selector: 'app-stats-widget',
-  imports: [CommonModule],
-  styles: [
-    `
+    selector: 'app-stats-widget',
+    imports: [CommonModule],
+    styles: [
+        `
       .card {
         background: #ffffff;
         padding: 2rem;
@@ -18,8 +17,8 @@ import { CommonModule } from '@angular/common';
         }
       }
     `,
-  ],
-  template: `<div class="grid">
+    ],
+    template: `<div class="grid">
     <div class="col-12 md:col-6 xl:col-3">
       <div class="card mb-0">
         <div class="flex justify-content-between align-items-center mb-3">
@@ -99,6 +98,6 @@ import { CommonModule } from '@angular/common';
         <span class="text-color-secondary">responded</span>
       </div>
     </div>
-  </div> `,
+  </div> `
 })
 export class StatsWidget {}

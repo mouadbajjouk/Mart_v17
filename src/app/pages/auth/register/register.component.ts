@@ -14,18 +14,17 @@ import { Error } from '../../../core/interfaces/error.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    InputTextModule,
-    ButtonModule,
-    PasswordModule,
-    FormsModule,
-    JsonPipe,
-    ToastModule,
-  ],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+    selector: 'app-register',
+    imports: [
+        InputTextModule,
+        ButtonModule,
+        PasswordModule,
+        FormsModule,
+        JsonPipe,
+        ToastModule,
+    ],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   httpService = inject(HttpService);

@@ -5,11 +5,10 @@ import { MenuItem } from 'primeng/api';
 import { AppAdminMenuitem } from './admin-menu-item';
 
 @Component({
-  selector: 'app-admin-menu',
-  standalone: true,
-  styleUrl: '../styles/global.scss',
-  imports: [CommonModule, AppAdminMenuitem, RouterModule],
-  template: `<ul class="layout-menu">
+    selector: 'app-admin-menu',
+    styleUrl: '../styles/global.scss',
+    imports: [CommonModule, AppAdminMenuitem, RouterModule],
+    template: `<ul class="layout-menu">
     <ng-container *ngFor="let item of model; let i = index">
       <li
         app-admin-menuitem
@@ -19,7 +18,7 @@ import { AppAdminMenuitem } from './admin-menu-item';
         [root]="true"></li>
       <li *ngIf="item.separator" class="menu-separator"></li>
     </ng-container>
-  </ul> `,
+  </ul> `
 })
 export class AppAdminMenu {
   model: MenuItem[] = [];

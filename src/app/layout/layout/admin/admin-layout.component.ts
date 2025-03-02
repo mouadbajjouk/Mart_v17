@@ -9,12 +9,11 @@ import { LayoutService } from './services/layout.service';
 import { StatsWidget } from "../../../pages/admin/components/stats-widget";
 
 @Component({
-  selector: 'app-admin-layout',
-  standalone: true,
-  imports: [RouterModule, CommonModule, AppAdminTopbar, AppAdminSidebar, RouterModule, AppAdminFooter, StatsWidget],
-  templateUrl: './admin-layout.component.html',
-  styleUrl: './styles/global.scss',
-  encapsulation: ViewEncapsulation.None, // to fix global.scss affecting other loayouts (like home)
+    selector: 'app-admin-layout',
+    imports: [RouterModule, CommonModule, AppAdminTopbar, AppAdminSidebar, RouterModule, AppAdminFooter, StatsWidget],
+    templateUrl: './admin-layout.component.html',
+    styleUrl: './styles/global.scss',
+    encapsulation: ViewEncapsulation.None
 })
 export class AdminLayoutComponent {
   overlayMenuOpenSubscription: Subscription;

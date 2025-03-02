@@ -15,12 +15,11 @@ import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../services/layout.service';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[app-admin-menuitem]',
-  standalone: true,
-  styleUrl: '../styles/global.scss',
-  imports: [CommonModule, RouterModule, RippleModule],
-  template: `
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[app-admin-menuitem]',
+    styleUrl: '../styles/global.scss',
+    imports: [CommonModule, RouterModule, RippleModule],
+    template: `
     <ng-container>
       <div
         *ngIf="root && item.visible !== false"
@@ -86,27 +85,18 @@ import { LayoutService } from '../services/layout.service';
       </ul>
     </ng-container>
   `,
-  animations: [
-    trigger('children', [
-      state(
-        'collapsed',
-        style({
-          height: '0',
-        })
-      ),
-      state(
-        'expanded',
-        style({
-          height: '*',
-        })
-      ),
-      transition(
-        'collapsed <=> expanded',
-        animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')
-      ),
-    ]),
-  ],
-  providers: [LayoutService],
+    animations: [
+        trigger('children', [
+            state('collapsed', style({
+                height: '0',
+            })),
+            state('expanded', style({
+                height: '*',
+            })),
+            transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+        ]),
+    ],
+    providers: [LayoutService]
 })
 export class AppAdminMenuitem {
   @Input() item!: MenuItem;

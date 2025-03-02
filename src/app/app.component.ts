@@ -11,18 +11,17 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { Endpoint } from './core/enums/endpoint';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    ToastModule,
-    HeaderComponent,
-    FooterComponent,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  providers: [MessageService],
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        ToastModule,
+        HeaderComponent,
+        FooterComponent,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    providers: [MessageService]
 })
 export class AppComponent implements OnInit {
   authService = inject(AuthService);

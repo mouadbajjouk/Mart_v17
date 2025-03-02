@@ -7,11 +7,10 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { LayoutService } from '../services/layout.service';
 
 @Component({
-  selector: 'app-admin-topbar',
-  standalone: true,
-  styleUrl: '../styles/global.scss',
-  imports: [RouterModule, CommonModule, StyleClassModule],
-  template: ` <div class="layout-topbar">
+    selector: 'app-admin-topbar',
+    styleUrl: '../styles/global.scss',
+    imports: [RouterModule, CommonModule, StyleClassModule],
+    template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
       <button
         class="layout-menu-button layout-topbar-action"
@@ -103,7 +102,7 @@ import { LayoutService } from '../services/layout.service';
         </div>
       </div>
     </div>
-  </div>`,
+  </div>`
 })
 export class AppAdminTopbar {
   items!: MenuItem[];

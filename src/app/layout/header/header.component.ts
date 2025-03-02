@@ -13,19 +13,18 @@ import { Router } from '@angular/router';
 import { HeaderData } from './header.data';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [
-    MenubarModule,
-    BadgeModule,
-    AvatarModule,
-    InputTextModule,
-    RippleModule,
-    CommonModule,
-    ButtonModule,
-  ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+    selector: 'app-header',
+    imports: [
+        MenubarModule,
+        BadgeModule,
+        AvatarModule,
+        InputTextModule,
+        RippleModule,
+        CommonModule,
+        ButtonModule,
+    ],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
   authService = inject(AuthService);
