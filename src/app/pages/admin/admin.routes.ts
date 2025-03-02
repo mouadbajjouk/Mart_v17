@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { adminGuard } from '../../core/guards/admin.guard';
 
 export default [

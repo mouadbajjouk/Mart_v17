@@ -10,51 +10,51 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [CarouselModule, TagModule, ButtonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   products: Product[] | undefined;
 
   responsiveOptions: any[] | undefined;
 
-  productService: ProductService = inject(ProductService)
+  productService: ProductService = inject(ProductService);
 
   constructor() {}
 
   ngOnInit() {
-      this.productService.getProductsSmall().then((products) => {
-          this.products = products;
-      });
+    this.productService.getProductsSmall().then(products => {
+      this.products = products;
+    });
 
-      this.responsiveOptions = [
-          {
-              breakpoint: '1199px',
-              numVisible: 1,
-              numScroll: 1
-          },
-          {
-              breakpoint: '991px',
-              numVisible: 2,
-              numScroll: 1
-          },
-          {
-              breakpoint: '767px',
-              numVisible: 1,
-              numScroll: 1
-          }
-      ];
+    this.responsiveOptions = [
+      {
+        breakpoint: '1199px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '991px',
+        numVisible: 2,
+        numScroll: 1,
+      },
+      {
+        breakpoint: '767px',
+        numVisible: 1,
+        numScroll: 1,
+      },
+    ];
   }
 
   getSeverity(status: string) {
-      switch (status) {
-          case 'INSTOCK':
-              return 'success';
-          case 'LOWSTOCK':
-              return 'warning';
-          case 'OUTOFSTOCK':
-              return 'danger';
-          default:
-              return ''
-      }
-  } 
+    switch (status) {
+      case 'INSTOCK':
+        return 'success';
+      case 'LOWSTOCK':
+        return 'warning';
+      case 'OUTOFSTOCK':
+        return 'danger';
+      default:
+        return undefined;
+    }
+  }
 }

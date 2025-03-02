@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
         background: #ffffff;
         padding: 2rem;
         margin-bottom: 2rem;
-        border-radius: var(--content-border-radius);
+        border-radius: 6px;
 
         &:last-child {
           margin-bottom: 0;
@@ -35,7 +35,7 @@ import { CommonModule } from '@angular/common';
             <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
           </div>
         </div>
-        <span class="text-primary font-semibold">24 new </span>
+        <span class="text-green-400 font-semibold">24 new </span>
         <span class="text-color-secondary">since last visit</span>
       </div>
     </div>
@@ -55,7 +55,7 @@ import { CommonModule } from '@angular/common';
             <i class="pi pi-dollar text-orange-500 text-xl"></i>
           </div>
         </div>
-        <span class="text-primary font-semibold">%52+ </span>
+        <span class="text-green-400 font-semibold">%52+ </span>
         <span class="text-color-secondary">since last week</span>
       </div>
     </div>
@@ -75,7 +75,7 @@ import { CommonModule } from '@angular/common';
             <i class="pi pi-users text-cyan-500 text-xl"></i>
           </div>
         </div>
-        <span class="text-primary font-semibold">520 </span>
+        <span class="text-green-400 font-semibold">520 </span>
         <span class="text-color-secondary">newly registered</span>
       </div>
     </div>
@@ -95,7 +95,7 @@ import { CommonModule } from '@angular/common';
             <i class="pi pi-comment text-purple-500 text-xl"></i>
           </div>
         </div>
-        <span class="text-primary font-semibold">85 </span>
+        <span class="text-green-400 font-semibold">85 </span>
         <span class="text-color-secondary">responded</span>
       </div>
     </div>

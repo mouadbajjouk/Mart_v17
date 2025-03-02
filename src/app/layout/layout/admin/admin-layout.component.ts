@@ -6,7 +6,7 @@ import { AppAdminSidebar } from './components/admin-sidebar';
 import { AppAdminTopbar } from './components/admin-topbar';
 import { filter, Subscription } from 'rxjs';
 import { LayoutService } from './services/layout.service';
-import { StatsWidget } from "../../../pages/admin/dashboard/components/stats-widget";
+import { StatsWidget } from "../../../pages/admin/components/stats-widget";
 
 @Component({
   selector: 'app-admin-layout',
