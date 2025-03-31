@@ -44,12 +44,12 @@ export class HomeComponent {
     ];
   }
 
-  getSeverity(status: string) {
+  getSeverity(status: string): "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | undefined {
     switch (status) {
       case 'INSTOCK':
         return 'success';
       case 'LOWSTOCK':
-        return 'warning';
+        return 'warn';
       case 'OUTOFSTOCK':
         return 'danger';
       default:

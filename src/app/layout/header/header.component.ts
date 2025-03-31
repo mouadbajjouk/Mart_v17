@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { AuthService } from '../../core/services/auth.service';
 import { ButtonModule } from 'primeng/button';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HeaderData } from './header.data';
 
 @Component({
@@ -22,6 +22,7 @@ import { HeaderData } from './header.data';
         RippleModule,
         CommonModule,
         ButtonModule,
+        RouterLink
     ],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
