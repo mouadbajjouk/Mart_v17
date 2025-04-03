@@ -111,9 +111,9 @@
           *ngIf="authService.isLoggedIn()">
           <span>Welcome {{ authService.currentUserSig()?.fullName }}</span>
 
-          <!-- <p-avatar
+          <p-avatar
             image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-            shape="circle" /> -->
+            shape="circle" />
 
           <p-button
             *ngIf="authService.isAdmin()"

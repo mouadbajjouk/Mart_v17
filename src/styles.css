@@ -2,19 +2,11 @@
 // @use './app/layout/layout/admin/styles/global.css';
 // @import 'primeflex/primeflex.css';
 // @import 'primeng/resources/themes/lara-light-blue/theme.css';
-// @use './tailwind.css';
-// @use './app/layout/layout/admin/styles/global.css';
-// @import 'tailwindcss';
-
-// @import 'tailwindcss-primeui';
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities; */
+*/
 
 @import 'tailwindcss';
 @import "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
-/* @import 'primeng/resources/primeng.css'; */
 
 
 
