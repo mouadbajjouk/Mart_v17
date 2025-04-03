@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 // import { Product, ProductService } from '../../service/product.service';
 
 @Component({
-    selector: 'app-recent-sales-widget',
-    imports: [CommonModule, TableModule, ButtonModule, RippleModule],
-    template: `<div class="card !mb-8">
+  selector: 'app-recent-sales-widget',
+  imports: [CommonModule, TableModule, ButtonModule, RippleModule],
+  template: `<div class="card !mb-8">
     <div class="font-semibold text-xl mb-12">Recent Sales</div>
     <p-table
       [value]="products"
@@ -31,7 +31,9 @@ import { CommonModule } from '@angular/common';
         <tr>
           <td style="width: 15%; min-width: 5rem;">
             <img
-              src=""
+              src="https://primefaces.org/cdn/primevue/images/product/{{
+                product.image
+              }}"
               class="shadow-lg"
               alt="{{ product.name }}"
               width="50" />
@@ -51,7 +53,7 @@ import { CommonModule } from '@angular/common';
         </tr>
       </ng-template>
     </p-table>
-  </div>`
+  </div>`,
 })
 export class RecentSalesWidget {
   products!: Prod[];
@@ -119,10 +121,10 @@ export class RecentSalesWidget {
         quantity: 24,
         inventoryStatus: 'INSTOCK',
         rating: 5,
-      }
+      },
     ];
     this.products = item;
-    console.log(this.products.length)
+    console.log(this.products.length);
   }
 }
 

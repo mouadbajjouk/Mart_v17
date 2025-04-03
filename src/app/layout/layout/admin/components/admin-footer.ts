@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `<div class="layout-footer">
     Mart
     <a
-      href="https://primeng.org"
+      href=""
       target="_blank"
       rel="noopener noreferrer"
       class="text-primary font-bold hover:underline"
