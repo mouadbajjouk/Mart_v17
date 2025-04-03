@@ -47,7 +47,7 @@ declare type SurfacesType = {
   standalone: true,
   imports: [CommonModule, FormsModule, SelectButtonModule],
   template: `
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-12">
       <div>
         <span class="text-sm text-muted-color font-semibold">Primary</span>
         <div class="pt-2 flex gap-2 flex-wrap justify-start">
@@ -59,7 +59,7 @@ declare type SurfacesType = {
               [ngClass]="{
                 'outline-primary': primaryColor.name === selectedPrimaryColor()
               }"
-              class="border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1"
+              class="border-surface-0 dark:border-surface-900 w-5/12 h-5 rounded-full p-0 cursor-pointer outline-0 outline-offset-1"
               [style]="{
                 'background-color':
                   primaryColor?.name === 'noir'
@@ -84,7 +84,7 @@ declare type SurfacesType = {
                     ? surface.name === 'zinc'
                     : surface.name === 'slate'
               }"
-              class="border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1"
+              class="border-surface-0 dark:border-surface-900 w-5/12 h-5 rounded-full p-0 cursor-pointer outline-0 outline-offset-1"
               [style]="{
                 'background-color':
                   surface?.name === 'noir'
@@ -116,7 +116,7 @@ declare type SurfacesType = {
   `,
   host: {
     class:
-      'hidden absolute top-[3.25rem] right-0 w-72 p-4 bg-surface-0 dark:bg-surface-900 border border-surface rounded-border origin-top shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]',
+      'hidden absolute top-[3.25rem] right-0 w-72 p-12 bg-surface-0 dark:bg-surface-900 border border-surface rounded-border origin-top shadow-[0px_3px_5px_rgba(0,0,0,0.02),0px_0px_2px_rgba(0,0,0,0.05),0px_1px_4px_rgba(0,0,0,0.08)]',
   },
 })
 export class AppConfigurator {

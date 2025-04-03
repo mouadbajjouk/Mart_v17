@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     selector: 'app-recent-sales-widget',
     imports: [CommonModule, TableModule, ButtonModule, RippleModule],
     template: `<div class="card !mb-8">
-    <div class="font-semibold text-xl mb-4">Recent Sales</div>
+    <div class="font-semibold text-xl mb-12">Recent Sales</div>
     <p-table
       [value]="products"
       [paginator]="true"

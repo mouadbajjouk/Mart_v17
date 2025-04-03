@@ -12,7 +12,7 @@ import { StatsWidget } from "../../../pages/admin/components/stats-widget";
     selector: 'app-admin-layout',
     imports: [RouterModule, CommonModule, AppAdminTopbar, AppAdminSidebar, RouterModule, AppAdminFooter, StatsWidget],
     templateUrl: './admin-layout.component.html',
-    styleUrl: './styles/global.scss',
+    styleUrl: './styles/global.css',
     encapsulation: ViewEncapsulation.None
 })
 export class AdminLayoutComponent {

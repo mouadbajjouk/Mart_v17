@@ -1,0 +1,35 @@
+/* // @use './tailwind.css';
+// @use './app/layout/layout/admin/styles/global.css';
+// @import 'primeflex/primeflex.css';
+// @import 'primeng/resources/themes/lara-light-blue/theme.css';
+// @use './tailwind.css';
+// @use './app/layout/layout/admin/styles/global.css';
+// @import 'tailwindcss';
+
+// @import 'tailwindcss-primeui';
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities; */
+
+@import 'tailwindcss';
+@import "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
+/* @import 'primeng/resources/primeng.css'; */
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+/* // body, app-root, app-header {
+//   display: flex;
+//   flex-direction: column;
+// } */

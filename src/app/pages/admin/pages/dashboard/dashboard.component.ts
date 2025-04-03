@@ -6,7 +6,7 @@ import { RecentSalesWidget } from "../../components/recent-sales";
     selector: 'app-dashboard',
     imports: [StatsWidget, RecentSalesWidget],
     templateUrl: './dashboard.component.html',
-    styleUrl: './dashboard.component.scss'
+    styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 

@@ -1,9 +1,9 @@
-// this file has all classes, it's not the optimal way to do this
-// but, for faster dashboard creation, I opted for this approach, which needs to be refactored afterwards
-// Talwind is only imported in the dashboard components
+/* // this file has all classes, it's not the optimal way to do this
+/* but, for faster dashboard creation, I opted for this approach, which needs to be refactored afterwards */
+/* Talwind is only imported in the dashboard components */
 @use '../../../../../tailwind.css';
 @use '../styles/mixins' as *;
-// @use '../styles/global.scss';
+/* @use '../styles/global.scss'; */ */
 
 
 
@@ -28,7 +28,7 @@
   --focus-ring-shadow: var(--p-focus-ring-shadow);
 }
 
-// -------------------------------- core.scss --------------------------------
+/* // -------------------------------- core.scss -------------------------------- */
 html {
   height: 100%;
   font-size: 14px;
@@ -54,7 +54,7 @@ a {
   min-height: 100vh;
 }
 
-// -------------------------------- footer.scss --------------------------------
+/* // -------------------------------- footer.scss -------------------------------- */
 .layout-footer {
   display: flex;
   align-items: center;
@@ -64,7 +64,7 @@ a {
   border-top: 1px solid var(--surface-border);
 }
 
-// -------------------------------- main.scss --------------------------------
+/* -------------------------------- main.scss -------------------------------- */
 .layout-main-container {
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@ a {
   padding-bottom: 2rem;
 }
 
-// -------------------------------- menu.scss --------------------------------
+/* -------------------------------- menu.scss -------------------------------- */
 .layout-sidebar {
   position: fixed;
   width: 20rem;
@@ -239,7 +239,7 @@ a {
   transition: max-height 1s ease-in-out;
 }
 
-// -------------------------------- preloader.scss --------------------------------
+/* -------------------------------- preloader.scss -------------------------------- */
 .preloader {
   position: fixed;
   z-index: 999999;
@@ -289,7 +289,7 @@ a {
   }
 }
 
-// -------------------------------- responsive.scss --------------------------------
+/* -------------------------------- responsive.scss -------------------------------- */
 @media screen and (min-width: 1960px) {
   .layout-main,
   .landing-wrapper {
@@ -401,7 +401,7 @@ a {
   }
 }
 
-// -------------------------------- topbar.scss --------------------------------
+/* -------------------------------- topbar.scss -------------------------------- */
 .layout-topbar {
   position: fixed;
   height: 4rem;
@@ -561,7 +561,7 @@ a {
   }
 }
 
-// -------------------------------- typography.scss --------------------------------
+/* -------------------------------- typography.scss -------------------------------- */
 h1,
 h2,
 h3,
@@ -631,7 +631,7 @@ p {
   }
 }
 
-// -------------------------------- utils.scss --------------------------------
+/* -------------------------------- utils.scss -------------------------------- */
 .clearfix:after {
   content: ' ';
   display: block;

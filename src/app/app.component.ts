@@ -20,7 +20,7 @@ import { Endpoint } from './core/enums/endpoint';
         FooterComponent,
     ],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
+    styleUrl: './app.component.css',
     providers: [MessageService]
 })
 export class AppComponent implements OnInit {

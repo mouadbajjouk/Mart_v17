@@ -5,24 +5,24 @@
 <!-- They work with min-width -->
 
 <div
-  class="flex w-screen h-screen align-items-center justify-content-center surface-100">
+  class="flex w-screen h-screen items-center justify-center bg-surface-100 dark:bg-surface-700">
   <div
-    class="flex flex-column align-items-center border-round-2xl surface-0 w-4 pb-7 pt-4 w-11 sm:w-10 lg:w-5 xl:w-4">
-    <div class="flex align-self-start justify-content-center ml-4">
+    class="flex flex-col items-center rounded-2xl bg-surface-0 dark:bg-surface-900 w-4/12 pb-16 pt-12 w-11/12 sm:w-10/12 lg:w-5/12 xl:w-4/12">
+    <div class="flex self-start justify-center ml-12">
       <p-button
         [link]="true"
         icon="pi pi-arrow-left"
         label="Back to home"
         (onClick)="goToHome()"></p-button>
     </div>
-    <h3 class="text-center text-2xl pt-3">Register</h3>
+    <h3 class="text-center text-2xl pt-6">Register</h3>
 
     <form
-      class="flex align-items-center justify-content-center w-10"
+      class="flex items-center justify-center w-10/12"
       #registerForm="ngForm"
       (ngSubmit)="onSubmit()">
-      <div class="flex flex-column gap-2 w-10">
-        <div class="flex flex-column gap-2">
+      <div class="flex flex-col gap-2 w-10/12">
+        <div class="flex flex-col gap-2">
           <!-- {{ userRegister | json }} -->
           <label for="email-address">Email Address</label>
           <input
@@ -35,7 +35,7 @@
             name="email" />
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-col gap-2">
           <label for="firstName">First Name</label>
           <input
             id="firstName"
@@ -46,7 +46,7 @@
             name="firstName" />
         </div>
 
-        <div class="flex flex-column gap-2">
+        <div class="flex flex-col gap-2">
           <label for="lastName">Last Name</label>
           <input
             id="lastName"
@@ -57,13 +57,13 @@
             name="lastName" />
         </div>
 
-        <div class="flex flex-column mb-3 gap-2">
+        <div class="flex flex-col mb-6 gap-2">
           <label for="password">Password</label>
           <p-password
             inputId="password"
             placeholder="Password"
-            styleClass="w-12"
-            inputStyleClass="w-12"
+            styleClass="w-full"
+            inputStyleClass="w-full"
             [toggleMask]="true"
             ariaLabel="password-help"
             [(ngModel)]="userRegister.password"
@@ -74,12 +74,12 @@
           <button
             pButton
             label="Register"
-            class="w-12"
+            class="w-full"
             [disabled]="!registerForm.form.valid"
             type="submit"></button>
         </div>
 
-        <div class="flex align-items-center justify-content-between">
+        <div class="flex items-center justify-between">
           <p>Already have an account?</p>
           <p-button
             label="Login"

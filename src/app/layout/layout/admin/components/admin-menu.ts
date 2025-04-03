@@ -6,7 +6,7 @@ import { AppAdminMenuitem } from './admin-menu-item';
 
 @Component({
     selector: 'app-admin-menu',
-    styleUrl: '../styles/global.scss',
+    styleUrl: '../styles/global.css',
     imports: [CommonModule, AppAdminMenuitem, RouterModule],
     template: `<ul class="layout-menu">
     <ng-container *ngFor="let item of model; let i = index">

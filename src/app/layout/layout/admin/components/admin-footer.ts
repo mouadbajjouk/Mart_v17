@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   standalone: true,
   selector: 'app-admin-footer',
-  styleUrl: '../styles/global.scss',
+  styleUrl: '../styles/global.css',
   template: `<div class="layout-footer">
     Mart
     <a

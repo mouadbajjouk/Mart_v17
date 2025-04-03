@@ -9,7 +9,7 @@ import { LayoutService } from '../services/layout.service';
   standalone: true,
   imports: [ButtonModule, StyleClassModule, AppConfigurator],
   template: `
-    <div class="fixed flex gap-4 top-8 right-8">
+    <div class="fixed flex gap-12 top-8 right-8">
       <p-button
         type="button"
         (onClick)="toggleDarkMode()"

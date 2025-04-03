@@ -69,7 +69,7 @@
     <ng-template pTemplate="item" let-item let-root="root">
       <a
         pRipple
-        class="flex align-items-center p-menuitem-link"
+        class="flex items-center p-2 rounded-md hover:bg-gray-100 transition"
         [routerLink]="item.routerLink">
         <span [class]="item.icon"></span>
         <span class="ml-2">{{ item.label }}</span>
@@ -79,7 +79,7 @@
           [value]="item.badge" />
         <span
           *ngIf="item.shortcut"
-          class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1"
+          class="ml-auto border border-gray-300 rounded bg-gray-100 text-xs p-1"
           >{{ item.shortcut }}</span
         >
         <i
@@ -92,12 +92,12 @@
     </ng-template>
 
     <ng-template pTemplate="end">
-      <div class="flex align-items-center gap-2">
+      <div class="flex items-center gap-2">
         <div *ngIf="!authService.isLoggedIn()">
           <p-button
             label="Login"
             size="small"
-            class="mr-3"
+            class="mr-6"
             (onClick)="navigateTo('auth/login')" />
           <p-button
             label="Register"
@@ -107,13 +107,13 @@
         </div>
 
         <div
-          class="flex align-items-center gap-2"
+          class="flex items-center gap-2"
           *ngIf="authService.isLoggedIn()">
-          Welcome {{ authService.currentUserSig()?.fullName }}
+          <span>Welcome {{ authService.currentUserSig()?.fullName }}</span>
 
-          <p-avatar
+          <!-- <p-avatar
             image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-            shape="circle" />
+            shape="circle" /> -->
 
           <p-button
             *ngIf="authService.isAdmin()"

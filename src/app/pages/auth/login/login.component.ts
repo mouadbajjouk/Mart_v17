@@ -22,7 +22,7 @@ import { MessageService } from 'primeng/api';
         JsonPipe,
     ],
     templateUrl: './login.component.html',
-    styleUrl: './login.component.scss'
+    styleUrl: './login.component.css'
 })
 export class LoginComponent {
   httpService = inject(HttpService);

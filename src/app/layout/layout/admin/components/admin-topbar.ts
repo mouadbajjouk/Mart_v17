@@ -8,7 +8,7 @@ import { LayoutService } from '../services/layout.service';
 
 @Component({
     selector: 'app-admin-topbar',
-    styleUrl: '../styles/global.scss',
+    styleUrl: '../styles/global.css',
     imports: [RouterModule, CommonModule, StyleClassModule],
     template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">

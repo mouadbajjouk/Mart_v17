@@ -24,7 +24,7 @@ import { HttpErrorResponse } from '@angular/common/http';
         ToastModule,
     ],
     templateUrl: './register.component.html',
-    styleUrl: './register.component.scss'
+    styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   httpService = inject(HttpService);
