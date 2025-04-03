@@ -124,7 +124,6 @@ export class RecentSalesWidget {
       },
     ];
     this.products = item;
-    console.log(this.products.length);
   }
 }
 

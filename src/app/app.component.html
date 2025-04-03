@@ -1,3 +1,25 @@
-<p-toast />
+<ng-container *ngIf="isLoading && !isServerDown; else serverError">
+  <div
+    class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white">
+    <div
+      class="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
+  </div>
+</ng-container>
 
-<router-outlet></router-outlet>
+<ng-template #serverError>
+  <div class="flex w-full h-screen justify-center items-center bg-gray-100">
+    <div class="flex flex-col items-center text-center p-8 bg-white shadow-lg rounded-xl">
+      <i class="pi pi-exclamation-circle text-red-600 mb-6" style="font-size: 6rem;"></i>
+      <h1 class="text-6xl font-bold text-gray-800">Error 503</h1>
+      <h2 class="text-4xl font-semibold text-gray-700 mt-2">Service Unavailable</h2>
+      <p class="text-lg text-gray-600 mt-4">
+        The server is temporarily unable to handle the request.  
+        Please try again later, or contact us at: <b>support&commat;mart.com</b>
+      </p>
+    </div>
+  </div>
+</ng-template>
+
+<router-outlet *ngIf="!isLoading && !isServerDown"></router-outlet>
+
+<p-toast />
