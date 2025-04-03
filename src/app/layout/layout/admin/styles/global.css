@@ -3,7 +3,7 @@
 /* Talwind is only imported in the dashboard components */
 @use '../../../../../tailwind.css';
 @use '../styles/mixins' as *;
-/* @use '../styles/global.scss'; */ */
+/* @use '../styles/global.scss'; */ 
 
 
 

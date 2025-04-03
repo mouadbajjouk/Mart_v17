@@ -6,8 +6,8 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { User } from './user.interface';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/layout/basic/components/header/header.component';
+import { FooterComponent } from './layout/layout/basic/components/footer/footer.component';
 import { Endpoint } from './core/enums/endpoint';
 
 @Component({
