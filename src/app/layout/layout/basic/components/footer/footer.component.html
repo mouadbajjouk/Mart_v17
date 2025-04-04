@@ -1,39 +1,56 @@
-<div class="flex border-t-2 border-primary-500 justify-around">
-  <div class="flex flex-col">
-    <div><span class="font-bold">MART</span></div>
-    <div>Our Mart offers the best deals!</div>
-    <div>We focus on bringin the latest products with the best prices!</div>
-  </div>
-  <div class="flex flex-col">
-    <div>
-      <span class="font-bold">Navigation</span>
-    </div>
-    <a routerLink="">Home</a>
-    <a routerLink="">Products</a>
-    <a routerLink="">About</a>
-    <a routerLink="">Contact</a>
-  </div>
+<footer class="bg-primary-500 text-white py-12">
+  <div class="container mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+      <!-- Company Info Section -->
+      <div class="flex flex-col space-y-4">
+        <h3 class="font-semibold text-xl">MART</h3>
+        <p class="text-sm">
+          Our Mart offers the best deals! We focus on bringing the latest
+          products with the best prices!
+        </p>
+      </div>
 
-  <div class="flex flex-col">
-    <div>
-      <span class="font-bold">Portfolio</span>
-    </div>
-    <a routerLink="">Home gadgets</a>
-    <a routerLink="">Desks</a>
-    <a routerLink="">Electronics</a>
-    <a routerLink="">Garden</a>
-  </div>
+      <!-- Navigation Links -->
+      <div class="flex flex-col space-y-4">
+        <h3 class="font-semibold text-xl">Navigation</h3>
+        <a href="/" class="text-sm hover:text-gray-300">Home</a>
+        <a href="/products" class="text-sm hover:text-gray-300">Products</a>
+        <a href="/about" class="text-sm hover:text-gray-300">About</a>
+        <a href="/contact" class="text-sm hover:text-gray-300">Contact</a>
+      </div>
 
-  <div class="flex flex-col">
-    <div>
-      <span class="font-bold">Get in touch</span>
-    </div>
-    <div><span>contact&#64;mart.com</span></div>
-    <div><span>Avenue 16, near Big Mall, Kénitra</span></div>
-  </div>
-</div>
+      <!-- Portfolio Links -->
+      <div class="flex flex-col space-y-4">
+        <h3 class="font-semibold text-xl">Portfolio</h3>
+        <a href="/portfolio/home-gadgets" class="text-sm hover:text-gray-300"
+          >Home Gadgets</a
+        >
+        <a href="/portfolio/desks" class="text-sm hover:text-gray-300">Desks</a>
+        <a href="/portfolio/electronics" class="text-sm hover:text-gray-300"
+          >Electronics</a
+        >
+        <a href="/portfolio/garden" class="text-sm hover:text-gray-300"
+          >Garden</a
+        >
+      </div>
 
-<!-- <div
-  class="flex items-center justify-center">
-  <h4 class="text-center">Mart - copyright 2024</h4>
-</div> -->
+      <!-- Contact Info -->
+      <div class="flex flex-col space-y-4">
+        <h3 class="font-semibold text-xl">Get in Touch</h3>
+        <p class="text-sm">contact&commat;mart.com</p>
+        <p class="text-sm">Avenue 16, near Big Mall, Kénitra</p>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Section -->
+    <div class="mt-12 border-t border-gray-600 pt-6">
+      <div class="flex justify-between items-center">
+        <p class="text-sm">© 2025 Mart. All Rights Reserved.</p>
+        <div class="space-x-4">
+          <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+          <a href="#" class="hover:text-gray-300">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
