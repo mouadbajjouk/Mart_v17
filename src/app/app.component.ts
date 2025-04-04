@@ -30,11 +30,17 @@ export class AppComponent implements OnInit {
     this.httpService
       .get<User>(Endpoint.ME)
       .pipe(
-        timeout(5),
+        timeout(5000),
         catchError(error => {
-          console.error('API Timeout or Error:', error);
           this.isLoading = false;
-          this.isServerDown = true; // Activate error flag
+
+          // Timeout or no server response
+          if (error.name === 'TimeoutError' || error.status === 0) {
+            console.error('Server unreachable or timeout');
+            this.isServerDown = true; // activate error flag
+          } else {
+            console.warn('Received HTTP error from server:', error.status);
+          }
           this.authService.currentUserSig.set(null);
           return throwError(() => error);
         })
@@ -45,7 +51,7 @@ export class AppComponent implements OnInit {
           this.isLoading = false;
         },
         error: () => {
-            this.authService.currentUserSig.set(null);
+          this.authService.currentUserSig.set(null);
         },
       });
   }

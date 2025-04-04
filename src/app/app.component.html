@@ -1,25 +1,43 @@
-<ng-container *ngIf="isLoading && !isServerDown; else serverError">
-  <div
-    class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white">
+<ng-container [ngSwitch]="true">
+  <!-- Show loader while loading and server is not down -->
+  <ng-container *ngSwitchCase="isLoading && !isServerDown">
     <div
-      class="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
-  </div>
+      class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white">
+      <div
+        class="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full"></div>
+    </div>
+  </ng-container>
+
+  <!-- Show server error page -->
+  <ng-container *ngSwitchCase="isServerDown">
+    <div
+      class="flex items-center justify-center h-screen w-screen bg-gradient-to-r from-gray-100 to-gray-300">
+      <div
+        class="backdrop-blur-lg bg-white/80 border border-gray-300 shadow-2xl rounded-3xl p-12 max-w-2xl text-center animate-fade-in">
+        <div class="flex flex-col items-center gap-6">
+          <i
+            class="pi pi-exclamation-triangle text-red-500 drop-shadow-lg"
+            style="font-size: 10rem"></i>
+          <h1 class="text-6xl font-extrabold text-gray-800 tracking-tight">
+            503 – Service Unavailable
+          </h1>
+          <p class="text-xl text-gray-600">
+            Our servers are currently unable to handle your request.
+            <br />
+            We’re working to restore service as quickly as possible.
+            <br />
+            Should you need any help, please contact us at:
+            <b>support&commat;mart.com</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Show actual content -->
+  <ng-container *ngSwitchDefault>
+    <router-outlet></router-outlet>
+  </ng-container>
 </ng-container>
 
-<ng-template #serverError>
-  <div class="flex w-full h-screen justify-center items-center bg-gray-100">
-    <div class="flex flex-col items-center text-center p-8 bg-white shadow-lg rounded-xl">
-      <i class="pi pi-exclamation-circle text-red-600 mb-6" style="font-size: 6rem;"></i>
-      <h1 class="text-6xl font-bold text-gray-800">Error 503</h1>
-      <h2 class="text-4xl font-semibold text-gray-700 mt-2">Service Unavailable</h2>
-      <p class="text-lg text-gray-600 mt-4">
-        The server is temporarily unable to handle the request.  
-        Please try again later, or contact us at: <b>support&commat;mart.com</b>
-      </p>
-    </div>
-  </div>
-</ng-template>
-
-<router-outlet *ngIf="!isLoading && !isServerDown"></router-outlet>
-
-<p-toast />
+<p-toast></p-toast>
