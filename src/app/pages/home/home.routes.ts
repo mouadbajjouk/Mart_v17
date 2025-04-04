@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from '../../shared/not-found/not-found.component';
 
 export const routes: Route[] = [
   {
@@ -25,4 +26,8 @@ export const routes: Route[] = [
     path: 'contact',
     component: ContactComponent,
   },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
