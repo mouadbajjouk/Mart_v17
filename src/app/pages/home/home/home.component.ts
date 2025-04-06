@@ -7,10 +7,10 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-home',
-    imports: [CarouselModule, TagModule, ButtonModule, CommonModule],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css'
+  selector: 'app-home',
+  imports: [CarouselModule, TagModule, ButtonModule, CommonModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   products: Product[] = [];
@@ -22,8 +22,9 @@ export class HomeComponent {
   constructor() {}
 
   ngOnInit() {
-    this.productService.getProductsSmall().then(products => {
-      this.products = products;
+    this.productService.getProductsData().subscribe({
+      next: data => (this.products = data.slice(0, 5)),
+      error: () => console.log('rrrrr'),
     });
 
     this.responsiveOptions = [
@@ -45,7 +46,16 @@ export class HomeComponent {
     ];
   }
 
-  getSeverity(status: string): "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | undefined {
+  getSeverity(
+    status: string
+  ):
+    | 'success'
+    | 'secondary'
+    | 'info'
+    | 'warn'
+    | 'danger'
+    | 'contrast'
+    | undefined {
     switch (status) {
       case 'INSTOCK':
         return 'success';
