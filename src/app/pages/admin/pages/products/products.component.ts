@@ -11,19 +11,20 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { CommonModule } from '@angular/common';
-import { FileUpload } from 'primeng/fileupload';
+import { FileUpload, FileUploadEvent, UploadEvent } from 'primeng/fileupload';
 import { SelectModule } from 'primeng/select';
 import { Tag } from 'primeng/tag';
 import { RadioButton } from 'primeng/radiobutton';
 import { Rating } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
+import { InputNumber, InputNumberModule } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { Table } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { Product } from '../../../../domain/product';
 import { ProductService } from '../../../../services/product.service';
+import { BadgeModule } from 'primeng/badge';
 
 interface Column {
   field: string;
@@ -60,12 +61,23 @@ interface ExportColumn {
     IconFieldModule,
     InputIconModule,
     ButtonModule,
+    InputNumberModule,
+    FileUpload,
+    BadgeModule,
   ],
   providers: [MessageService, ConfirmationService, ProductService],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
+  files = [];
+
+  totalSize: number = 0;
+
+  totalSizePercent: number = 0;
+
+  uploadedFiles: any[] = [];
+
   productDialog: boolean = false;
 
   products!: Product[];
@@ -222,6 +234,18 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  onUpload(event: FileUploadEvent) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.messageService.add({
+      severity: 'info',
+      summary: 'File Uploaded',
+      detail: '',
+    });
+  }
+
   saveProduct() {
     this.submitted = true;
 
@@ -250,5 +274,56 @@ export class ProductsComponent implements OnInit {
       this.productDialog = false;
       this.product = {};
     }
+  }
+
+  choose(event: any, callback: any) {
+    callback();
+  }
+
+  onRemoveTemplatingFile(event:any, file:any, removeFileCallback:any, index:any) {
+    removeFileCallback(event, index);
+    this.totalSize -= parseInt(this.formatSize(file.size));
+    this.totalSizePercent = this.totalSize / 10;
+  }
+
+  onClearTemplatingUpload(clear:any) {
+    clear();
+    this.totalSize = 0;
+    this.totalSizePercent = 0;
+  }
+
+  onTemplatedUpload() {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded',
+      life: 3000,
+    });
+  }
+
+  onSelectedFiles(event: any) {
+    this.files = event.currentFiles;
+    this.files.forEach(file => {
+      this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
+    });
+    this.totalSizePercent = this.totalSize / 10;
+  }
+
+  uploadEvent(callback: any) {
+    callback();
+  }
+
+  formatSize(bytes: any) {
+    const k = 1024;
+    const dm = 3;
+    const sizes = 'f';//this.config.translation.fileSizeTypes;
+    if (bytes === 0) {
+      return `0 ${sizes[0]}`;
+    }
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+
+    return `${formattedSize} ${sizes[i]}`;
   }
 }
