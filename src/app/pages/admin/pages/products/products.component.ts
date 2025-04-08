@@ -25,6 +25,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { Product } from '../../../../domain/product';
 import { ProductService } from '../../../../services/product.service';
 import { BadgeModule } from 'primeng/badge';
+import { Enum } from '../../../../domain/enum';
 
 interface Column {
   field: string;
@@ -84,6 +85,8 @@ export class ProductsComponent implements OnInit {
 
   product!: Product;
 
+  categories: Enum[] = [];
+
   selectedProducts!: Product[] | null;
 
   submitted: boolean = false;
@@ -105,6 +108,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDemoData();
+    this.loadCategories();
   }
 
   applyFilterGlobal($event: Event, stringVal: string) {
@@ -143,6 +147,18 @@ export class ProductsComponent implements OnInit {
       title: col.header,
       dataKey: col.field,
     }));
+  }
+
+  loadCategories() {
+    this.productService.getCategories().subscribe({
+      next: data => {
+        this.categories = data;
+      },
+    });
+  }
+
+  getCategoryName(categoryId: number): string | undefined {
+    return this.categories.find(c => c.id === categoryId)?.name;
   }
 
   openNew() {
@@ -259,20 +275,29 @@ export class ProductsComponent implements OnInit {
           life: 3000,
         });
       } else {
-        this.product.id = this.createId();
+        //this.product.id = this.createId();
         //this.product.image = 'product-placeholder.svg';
-        this.products.push(this.product);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Created',
-          life: 3000,
+        this.product.imageFiles = this.files;
+        this.productService.addProduct(this.product).subscribe({
+          next: () => {
+            this.products.push(this.product);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Product Created',
+              life: 3000,
+            });
+
+            this.productDialog = false; // TODO: FALSE
+            console.log('after save:', this.product.imageFiles?.at(0)?.bytes);
+            this.loadDemoData();
+
+            this.product = {};
+          },
         });
       }
 
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {};
+      //this.products = [...this.products];
     }
   }
 
@@ -280,13 +305,18 @@ export class ProductsComponent implements OnInit {
     callback();
   }
 
-  onRemoveTemplatingFile(event:any, file:any, removeFileCallback:any, index:any) {
+  onRemoveTemplatingFile(
+    event: any,
+    file: any,
+    removeFileCallback: any,
+    index: any
+  ) {
     removeFileCallback(event, index);
     this.totalSize -= parseInt(this.formatSize(file.size));
     this.totalSizePercent = this.totalSize / 10;
   }
 
-  onClearTemplatingUpload(clear:any) {
+  onClearTemplatingUpload(clear: any) {
     clear();
     this.totalSize = 0;
     this.totalSizePercent = 0;
@@ -303,6 +333,7 @@ export class ProductsComponent implements OnInit {
 
   onSelectedFiles(event: any) {
     this.files = event.currentFiles;
+    console.log('files: ', this.files);
     this.files.forEach(file => {
       this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
     });
@@ -316,7 +347,7 @@ export class ProductsComponent implements OnInit {
   formatSize(bytes: any) {
     const k = 1024;
     const dm = 3;
-    const sizes = 'f';//this.config.translation.fileSizeTypes;
+    const sizes = 'f'; //this.config.translation.fileSizeTypes;
     if (bytes === 0) {
       return `0 ${sizes[0]}`;
     }

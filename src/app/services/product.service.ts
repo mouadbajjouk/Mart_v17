@@ -1,8 +1,9 @@
+import { Product } from './../domain/product';
 import { Observable } from 'rxjs';
 import { Endpoint } from '../core/enums/endpoint';
-import { Product } from '../domain/product';
 import { HttpService } from './../core/services/http.service';
 import { inject, Injectable } from '@angular/core';
+import { Enum } from '../domain/enum';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,38 @@ export class ProductService {
 
   getProductsData(): Observable<Product[]> {
     return this.httpService.get<Product[]>(Endpoint.GET_PRODUCTS);
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    // TODO: ADD AUTH !!!!
+    let formData = new FormData();
+
+    // if (product.id) formData.append('id', product.id);
+    if (product.name) formData.append('name', product.name);
+    if (product.categoryId) formData.append('categoryId', product.categoryId.toString());
+    if (product.price !== undefined && product.price !== null)
+      formData.append('price', product.price.toString());
+    if (product.description)
+      formData.append('description', product.description);
+    if (product.quantity !== undefined && product.quantity !== null)
+      formData.append('quantity', product.quantity.toString());
+    if (product.sku) formData.append('sku', product.sku);
+    if (product.barcode) formData.append('barcode', product.barcode);
+
+    // Append each file individually
+    if (product.imageFiles) {
+      product.imageFiles.forEach((file, index) => {
+        if (file instanceof File) {
+          formData.append('imageFiles', file, file.name); // key must match parameter name in C#
+        }
+      });
+    }
+
+    return this.httpService.post(Endpoint.ADD_PRODUCTS, formData);
+  }
+
+  getCategories() {
+    return this.httpService.get<Enum[]>(Endpoint.GET_CATEGORIES);
   }
 
   // getProducts() {

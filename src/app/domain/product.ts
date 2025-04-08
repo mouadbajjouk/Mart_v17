@@ -1,10 +1,12 @@
+import { Enum } from "./enum";
+
 export interface Product {
   id?: string;
   name?: string;
-  category?: string;
+  categoryId?: number;
   price?: number;
   description?: string;
-  imageFiles?: string[];
+  imageFiles?: File[];
   quantity?: number;
   sku?: string;
   barcode?: string;
