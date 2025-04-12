@@ -26,6 +26,7 @@ import { Product } from '../../../../domain/product';
 import { ProductService } from '../../../../services/product.service';
 import { BadgeModule } from 'primeng/badge';
 import { Enum } from '../../../../domain/enum';
+import { startCase } from 'lodash';
 
 interface Column {
   field: string;
@@ -152,7 +153,10 @@ export class ProductsComponent implements OnInit {
   loadCategories() {
     this.productService.getCategories().subscribe({
       next: data => {
-        this.categories = data;
+        this.categories = data.map(category => ({
+          ...category,
+          name: startCase(category.name),
+        }));
       },
     });
   }
