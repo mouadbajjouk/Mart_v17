@@ -3,8 +3,10 @@ export enum Endpoint {
   REGISTER = '/users/register',
   ME = '/users/me',
   GET_PRODUCTS = '/products',
-  ADD_PRODUCTS = '/products/add',
-  GET_CATEGORIES = '/products/categories'
+  ADD_PRODUCT = '/products/add',
+  EDIT_PRODUCT = '/products',
+  GET_CATEGORIES = '/products/categories',
+  DELETE_FILE = '/files',
 }
 
 // ORGNAIZE

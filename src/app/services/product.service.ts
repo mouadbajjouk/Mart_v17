@@ -18,9 +18,22 @@ export class ProductService {
 
   addProduct(product: Product): Observable<Product> {
     // TODO: ADD AUTH !!!!
+    let formData = this.GetProductFormData(product);
+
+    return this.httpService.post(Endpoint.ADD_PRODUCT, formData);
+  }
+
+  editProduct(product: Product): Observable<Product> {
+    // TODO: ADD AUTH !!!!
+    let formData = this.GetProductFormData(product);
+
+    return this.httpService.patch(Endpoint.EDIT_PRODUCT, formData);
+  }
+
+  private GetProductFormData(product: Product) {
     let formData = new FormData();
 
-    // if (product.id) formData.append('id', product.id);
+    if (product.id) formData.append('id', product.id);
     if (product.name) formData.append('name', product.name);
     if (product.categoryId) formData.append('categoryId', product.categoryId.toString());
     if (product.price !== undefined && product.price !== null)
@@ -30,7 +43,7 @@ export class ProductService {
     if (product.quantity !== undefined && product.quantity !== null)
       formData.append('quantity', product.quantity.toString());
     if (product.sku) formData.append('sku', product.sku);
-    if (product.barcode) formData.append('barcode', product.barcode);
+    if (product.barCode) formData.append('barCode', product.barCode);
 
     // Append each file individually
     if (product.imageFiles) {
@@ -40,8 +53,7 @@ export class ProductService {
         }
       });
     }
-
-    return this.httpService.post(Endpoint.ADD_PRODUCTS, formData);
+    return formData;
   }
 
   getCategories() {

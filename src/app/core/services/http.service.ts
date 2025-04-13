@@ -25,6 +25,30 @@ export class HttpService {
     // .pipe(catchError(error => this.handleError(error)));
   }
 
+  patch<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
+    return this.httpClient.patch<T>(
+      'https://localhost:5001/api/v1' + endpoint,
+      data,
+      options
+    ) as Observable<T>;
+    // .pipe(catchError(error => this.handleError(error)));
+  }
+
+  delete<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
+    return this.httpClient.delete(
+      'https://localhost:5001/api/v1' + endpoint,
+      data
+    ) as Observable<T>;
+    // .pipe(catchError(error => this.handleError(error)));
+  }
+
+  deleteUsingQuery<T>(endpoint: Endpoint, queryParam: string): Observable<T> {
+    return this.httpClient.delete(
+      'https://localhost:5001/api/v1' + endpoint + queryParam
+    ) as Observable<T>;
+    // .pipe(catchError(error => this.handleError(error)));
+  }
+
   // handleError(error: HttpErrorResponse)/*: Observable<any>*/ {
   //   if (error.error instanceof ErrorEvent) {
   //     console.error('An error occured:', error.error.message);

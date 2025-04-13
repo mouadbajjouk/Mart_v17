@@ -72,20 +72,21 @@
           <p-tableHeaderCheckbox />
         </th>
         <th style="min-width: 8rem">Sku</th>
-        <th pSortableColumn="name" style="min-width: 16rem">
+        <th style="min-width: 8rem">Bar Code</th>
+        <th pSortableColumn="name" style="min-width: 8rem">
           Name
           <p-sortIcon field="name" />
         </th>
-        <th>Image</th>
+        <th style="min-width: 12rem">Image</th>
         <th pSortableColumn="price" style="min-width: 8rem">
           Price
           <p-sortIcon field="price" />
         </th>
-        <th pSortableColumn="category" style="min-width: 10rem">
+        <th pSortableColumn="category" style="min-width: 8rem">
           Category
           <p-sortIcon field="category" />
         </th>
-        <th pSortableColumn="quantity" style="min-width: 10rem">
+        <th pSortableColumn="quantity" style="min-width: 8rem">
           Quantity
           <p-sortIcon field="quantity" />
         </th>
@@ -106,6 +107,7 @@
           <p-tableCheckbox [value]="product" />
         </td>
         <td style="min-width: 12rem">{{ product.sku }}</td>
+        <td style="min-width: 12rem">{{ product.barCode }}</td>
         <td style="min-width: 16rem">{{ product.name }}</td>
         <td>
           <img
@@ -212,7 +214,7 @@
             type="text"
             pInputText
             id="barcode"
-            [(ngModel)]="product.barcode"
+            [(ngModel)]="product.barCode"
             autofocus
             fluid />
         </div>
@@ -273,6 +275,25 @@
             >
           </div>
         </div>
+
+        <ng-container *ngIf="isProductEdit">
+          <p class="block font-bold mb-3">Product images</p>
+          <div class="flex">
+            @for (image of product.imageFiles; track $index) {
+              <div class="flex flex-col items-center gap-4">
+                <img class="block h-[250px] w-auto"
+                  [src]="'data:image/png;base64,' + (image.bytes)"
+                  alt="" />
+                <p-button class="block"
+                  icon="pi pi-times"
+                  [rounded]="true"
+                  severity="danger"
+                  [outlined]="true" 
+                  (onClick)="deleteImage(image.id)"/>
+              </div>
+            }
+          </div>
+        </ng-container>
 
         <div>
           <label for="images" class="block font-bold mb-3">Upload images</label>

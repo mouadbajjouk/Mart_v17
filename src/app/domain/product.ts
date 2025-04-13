@@ -1,4 +1,5 @@
 import { Enum } from "./enum";
+import { AppFile } from "./appFile";
 
 export interface Product {
   id?: string;
@@ -6,9 +7,9 @@ export interface Product {
   categoryId?: number;
   price?: number;
   description?: string;
-  imageFiles?: File[];
+  imageFiles?: AppFile[];
   quantity?: number;
   sku?: string;
-  barcode?: string;
+  barCode?: string;
   inventoryStatus?: string;
 }

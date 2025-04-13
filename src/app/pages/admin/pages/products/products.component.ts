@@ -1,4 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { TableModule } from 'primeng/table';
@@ -27,6 +33,7 @@ import { ProductService } from '../../../../services/product.service';
 import { BadgeModule } from 'primeng/badge';
 import { Enum } from '../../../../domain/enum';
 import { startCase } from 'lodash';
+import { FileService } from '../../../../services/file.service';
 
 interface Column {
   field: string;
@@ -67,7 +74,7 @@ interface ExportColumn {
     FileUpload,
     BadgeModule,
   ],
-  providers: [MessageService, ConfirmationService, ProductService],
+  providers: [MessageService, ConfirmationService, ProductService, FileService],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -81,6 +88,8 @@ export class ProductsComponent implements OnInit {
   uploadedFiles: any[] = [];
 
   productDialog: boolean = false;
+
+  isProductEdit = false;
 
   products!: Product[];
 
@@ -99,6 +108,8 @@ export class ProductsComponent implements OnInit {
   cols!: Column[];
 
   exportColumns!: ExportColumn[];
+
+  fileService = inject(FileService);
 
   constructor(
     private productService: ProductService,
@@ -169,11 +180,13 @@ export class ProductsComponent implements OnInit {
     this.product = {};
     this.submitted = false;
     this.productDialog = true;
+    this.isProductEdit = false;
   }
 
   editProduct(product: Product) {
     this.product = { ...product };
     this.productDialog = true;
+    this.isProductEdit = true;
   }
 
   deleteSelectedProducts() {
@@ -199,6 +212,7 @@ export class ProductsComponent implements OnInit {
   hideDialog() {
     this.productDialog = false;
     this.submitted = false;
+    this.isProductEdit = false;
   }
 
   deleteProduct(product: Product) {
@@ -267,16 +281,26 @@ export class ProductsComponent implements OnInit {
   }
 
   saveProduct() {
-    this.submitted = true;
-
     if (this.product.name?.trim()) {
       if (this.product.id) {
         this.products[this.findIndexById(this.product.id)] = this.product;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Updated',
-          life: 3000,
+        this.product.imageFiles = this.files;
+        this.productService.editProduct(this.product).subscribe({
+          next: () => {
+            this.submitted = true;
+
+            this.productDialog = false; // TODO: FALSE
+            this.loadDemoData();
+
+            this.product = {};
+
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Product Updated',
+              life: 3000,
+            });
+          },
         });
       } else {
         //this.product.id = this.createId();
@@ -360,5 +384,18 @@ export class ProductsComponent implements OnInit {
     const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
 
     return `${formattedSize} ${sizes[i]}`;
+  }
+
+  deleteImage(fileId: string) {
+    this.fileService.deleteFile(fileId).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'File deleted',
+          life: 3000,
+        });
+      }
+    });
   }
 }
