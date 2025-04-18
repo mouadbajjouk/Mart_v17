@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Endpoint } from './../enums/endpoint';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
@@ -8,17 +9,18 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class HttpService {
   httpClient = inject(HttpClient);
+  apiUrl = environment.apiUrl;
 
   get<T>(endpoint: Endpoint, options?: any): Observable<T> {
     return this.httpClient.get<T>(
-      'https://localhost:5001/api/v1' + endpoint,
+      this.apiUrl + endpoint,
       options
     ) as Observable<T>;
   }
 
   post<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
     return this.httpClient.post<T>(
-      'https://localhost:5001/api/v1' + endpoint,
+      this.apiUrl + endpoint,
       data,
       options
     ) as Observable<T>;
@@ -27,7 +29,7 @@ export class HttpService {
 
   patch<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
     return this.httpClient.patch<T>(
-      'https://localhost:5001/api/v1' + endpoint,
+      this.apiUrl + endpoint,
       data,
       options
     ) as Observable<T>;
@@ -36,7 +38,7 @@ export class HttpService {
 
   delete<T>(endpoint: Endpoint, data: any, options?: any): Observable<T> {
     return this.httpClient.delete(
-      'https://localhost:5001/api/v1' + endpoint,
+      this.apiUrl + endpoint,
       data
     ) as Observable<T>;
     // .pipe(catchError(error => this.handleError(error)));
@@ -44,7 +46,7 @@ export class HttpService {
 
   deleteUsingQuery<T>(endpoint: Endpoint, queryParam: string): Observable<T> {
     return this.httpClient.delete(
-      'https://localhost:5001/api/v1' + endpoint + queryParam
+      this.apiUrl + endpoint + queryParam
     ) as Observable<T>;
     // .pipe(catchError(error => this.handleError(error)));
   }

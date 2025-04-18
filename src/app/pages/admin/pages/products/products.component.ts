@@ -34,6 +34,8 @@ import { BadgeModule } from 'primeng/badge';
 import { Enum } from '../../../../domain/enum';
 import { startCase } from 'lodash';
 import { FileService } from '../../../../services/file.service';
+import { environment } from '../../../../../environments/environment';
+import { StaticFiles } from '../../../../core/enums/staticFiles';
 
 interface Column {
   field: string;
@@ -386,16 +388,43 @@ export class ProductsComponent implements OnInit {
     return `${formattedSize} ${sizes[i]}`;
   }
 
-  deleteImage(fileId: string) {
+  getProductImage(product: Product) {
+    if (!product.imageFiles || product.imageFiles.length == 0)
+      return environment.baseUrl + StaticFiles.NotFound;
+
+    return 'data:image/png;base64,' + product.imageFiles[0].bytes;
+  }
+
+  deleteImage(productId: string, fileId: string) {
     this.fileService.deleteFile(fileId).subscribe({
       next: () => {
+        const prodToModify = this.products.find(f => f.id === productId);
+
+        const sourceImages = this.product.imageFiles ?? [];
+
+        prodToModify!.imageFiles = sourceImages.filter(
+          image => image.id !== fileId
+        );
+
+        this.product.imageFiles = this.product.imageFiles!.filter(
+          image => image.id !== fileId
+        );
+
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
           detail: 'File deleted',
           life: 3000,
         });
-      }
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: "Can't delete file!",
+          life: 3000,
+        });
+      },
     });
   }
 }

@@ -111,10 +111,7 @@
         <td style="min-width: 16rem">{{ product.name }}</td>
         <td>
           <img
-            [src]="
-              'data:image/png;base64,' +
-              (product.imageFiles[0].bytes ?? product.imageFiles[0])
-            "
+            [src]="getProductImage(product)"
             [alt]="product.name"
             style="width: 64px"
             class="rounded" />
@@ -281,15 +278,17 @@
           <div class="flex">
             @for (image of product.imageFiles; track $index) {
               <div class="flex flex-col items-center gap-4">
-                <img class="block h-[250px] w-auto"
-                  [src]="'data:image/png;base64,' + (image.bytes)"
+                <img
+                  class="block h-[250px] w-auto"
+                  [src]="'data:image/png;base64,' + image.bytes"
                   alt="" />
-                <p-button class="block"
+                <p-button
+                  class="block"
                   icon="pi pi-times"
                   [rounded]="true"
                   severity="danger"
-                  [outlined]="true" 
-                  (onClick)="deleteImage(image.id)"/>
+                  [outlined]="true"
+                  (onClick)="deleteImage(product.id!, image.id)" />
               </div>
             }
           </div>
