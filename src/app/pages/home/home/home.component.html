@@ -26,16 +26,14 @@
         <div
           class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
           <div class="mb-4">
-            <div class="relative mx-auto">
+            <div class="relative mx-auto flex justify-center">
               <img
-                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-                  product.image
-                }}"
+                [src]="getProductImage(product)"
                 [alt]="product.name"
-                class="w-full rounded-border" />
+                class="h-[200px] rounded-border" />
               <p-tag
-                [value]="product.inventoryStatus"
-                [severity]="getSeverity(product.inventoryStatus)"
+                [value]="getInventoryStatus(product.quantity)"
+                [severity]="getSeverity(product.quantity)"
                 class="absolute"
                 styleClass="dark:!bg-surface-900"
                 [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
@@ -81,16 +79,14 @@
       <ng-template let-product pTemplate="item">
         <div class="border border-surface rounded-border m-2 p-6">
           <div class="mb-6">
-            <div class="relative mx-auto">
+            <div class="relative mx-auto flex justify-center">
               <img
-                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-                  product.image
-                }}"
+                [src]="getProductImage(product)"
                 [alt]="product.name"
-                class="w-full rounded-border" />
+                class="h-[200px] rounded-border" />
               <p-tag
-                [value]="product.inventoryStatus"
-                [severity]="getSeverity(product.inventoryStatus)"
+                [value]="getInventoryStatus(product.quantity)"
+                [severity]="getSeverity(product.quantity)"
                 class="absolute"
                 [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
             </div>
@@ -135,16 +131,14 @@
       <ng-template let-product pTemplate="item">
         <div class="border border-surface rounded-border m-2 p-6">
           <div class="mb-6">
-            <div class="relative mx-auto">
+            <div class="relative mx-auto flex justify-center">
               <img
-                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-                  product.image
-                }}"
+                [src]="getProductImage(product)"
                 [alt]="product.name"
-                class="w-full rounded-border" />
+                class="h-[200px] rounded-border" />
               <p-tag
-                [value]="product.inventoryStatus"
-                [severity]="getSeverity(product.inventoryStatus)"
+                [value]="getInventoryStatus(product.quantity)"
+                [severity]="getSeverity(product.quantity)"
                 class="absolute"
                 [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
             </div>

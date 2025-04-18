@@ -5,6 +5,8 @@ import { ProductService } from '../../../services/product.service';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
+import { StaticFiles } from '../../../core/enums/staticFiles';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.productService.getProductsData().subscribe({
-      next: data => (this.products = data.slice(0, 5)),
+      next: data => (this.products = data.slice(0, 10)),
       error: () => console.log('rrrrr'),
     });
 
@@ -47,7 +49,7 @@ export class HomeComponent {
   }
 
   getSeverity(
-    status: string
+    quantity: number
   ):
     | 'success'
     | 'secondary'
@@ -56,15 +58,41 @@ export class HomeComponent {
     | 'danger'
     | 'contrast'
     | undefined {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warn';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return undefined;
+    if (quantity > 50) {
+      return 'success';
     }
+
+    if (quantity >= 1) {
+      return 'warn';
+    }
+
+    if (quantity >= 0) {
+      return 'danger';
+    }
+
+    return undefined;
+  }
+
+  getInventoryStatus(quantity: number) {
+    if (quantity > 50) {
+      return 'INSTOCK';
+    }
+
+    if (quantity >= 1) {
+      return 'LOWSTOCK';
+    }
+
+    if (quantity === 0) {
+      return 'OUTOFSTOCK';
+    }
+
+    return undefined;
+  }
+
+  getProductImage(product: Product) {
+    if (!product.imageFiles || product.imageFiles.length == 0)
+      return environment.baseUrl + StaticFiles.NotFound;
+
+    return 'data:image/png;base64,' + product.imageFiles[0].bytes;
   }
 }
