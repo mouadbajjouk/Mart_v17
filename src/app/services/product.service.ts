@@ -73,16 +73,4 @@ export class ProductService {
       body: { ids },
     });
   }
-
-  // getProducts() {
-  //   return Promise.resolve(this.getProductsData());
-  // }
-
-  // getProductsWithOrdersSmall() {
-  //   return Promise.resolve(this.getProductsWithOrdersData().slice(0, 10));
-  // }
-
-  // getProductsWithOrders() {
-  //   return Promise.resolve(this.getProductsWithOrdersData());
-  // }
 }

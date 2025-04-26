@@ -6,76 +6,30 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-
-import { TableModule } from 'primeng/table';
-import { Dialog } from 'primeng/dialog';
-import { Ripple } from 'primeng/ripple';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ConfirmDialog } from 'primeng/confirmdialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { TextareaModule } from 'primeng/textarea';
 import { CommonModule } from '@angular/common';
-import { FileUpload, FileUploadEvent, UploadEvent } from 'primeng/fileupload';
-import { SelectModule } from 'primeng/select';
-import { Tag } from 'primeng/tag';
-import { RadioButton } from 'primeng/radiobutton';
-import { Rating } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { InputNumber, InputNumberModule } from 'primeng/inputnumber';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { Table } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
 import { Product } from '../../../../domain/product';
 import { ProductService } from '../../../../services/product.service';
-import { BadgeModule } from 'primeng/badge';
 import { Enum } from '../../../../domain/enum';
 import { startCase } from 'lodash';
 import { FileService } from '../../../../services/file.service';
 import { environment } from '../../../../../environments/environment';
 import { StaticFiles } from '../../../../core/enums/staticFiles';
+import { formatSize } from '../../utils/products/formatSize';
+import { PRIMENG_MODULES } from '../../../../shared/primeng/primeng-modules';
 import { PrimeNG } from 'primeng/config';
+import { Table } from 'primeng/table';
+import { FileUploadEvent } from 'primeng/fileupload';
+import { Column } from '../../utils/products/column.interface';
+import { ExportColumn } from '../../utils/products/export-column.interface';
 
-interface Column {
-  field: string;
-  header: string;
-  customExportHeader?: string;
-}
-
-interface ExportColumn {
-  title: string;
-  dataKey: string;
-}
 
 @Component({
   selector: 'app-products',
   imports: [
-    TableModule,
-    Dialog,
-    Ripple,
-    SelectModule,
-    ToastModule,
-    ToolbarModule,
-    ConfirmDialog,
-    InputTextModule,
-    TextareaModule,
     CommonModule,
-    FileUpload,
-    DropdownModule,
-    Tag,
-    RadioButton,
-    Rating,
-    InputTextModule,
     FormsModule,
-    InputNumber,
-    IconFieldModule,
-    InputIconModule,
-    ButtonModule,
-    InputNumberModule,
-    FileUpload,
-    BadgeModule,
+    PRIMENG_MODULES
   ],
   providers: [MessageService, ConfirmationService, ProductService, FileService],
   templateUrl: './products.component.html',
@@ -112,15 +66,12 @@ export class ProductsComponent implements OnInit {
 
   exportColumns!: ExportColumn[];
 
+  private productService = inject(ProductService);
+  private messageService = inject(MessageService);
+  private confirmationService = inject(ConfirmationService);
+  private cd = inject(ChangeDetectorRef);
+  private config = inject(PrimeNG);
   fileService = inject(FileService);
-
-  constructor(
-    private productService: ProductService,
-    private messageService: MessageService,
-    private confirmationService: ConfirmationService,
-    private cd: ChangeDetectorRef,
-    private config: PrimeNG
-  ) {}
 
   ngOnInit(): void {
     this.loadDemoData();
@@ -279,16 +230,6 @@ export class ProductsComponent implements OnInit {
     return index;
   }
 
-  createId(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 5; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
-  }
-
   getSeverity(status: string) {
     switch (status) {
       case 'INSTOCK':
@@ -393,31 +334,8 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onSelectedFiles(event: any) {
-    this.files = event.currentFiles;
-    console.log('files: ', this.files);
-    this.files.forEach(file => {
-      this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
-    });
-    this.totalSizePercent = this.totalSize / 10;
-  }
-
   uploadEvent(callback: any) {
     callback();
-  }
-
-  formatSize(bytes: any) {
-    const k = 1024;
-    const dm = 3;
-    const sizes = this.config.translation.fileSizeTypes;
-    if (bytes === 0) {
-      return `0 ${sizes![0]}`;
-    }
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
-
-    return `${formattedSize} ${sizes![i]}`;
   }
 
   getProductImage(product: Product) {
@@ -458,5 +376,9 @@ export class ProductsComponent implements OnInit {
         });
       },
     });
+  }
+
+  formatSize(bytes: any){
+    return formatSize(bytes, this.config.translation.fileSizeTypes)
   }
 }
