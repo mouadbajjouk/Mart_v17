@@ -36,6 +36,7 @@ import { startCase } from 'lodash';
 import { FileService } from '../../../../services/file.service';
 import { environment } from '../../../../../environments/environment';
 import { StaticFiles } from '../../../../core/enums/staticFiles';
+import { PrimeNG } from 'primeng/config';
 
 interface Column {
   field: string;
@@ -117,7 +118,8 @@ export class ProductsComponent implements OnInit {
     private productService: ProductService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private config: PrimeNG
   ) {}
 
   ngOnInit(): void {
@@ -377,15 +379,15 @@ export class ProductsComponent implements OnInit {
   formatSize(bytes: any) {
     const k = 1024;
     const dm = 3;
-    const sizes = 'f'; //this.config.translation.fileSizeTypes;
+    const sizes = this.config.translation.fileSizeTypes;
     if (bytes === 0) {
-      return `0 ${sizes[0]}`;
+      return `0 ${sizes![0]}`;
     }
 
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
 
-    return `${formattedSize} ${sizes[i]}`;
+    return `${formattedSize} ${sizes![i]}`;
   }
 
   getProductImage(product: Product) {

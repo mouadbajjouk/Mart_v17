@@ -93,6 +93,13 @@ export class HomeComponent {
     if (!product.imageFiles || product.imageFiles.length == 0)
       return environment.baseUrl + StaticFiles.NotFound;
 
+    if (
+      !product.imageFiles[0].path &&
+      product.imageFiles[0].path?.length! > 0
+    ) {
+      return environment.baseUrl + '/' + product.imageFiles[0].path;
+    }
+
     return 'data:image/png;base64,' + product.imageFiles[0].bytes;
   }
 }
