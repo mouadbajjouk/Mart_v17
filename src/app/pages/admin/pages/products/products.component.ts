@@ -199,15 +199,33 @@ export class ProductsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(
-          val => !this.selectedProducts?.includes(val)
-        );
-        this.selectedProducts = null;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Products Deleted',
-          life: 3000,
+        const ids = this.selectedProducts?.map(product => product.id!);
+
+        if (!ids) {
+          return;
+        }
+
+        this.productService.deleteProducts(ids).subscribe({
+          next: () => {
+            this.products = this.products.filter(
+              val => !this.selectedProducts?.includes(val)
+            );
+            this.selectedProducts = null;
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Products Deleted',
+              life: 3000,
+            });
+          },
+          error: () => {
+            this.messageService.add({
+              severity: 'danger',
+              summary: 'Failure',
+              detail: 'Failed to delete selected products!',
+              life: 3000,
+            });
+          },
         });
       },
     });
@@ -225,13 +243,25 @@ export class ProductsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.products = this.products.filter(val => val.id !== product.id);
-        this.product = {};
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Product Deleted',
-          life: 3000,
+        this.productService.deleteProduct(product.id!).subscribe({
+          next: () => {
+            this.products = this.products.filter(val => val.id !== product.id);
+            this.product = {};
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Product Deleted',
+              life: 3000,
+            });
+          },
+          error: () => {
+            this.messageService.add({
+              severity: 'danger',
+              summary: 'Failure',
+              detail: 'Failed to delete product!',
+              life: 3000,
+            });
+          },
         });
       },
     });

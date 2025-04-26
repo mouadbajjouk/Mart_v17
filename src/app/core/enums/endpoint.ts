@@ -7,6 +7,7 @@ export enum Endpoint {
   EDIT_PRODUCT = '/products',
   GET_CATEGORIES = '/products/categories',
   DELETE_FILE = '/files',
+  DELETE_PRODUCT = '/products'
 }
 
 // ORGNAIZE

@@ -35,7 +35,8 @@ export class ProductService {
 
     if (product.id) formData.append('id', product.id);
     if (product.name) formData.append('name', product.name);
-    if (product.categoryId) formData.append('categoryId', product.categoryId.toString());
+    if (product.categoryId)
+      formData.append('categoryId', product.categoryId.toString());
     if (product.price !== undefined && product.price !== null)
       formData.append('price', product.price.toString());
     if (product.description)
@@ -58,6 +59,19 @@ export class ProductService {
 
   getCategories() {
     return this.httpService.get<Enum[]>(Endpoint.GET_CATEGORIES);
+  }
+
+  deleteProduct(id: string) {
+    return this.httpService.deleteUsingQuery<boolean>(
+      Endpoint.DELETE_PRODUCT,
+      '/' + id
+    );
+  }
+
+  deleteProducts(ids: string[]) {
+    return this.httpService.delete<boolean>(Endpoint.DELETE_PRODUCT, {
+      body: { ids },
+    });
   }
 
   // getProducts() {
