@@ -8,7 +8,8 @@ export class AuthService {
   currentUserSig = signal<User | undefined | null>(undefined);
 
   isLoggedIn(): boolean {
-    if (!localStorage.getItem('token')) return false;
+    if (!localStorage.getItem('token') || this.currentUserSig() === null)
+      return false;
 
     return true;
   }
@@ -18,3 +19,4 @@ export class AuthService {
     return false;
   }
 }
+ 

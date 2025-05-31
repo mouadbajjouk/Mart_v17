@@ -41,6 +41,11 @@ export class AppAdminMenu {
             routerLink: ['/admin/products'],
           },
           {
+            label: 'Users',
+            icon: 'pi pi-fw pi-user',
+            routerLink: ['/admin/users'],
+          },
+          {
             label: 'Input',
             icon: 'pi pi-fw pi-check-square',
             routerLink: ['/uikit/input'],
