@@ -243,7 +243,7 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onUpload(event: FileUploadEvent) {
+  onUpload(event: FileUploadEvent) { 
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
@@ -332,6 +332,15 @@ export class ProductsComponent implements OnInit {
       detail: 'File Uploaded',
       life: 3000,
     });
+  }
+
+  onSelectedFiles(event: any) {
+    this.files = event.currentFiles;
+    console.log('files: ', this.files);
+    this.files.forEach(file => {
+      this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
+    });
+    this.totalSizePercent = this.totalSize / 10;
   }
 
   uploadEvent(callback: any) {
