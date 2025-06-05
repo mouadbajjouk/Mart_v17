@@ -22,16 +22,18 @@ import { Table } from 'primeng/table';
 import { FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
+import { UserService } from '../../../../services/user.service';
+import { User } from '../../../../user.interface';
 
 @Component({
   selector: 'app-users',
   imports: [CommonModule, FormsModule, PRIMENG_MODULES],
   templateUrl: './users.component.html',
-  providers: [MessageService, ConfirmationService, ProductService, FileService],
+  providers: [MessageService, ConfirmationService, UserService, FileService],
   styleUrl: './users.component.css',
 })
 export class UsersComponent implements OnInit {
-  files = [];
+  files: any;
 
   totalSize: number = 0;
 
@@ -43,9 +45,9 @@ export class UsersComponent implements OnInit {
 
   isProductEdit = false;
 
-  products!: Product[];
+  users!: User[];
 
-  product!: Product;
+  user!: User;
 
   categories: Enum[] = [];
 
@@ -61,7 +63,7 @@ export class UsersComponent implements OnInit {
 
   exportColumns!: ExportColumn[];
 
-  private productService = inject(ProductService);
+  private userService = inject(UserService);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
   private cd = inject(ChangeDetectorRef);
@@ -70,7 +72,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDemoData();
-    this.loadCategories();
   }
 
   applyFilterGlobal($event: Event, stringVal: string) {
@@ -83,9 +84,9 @@ export class UsersComponent implements OnInit {
   }
 
   loadDemoData() {
-    this.productService.getProductsData().subscribe({
+    this.userService.getUsers().subscribe({
       next: data => {
-        this.products = data;
+        this.users = data;
         this.cd.markForCheck();
       },
       error: () => console.log('error here'),
@@ -111,37 +112,29 @@ export class UsersComponent implements OnInit {
     }));
   }
 
-  loadCategories() {
-    this.productService.getCategories().subscribe({
-      next: data => {
-        this.categories = data.map(category => ({
-          ...category,
-          name: startCase(category.name),
-        }));
-      },
-    });
-  }
-
-  getCategoryName(categoryId: number): string | undefined {
-    return this.categories.find(c => c.id === categoryId)?.name;
-  }
-
   openNew() {
-    this.product = {};
+    this.user = {
+      email: '',
+      firstName: '',
+      lastName: '',
+      id: '',
+      roles: [],
+      fullName: '',
+    };
     this.submitted = false;
     this.productDialog = true;
     this.isProductEdit = false;
   }
 
-  editProduct(product: Product) {
-    this.product = { ...product };
+  editUser(user: User) {
+    this.user = { ...user };
     this.productDialog = true;
     this.isProductEdit = true;
   }
 
-  deleteSelectedProducts() {
+  deleteSelectedUsers() {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected products?',
+      message: 'Are you sure you want to delete the selected users?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -151,9 +144,9 @@ export class UsersComponent implements OnInit {
           return;
         }
 
-        this.productService.deleteProducts(ids).subscribe({
+        this.userService.deleteUsers(ids).subscribe({
           next: () => {
-            this.products = this.products.filter(
+            this.users = this.users.filter(
               val => !this.selectedProducts?.includes(val)
             );
             this.selectedProducts = null;
@@ -183,16 +176,23 @@ export class UsersComponent implements OnInit {
     this.isProductEdit = false;
   }
 
-  deleteProduct(product: Product) {
+  deleteUser(user: User) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
+      message: 'Are you sure you want to delete ' + user.fullName + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.productService.deleteProduct(product.id!).subscribe({
+        this.userService.deleteUser(user.id!).subscribe({
           next: () => {
-            this.products = this.products.filter(val => val.id !== product.id);
-            this.product = {};
+            this.users = this.users.filter(val => val.id !== user.id);
+            this.user = {
+              email: '',
+              firstName: '',
+              lastName: '',
+              id: '',
+              roles: [],
+              fullName: '',
+            };
             this.messageService.add({
               severity: 'success',
               summary: 'Successful',
@@ -215,8 +215,8 @@ export class UsersComponent implements OnInit {
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].id === id) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id === id) {
         index = i;
         break;
       }
@@ -250,19 +250,30 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  saveProduct() {
-    if (this.product.name?.trim()) {
-      if (this.product.id) {
-        this.products[this.findIndexById(this.product.id)] = this.product;
-        this.product.imageFiles = this.files;
-        this.productService.editProduct(this.product).subscribe({
+  saveUser() {
+    if (
+      this.user.firstName.trim() &&
+      this.user.lastName.trim() &&
+      this.user.email.trim()
+    ) {
+      if (this.user.id) {
+        this.users[this.findIndexById(this.user.id)] = this.user;
+        this.user.profileImage = this.files;
+        this.userService.editUser(this.user).subscribe({
           next: () => {
             this.submitted = true;
 
             this.productDialog = false; // TODO: FALSE
             this.loadDemoData();
 
-            this.product = {};
+            this.user = {
+              email: '',
+              firstName: '',
+              lastName: '',
+              id: '',
+              roles: [],
+              fullName: '',
+            };
 
             this.messageService.add({
               severity: 'success',
@@ -275,22 +286,28 @@ export class UsersComponent implements OnInit {
       } else {
         //this.product.id = this.createId();
         //this.product.image = 'product-placeholder.svg';
-        this.product.imageFiles = this.files;
-        this.productService.addProduct(this.product).subscribe({
+        this.user.profileImage = this.files;
+        this.userService.addUser(this.user).subscribe({
           next: () => {
-            this.products.push(this.product);
+            this.users.push(this.user);
             this.messageService.add({
               severity: 'success',
               summary: 'Successful',
-              detail: 'Product Created',
+              detail: 'User Created',
               life: 3000,
             });
 
             this.productDialog = false; // TODO: FALSE
-            console.log('after save:', this.product.imageFiles?.at(0)?.bytes);
             this.loadDemoData();
 
-            this.product = {};
+            this.user = {
+              email: '',
+              firstName: '',
+              lastName: '',
+              id: '',
+              roles: [],
+              fullName: '',
+            };
           },
         });
       }
@@ -333,27 +350,23 @@ export class UsersComponent implements OnInit {
     callback();
   }
 
-  getProductImage(product: Product) {
-    if (!product.imageFiles || product.imageFiles.length == 0)
+  getUserImage(user: User) {
+    if (!user.profileImage)
       return environment.baseUrl + StaticFiles.NotFound;
 
-    return 'data:image/png;base64,' + product.imageFiles[0].bytes;
+    return 'data:image/png;base64,' + user.profileImage.bytes;
   }
 
-  deleteImage(productId: string, fileId: string) {
+  deleteImage(userId: string, fileId: string) {
     this.fileService.deleteFile(fileId).subscribe({
       next: () => {
-        const prodToModify = this.products.find(f => f.id === productId);
+        const userToModify = this.users.find(f => f.id === userId);
 
-        const sourceImages = this.product.imageFiles ?? [];
+        const sourceImages = this.user.profileImage;
 
-        prodToModify!.imageFiles = sourceImages.filter(
-          image => image.id !== fileId
-        );
+        userToModify!.profileImage = undefined;
 
-        this.product.imageFiles = this.product.imageFiles!.filter(
-          image => image.id !== fileId
-        );
+        this.user.profileImage = undefined;
 
         this.messageService.add({
           severity: 'success',

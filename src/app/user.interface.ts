@@ -1,3 +1,5 @@
+import { AppFile } from './domain/appFile';
+
 export interface User {
   id: string;
   email: string;
@@ -5,4 +7,5 @@ export interface User {
   lastName: string;
   fullName: string;
   roles: string[];
+  profileImage?: AppFile;
 }

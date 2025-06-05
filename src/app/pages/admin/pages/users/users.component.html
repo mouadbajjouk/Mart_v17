@@ -1,393 +1,298 @@
 <div class="card">
-    <p-toast />
-    <p-toolbar styleClass="mb-6">
-      <ng-template #start>
-        <p-button
-          label="New"
-          icon="pi pi-plus"
-          class="mr-2"
-          (onClick)="openNew()" />
-        <p-button
-          severity="danger"
-          label="Delete"
-          icon="pi pi-trash"
-          outlined
-          (onClick)="deleteSelectedProducts()"
-          [disabled]="!selectedProducts || !selectedProducts.length" />
-      </ng-template>
-  
-      <ng-template #end>
-        <p-fileUpload
-          mode="basic"
-          accept="image/*"
-          [maxFileSize]="1000000"
-          label="Import"
-          chooseLabel="Import"
-          auto
-          customUpload
-          class="mr-2 inline-block"
-          [chooseButtonProps]="{ severity: 'secondary' }" />
-        <p-button
-          label="Export"
-          icon="pi pi-upload"
-          severity="secondary"
-          (onClick)="exportCSV($event)" />
-      </ng-template>
-    </p-toolbar>
-  
-    <p-table
-      #dt
-      [value]="products"
-      [rows]="10"
-      [columns]="cols"
-      [paginator]="true"
-      [globalFilterFields]="[
-        'name',
-        'country.name',
-        'representative.name',
-        'status',
-      ]"
-      [tableStyle]="{ 'min-width': '75rem' }"
-      [(selection)]="selectedProducts"
-      [rowHover]="true"
-      dataKey="id"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [showCurrentPageReport]="true">
-      <ng-template #caption>
-        <div class="flex items-center justify-between">
-          <h5 class="m-0">Manage Products</h5>
-          <p-iconfield>
-            <p-inputicon styleClass="pi pi-search" />
-            <input
-              pInputText
-              type="text"
-              (input)="applyFilterGlobal($event, 'contains')"
-              placeholder="Search..." />
-          </p-iconfield>
-        </div>
-      </ng-template>
-      <ng-template #header>
-        <tr>
-          <th style="width: 3rem">
-            <p-tableHeaderCheckbox />
-          </th>
-          <th style="min-width: 8rem">Sku</th>
-          <th style="min-width: 8rem">Bar Code</th>
-          <th pSortableColumn="name" style="min-width: 8rem">
-            Name
-            <p-sortIcon field="name" />
-          </th>
-          <th style="min-width: 12rem">Image</th>
-          <th pSortableColumn="price" style="min-width: 8rem">
-            Price
-            <p-sortIcon field="price" />
-          </th>
-          <th pSortableColumn="category" style="min-width: 8rem">
-            Category
-            <p-sortIcon field="category" />
-          </th>
-          <th pSortableColumn="quantity" style="min-width: 8rem">
-            Quantity
-            <p-sortIcon field="quantity" />
-          </th>
-          <!-- <th pSortableColumn="rating" style="min-width: 12rem">
-                      Reviews
-                      <p-sortIcon field="rating" />
-                  </th> -->
-          <!-- <th pSortableColumn="inventoryStatus" style="min-width: 12rem">
-                      Status
-                      <p-sortIcon field="inventoryStatus" />
-                  </th> -->
-          <th style="min-width: 12rem"></th>
-        </tr>
-      </ng-template>
-      <ng-template #body let-product>
-        <tr>
-          <td style="width: 3rem">
-            <p-tableCheckbox [value]="product" />
-          </td>
-          <td style="min-width: 12rem">{{ product.sku }}</td>
-          <td style="min-width: 12rem">{{ product.barCode }}</td>
-          <td style="min-width: 16rem">{{ product.name }}</td>
-          <td>
-            <img
-              [src]="getProductImage(product)"
-              [alt]="product.name"
-              style="width: 64px"
-              class="rounded" />
-          </td>
-          <td>{{ product.price | currency: 'USD' }}</td>
-          <td>{{ getCategoryName(product.categoryId) }}</td>
-          <td>{{ product.quantity }}</td>
-          <!-- <td>
-                      <p-rating [(ngModel)]="product.rating" [readonly]="true" />
-                  </td>
-                  <td>
-                      <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
-                  </td> -->
-          <td>
-            <p-button
-              icon="pi pi-pencil"
-              class="mr-2"
-              [rounded]="true"
-              [outlined]="true"
-              (click)="editProduct(product)" />
-            <p-button
-              icon="pi pi-trash"
-              severity="danger"
-              [rounded]="true"
-              [outlined]="true"
-              (click)="deleteProduct(product)" />
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template #summary>
-        <div class="flex items-center justify-between">
-          In total there are {{ products ? products.length : 0 }} products.
-        </div>
-      </ng-template>
-    </p-table>
-  
-    <p-dialog
-      [(visible)]="productDialog"
-      [style]="{ width: '50%' }"
-      header="Product Details"
-      [modal]="true">
-      <ng-template #content>
-        <div class="flex flex-col gap-6">
+  <p-toast />
+  <p-toolbar styleClass="mb-6">
+    <ng-template #start>
+      <p-button
+        label="New"
+        icon="pi pi-plus"
+        class="mr-2"
+        (onClick)="openNew()" />
+      <p-button
+        severity="danger"
+        label="Delete"
+        icon="pi pi-trash"
+        outlined
+        (onClick)="deleteSelectedUsers()"
+        [disabled]="!selectedProducts || !selectedProducts.length" />
+    </ng-template>
+
+    <ng-template #end>
+      <p-fileUpload
+        mode="basic"
+        accept="image/*"
+        [maxFileSize]="1000000"
+        label="Import"
+        chooseLabel="Import"
+        auto
+        customUpload
+        class="mr-2 inline-block"
+        [chooseButtonProps]="{ severity: 'secondary' }" />
+      <p-button
+        label="Export"
+        icon="pi pi-upload"
+        severity="secondary"
+        (onClick)="exportCSV($event)" />
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="users"
+    [rows]="10"
+    [columns]="cols"
+    [paginator]="true"
+    [globalFilterFields]="[
+      'name',
+      'country.name',
+      'representative.name',
+      'status',
+    ]"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [(selection)]="selectedProducts"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true">
+    <ng-template #caption>
+      <div class="flex items-center justify-between">
+        <h5 class="m-0">Manage Users</h5>
+        <p-iconfield>
+          <p-inputicon styleClass="pi pi-search" />
+          <input
+            pInputText
+            type="text"
+            (input)="applyFilterGlobal($event, 'contains')"
+            placeholder="Search..." />
+        </p-iconfield>
+      </div>
+    </ng-template>
+    <ng-template #header>
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox />
+        </th>
+        <th style="min-width: 8rem">First Name</th>
+        <th style="min-width: 8rem">Last Name</th>
+        <th pSortableColumn="email" style="min-width: 8rem">
+          Email
+          <p-sortIcon field="email" />
+        </th>
+        <th style="min-width: 12rem">Profile Image</th>
+        <th style="min-width: 12rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-user>
+      <tr>
+        <td style="width: 3rem">
+          <p-tableCheckbox [value]="user" />
+        </td>
+        <td style="min-width: 12rem">{{ user.firstName }}</td>
+        <td style="min-width: 12rem">{{ user.lastName }}</td>
+        <td style="min-width: 16rem">{{ user.email }}</td>
+        <td>
           <img
-            [src]="
-              'https://primefaces.org/cdn/primeng/images/demo/product/' +
-              product.imageFiles
-            "
-            [alt]="''"
-            class="block m-auto pb-4"
-            *ngIf="product.imageFiles" />
-          <div>
-            <label for="name" class="block font-bold mb-3">Name</label>
-            <input
-              type="text"
-              pInputText
-              id="name"
-              [(ngModel)]="product.name"
-              required
-              autofocus
-              fluid />
-            <small class="text-red-500" *ngIf="submitted && !product.name"
-              >Name is required.</small
-            >
+            [src]="getUserImage(user)"
+            [alt]="user.name"
+            style="width: 64px"
+            class="rounded" />
+        </td>
+        <td>
+          <p-button
+            icon="pi pi-pencil"
+            class="mr-2"
+            [rounded]="true"
+            [outlined]="true"
+            (click)="editUser(user)" />
+          <p-button
+            icon="pi pi-trash"
+            severity="danger"
+            [rounded]="true"
+            [outlined]="true"
+            (click)="deleteUser(user)" />
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #summary>
+      <div class="flex items-center justify-between">
+        In total there are {{ users ? users.length : 0 }} users.
+      </div>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    [(visible)]="productDialog"
+    [style]="{ width: '50%' }"
+    header="Profile Details"
+    [modal]="true">
+    <ng-template #content>
+      <div class="flex flex-col gap-6">
+        <div>
+          <label for="firstname" class="block font-bold mb-3"
+            >First Name</label
+          >
+          <input
+            type="text"
+            pInputText
+            id="firstName"
+            [(ngModel)]="user.firstName"
+            required
+            autofocus
+            fluid />
+          <small class="text-red-500" *ngIf="submitted && !user.firstName"
+            >First Name is required.</small
+          >
+        </div>
+        <div>
+          <label for="last-name" class="block font-bold mb-3">Last Name</label>
+          <input
+            type="text"
+            pInputText
+            id="last-name"
+            [(ngModel)]="user.lastName"
+            required
+            autofocus
+            fluid />
+          <small class="text-red-500" *ngIf="submitted && !user.lastName"
+            >Last Name is required.</small
+          >
+        </div>
+
+        <div>
+          <label for="email" class="block font-bold mb-3">Email</label>
+          <input
+            type="text"
+            pInputText
+            id="email"
+            [(ngModel)]="user.email"
+            autofocus
+            fluid />
+        </div>
+
+        <!-- <div>
+          <label for="date-of-birth" class="block font-bold mb-3"
+            >Date Of Birth</label
+          >
+          <p-datepicker
+            [(ngModel)]="user.date"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="date-of-birth"
+            fluid />
+        </div> -->
+
+        <ng-container *ngIf="isProductEdit">
+          <p class="block font-bold mb-3">Profile Image</p>
+          <div class="flex">
+              <div class="flex flex-col items-center gap-4">
+                <img
+                  class="block h-[250px] w-auto"
+                  [src]="getUserImage(user)"
+                  alt="" />
+                <p-button
+                  class="block"
+                  icon="pi pi-times"
+                  [rounded]="true"
+                  severity="danger"
+                  [outlined]="true"
+                  (onClick)="deleteImage(user.id!, user.profileImage!.id)" />
+              </div>
+            
           </div>
-          <div>
-            <label for="description" class="block font-bold mb-3"
-              >Description</label
-            >
-            <textarea
-              id="description"
-              pTextarea
-              [(ngModel)]="product.description"
-              required
-              rows="3"
-              cols="20"
-              fluid></textarea>
-            <small class="text-red-500" *ngIf="submitted && !product.description"
-              >Description is required.</small
-            >
-          </div>
-  
-          <div>
-            <label for="sku" class="block font-bold mb-3">Sku</label>
-            <input
-              type="text"
-              pInputText
-              id="sku"
-              [(ngModel)]="product.sku"
-              autofocus
-              fluid />
-          </div>
-  
-          <div>
-            <label for="barcode" class="block font-bold mb-3">Bar code</label>
-            <input
-              type="text"
-              pInputText
-              id="barcode"
-              [(ngModel)]="product.barCode"
-              autofocus
-              fluid />
-          </div>
-  
-          <!-- <div>
-            <label for="inventoryStatus" class="block font-bold mb-3"
-              >Inventory Status</label
-            >
-            <p-select
-              [(ngModel)]="product.inventoryStatus"
-              inputId="inventoryStatus"
-              [options]="statuses"
-              optionLabel="label"
-              placeholder="Select a Status"
-              fluid />
-          </div> -->
-  
-          <div>
-            <span class="block font-bold mb-4">Category</span>
-            <div class="grid grid-cols-12 gap-4">
-              @for (category of categories; track category.id) {
-                <div class="flex items-center gap-2 col-span-6">
-                  <p-radiobutton
-                    [id]="category.id"
-                    name="category"
-                    [value]="category.id"
-                    [(ngModel)]="product.categoryId" />
-                  <label [for]="category.id">{{ category.name }}</label>
-                </div>
-              }
-            </div>
-          </div>
-  
-          <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-6">
-              <label for="price" class="block font-bold mb-3">Price</label>
-              <p-inputnumber
-                id="price"
-                [(ngModel)]="product.price"
-                mode="currency"
-                currency="USD"
-                locale="en-US"
-                required
-                fluid />
-              <small class="text-red-500" *ngIf="submitted && !product.price"
-                >Price is required.</small
-              >
-            </div>
-            <div class="col-span-6">
-              <label for="quantity" class="block font-bold mb-3">Quantity</label>
-              <p-inputnumber
-                id="quantity"
-                [(ngModel)]="product.quantity"
-                fluid
-                required />
-              <small class="text-red-500" *ngIf="submitted && !product.quantity"
-                >Quantity is required.</small
-              >
-            </div>
-          </div>
-  
-          <ng-container *ngIf="isProductEdit">
-            <p class="block font-bold mb-3">Product images</p>
-            <div class="flex">
-              @for (image of product.imageFiles; track $index) {
-                <div class="flex flex-col items-center gap-4">
-                  <img
-                    class="block h-[250px] w-auto"
-                    [src]="'data:image/png;base64,' + image.bytes"
-                    alt="" />
+        </ng-container>
+
+        <div>
+          <label for="images" class="block font-bold mb-3">Upload image</label>
+          <p-fileupload
+            name="myfile[]"
+            url="https://www.primefaces.org/cdn/api/upload.php"
+            [multiple]="false"
+            accept="image/*"
+            maxFileSize="3000000"
+            (onUpload)="onTemplatedUpload()">
+            <ng-template
+              #header
+              let-files
+              let-chooseCallback="chooseCallback"
+              let-clearCallback="clearCallback">
+              <div
+                class="flex flex-wrap justify-between items-center flex-1 gap-4">
+                <div class="flex gap-2">
                   <p-button
-                    class="block"
+                    (onClick)="choose($event, chooseCallback)"
+                    icon="pi pi-images"
+                    [rounded]="true"
+                    [outlined]="true" />
+                  <p-button
+                    (onClick)="clearCallback()"
                     icon="pi pi-times"
                     [rounded]="true"
-                    severity="danger"
                     [outlined]="true"
-                    (onClick)="deleteImage(product.id!, image.id)" />
+                    severity="danger"
+                    [disabled]="!files || files.length === 0" />
                 </div>
-              }
-            </div>
-          </ng-container>
-  
-          <div>
-            <label for="images" class="block font-bold mb-3">Upload images</label>
-            <p-fileupload
-              name="myfile[]"
-              url="https://www.primefaces.org/cdn/api/upload.php"
-              [multiple]="true"
-              accept="image/*"
-              maxFileSize="3000000"
-              (onUpload)="onTemplatedUpload()">
-              <ng-template
-                #header
-                let-files
-                let-chooseCallback="chooseCallback"
-                let-clearCallback="clearCallback">
-                <div
-                  class="flex flex-wrap justify-between items-center flex-1 gap-4">
-                  <div class="flex gap-2">
-                    <p-button
-                      (onClick)="choose($event, chooseCallback)"
-                      icon="pi pi-images"
-                      [rounded]="true"
-                      [outlined]="true" />
-                    <p-button
-                      (onClick)="clearCallback()"
-                      icon="pi pi-times"
-                      [rounded]="true"
-                      [outlined]="true"
-                      severity="danger"
-                      [disabled]="!files || files.length === 0" />
-                  </div>
-                </div>
-              </ng-template>
-              <ng-template
-                #content
-                let-files
-                let-uploadedFiles="uploadedFiles"
-                let-removeFileCallback="removeFileCallback">
-                <div class="flex flex-col gap-8 pt-4">
-                  <div *ngIf="files?.length > 0">
-                    <div class="flex flex-wrap gap-4">
-                      <div
-                        *ngFor="let file of files; let i = index"
-                        class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
-                        <div>
-                          <img
-                            role="presentation"
-                            [alt]="file.name"
-                            [src]="file.objectURL"
-                            width="100"
-                            height="50" />
-                        </div>
-                        <span
-                          class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden"
-                          >{{ file.name }}</span
-                        >
-                        <div>{{ formatSize(file.size) }}</div>
-                        <p-badge value="Pending" severity="warn" />
-                        <p-button
-                          icon="pi pi-times"
-                          (click)="
-                            onRemoveTemplatingFile(
-                              $event,
-                              file,
-                              removeFileCallback,
-                              i
-                            )
-                          "
-                          [outlined]="true"
-                          [rounded]="true"
-                          severity="danger" />
+              </div>
+            </ng-template>
+            <ng-template
+              #content
+              let-files
+              let-uploadedFiles="uploadedFiles"
+              let-removeFileCallback="removeFileCallback">
+              <div class="flex flex-col gap-8 pt-4">
+                <div *ngIf="files?.length > 0">
+                  <div class="flex flex-wrap gap-4">
+                    <div
+                      *ngFor="let file of files; let i = index"
+                      class="p-8 rounded-border flex flex-col border border-surface items-center gap-4">
+                      <div>
+                        <img
+                          role="presentation"
+                          [alt]="file.name"
+                          [src]="file.objectURL"
+                          width="100"
+                          height="50" />
                       </div>
+                      <span
+                        class="font-semibold text-ellipsis max-w-60 whitespace-nowrap overflow-hidden"
+                        >{{ file.name }}</span
+                      >
+                      <div>{{ formatSize(file.size) }}</div>
+                      <p-badge value="Pending" severity="warn" />
+                      <p-button
+                        icon="pi pi-times"
+                        (click)="
+                          onRemoveTemplatingFile(
+                            $event,
+                            file,
+                            removeFileCallback,
+                            i
+                          )
+                        "
+                        [outlined]="true"
+                        [rounded]="true"
+                        severity="danger" />
                     </div>
                   </div>
                 </div>
-              </ng-template>
-              <ng-template #file></ng-template>
-              <ng-template #empty>
-                <div class="flex items-center justify-center flex-col">
-                  <i
-                    class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color"></i>
-                  <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
-                </div>
-              </ng-template>
-            </p-fileupload>
-          </div>
+              </div>
+            </ng-template>
+            <ng-template #file></ng-template>
+            <ng-template #empty>
+              <div class="flex items-center justify-center flex-col">
+                <i
+                  class="pi pi-cloud-upload !border-2 !rounded-full !p-8 !text-4xl !text-muted-color"></i>
+                <p class="mt-6 mb-0">Drag and drop files to here to upload.</p>
+              </div>
+            </ng-template>
+          </p-fileupload>
         </div>
-      </ng-template>
-  
-      <ng-template #footer>
-        <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
-        <p-button label="Save" icon="pi pi-check" (click)="saveProduct()" />
-      </ng-template>
-    </p-dialog>
-  
-    <p-confirmDialog [style]="{ width: '450px' }" />
-  </div>
-  
+      </div>
+    </ng-template>
+
+    <ng-template #footer>
+      <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
+      <p-button label="Save" icon="pi pi-check" (click)="saveUser()" />
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{ width: '450px' }" />
+</div>

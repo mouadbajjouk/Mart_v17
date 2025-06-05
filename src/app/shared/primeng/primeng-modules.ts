@@ -17,6 +17,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { DropdownModule } from 'primeng/dropdown';
 import { BadgeModule } from 'primeng/badge';
+import { DatePickerModule } from 'primeng/datepicker';
 
 export const PRIMENG_MODULES = [
     TableModule,
@@ -41,4 +42,5 @@ export const PRIMENG_MODULES = [
     InputNumberModule,
     FileUpload,
     BadgeModule,
+    DatePickerModule
 ]
