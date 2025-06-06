@@ -53,7 +53,7 @@ export class UserService {
     if (user.profileImage) {
       if (user.profileImage instanceof File) {
         formData.append(
-          'imageFiles',
+          'profileImage',
           user.profileImage,
           user.profileImage.name
         ); // key must match parameter name in C#

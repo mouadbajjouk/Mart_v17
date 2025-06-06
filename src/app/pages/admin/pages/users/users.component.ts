@@ -258,7 +258,9 @@ export class UsersComponent implements OnInit {
     ) {
       if (this.user.id) {
         this.users[this.findIndexById(this.user.id)] = this.user;
-        this.user.profileImage = this.files;
+        this.user.profileImage = this.files[0];
+        console.log('im', this.files[0]);
+        
         this.userService.editUser(this.user).subscribe({
           next: () => {
             this.submitted = true;
@@ -328,6 +330,15 @@ export class UsersComponent implements OnInit {
   ) {
     removeFileCallback(event, index);
     this.totalSize -= parseInt(this.formatSize(file.size));
+    this.totalSizePercent = this.totalSize / 10;
+  }
+
+  onSelectedFiles(event: any) {
+    this.files = event.currentFiles;
+    console.log('files: ', this.files);
+    this.files.forEach(() => {
+      this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
+    });
     this.totalSizePercent = this.totalSize / 10;
   }
 
