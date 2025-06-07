@@ -12,6 +12,7 @@ export enum Endpoint {
   DELETE_USER = '/users',
   ADD_USER = '/users/add',
   EDIT_USER = '/users',
+  GET_ROLES= '/roles'
 }
 
 // ORGNAIZE

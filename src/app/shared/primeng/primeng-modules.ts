@@ -18,29 +18,35 @@ import { InputIconModule } from 'primeng/inputicon';
 import { DropdownModule } from 'primeng/dropdown';
 import { BadgeModule } from 'primeng/badge';
 import { DatePickerModule } from 'primeng/datepicker';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { Skeleton, SkeletonModule } from 'primeng/skeleton';
 
 export const PRIMENG_MODULES = [
-    TableModule,
-    Dialog,
-    Ripple,
-    SelectModule,
-    ToastModule,
-    ToolbarModule,
-    ConfirmDialog,
-    InputTextModule,
-    TextareaModule,
-    FileUpload,
-    DropdownModule,
-    Tag,
-    RadioButton,
-    Rating,
-    InputTextModule,
-    InputNumber,
-    IconFieldModule,
-    InputIconModule,
-    ButtonModule,
-    InputNumberModule,
-    FileUpload,
-    BadgeModule,
-    DatePickerModule
-]
+  TableModule,
+  Dialog,
+  Ripple,
+  SelectModule,
+  ToastModule,
+  ToolbarModule,
+  ConfirmDialog,
+  InputTextModule,
+  TextareaModule,
+  FileUpload,
+  DropdownModule,
+  Tag,
+  RadioButton,
+  Rating,
+  InputTextModule,
+  InputNumber,
+  IconFieldModule,
+  InputIconModule,
+  ButtonModule,
+  InputNumberModule,
+  FileUpload,
+  BadgeModule,
+  DatePickerModule,
+  AutoCompleteModule,
+  MultiSelectModule,
+  Skeleton
+];

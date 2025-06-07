@@ -3,6 +3,7 @@ import { HttpService } from '../core/services/http.service';
 import { User } from '../user.interface';
 import { Observable } from 'rxjs';
 import { Endpoint } from '../core/enums/endpoint';
+import { Role } from '../domain/role';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +22,11 @@ export class UserService {
     return this.httpService.post(Endpoint.ADD_USER, formData);
   }
 
-  editUser(user: User): Observable<User> {
+  editUser(user: User, newRoles: Role[], file: File): Observable<User> {
+    console.log('serv file', file);
+
     // TODO: ADD AUTH !!!!
-    let formData = this.GetUserFormData(user);
+    let formData = this.GetUserFormData(user, newRoles, file);
 
     return this.httpService.patch(Endpoint.EDIT_USER, formData);
   }
@@ -37,28 +40,34 @@ export class UserService {
 
   deleteUsers(ids: string[]): Observable<boolean> {
     return this.httpService.delete<boolean>(Endpoint.DELETE_USER, {
-      body: { ids },
+      body: { usersIds: ids },
     });
   }
 
-  private GetUserFormData(user: User) {
+  private GetUserFormData(user: User, newRoles?: Role[], file?: File) {
     let formData = new FormData();
+
+    // const payload = {
+    //   id:  user.id,
+    //   firstname', user.firstName
+    //   lastname', user.lastName
+    //   email', user.email
+    // }
 
     if (user.id) formData.append('id', user.id);
     if (user.firstName) formData.append('firstname', user.firstName);
     if (user.lastName) formData.append('lastname', user.lastName);
     if (user.email) formData.append('email', user.email);
-
-    // Append each file individually
-    if (user.profileImage) {
-      if (user.profileImage instanceof File) {
-        formData.append(
-          'profileImage',
-          user.profileImage,
-          user.profileImage.name
-        ); // key must match parameter name in C#
-      }
+    if (newRoles) {
+      newRoles.forEach(role => {
+        formData.append('rolesIds', role.id.toString());
+      });
     }
+
+    if (file) {
+      formData.append('profileImage', file);
+    }
+
     return formData;
   }
 }

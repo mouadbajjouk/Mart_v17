@@ -1,4 +1,3 @@
-import { Enum } from "./enum";
 import { AppFile } from "./appFile";
 
 export interface Product {

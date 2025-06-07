@@ -19,21 +19,24 @@ import { formatSize } from '../../utils/products/formatSize';
 import { PRIMENG_MODULES } from '../../../../shared/primeng/primeng-modules';
 import { PrimeNG } from 'primeng/config';
 import { Table } from 'primeng/table';
-import { FileUploadEvent } from 'primeng/fileupload';
+import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
 import { UserService } from '../../../../services/user.service';
 import { User } from '../../../../user.interface';
+import { Role } from '../../../../domain/role';
+import { RoleService } from '../../../../services/role.service';
+import { SkeletonComponent } from '../../../../shared/skeleton/skeleton';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, FormsModule, PRIMENG_MODULES],
+  imports: [CommonModule, FormsModule, PRIMENG_MODULES, SkeletonComponent],
   templateUrl: './users.component.html',
   providers: [MessageService, ConfirmationService, UserService, FileService],
   styleUrl: './users.component.css',
 })
 export class UsersComponent implements OnInit {
-  files: any;
+  file = {} as File;
 
   totalSize: number = 0;
 
@@ -63,15 +66,25 @@ export class UsersComponent implements OnInit {
 
   exportColumns!: ExportColumn[];
 
+  roles: Role[] = [];
+
+  selectedRoles: Role[] = [];
+
+  isLoading = true;
+
+  skeletonCols = ['First Name', 'Last Name', 'Email', 'Profile Image'];
+
   private userService = inject(UserService);
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
   private cd = inject(ChangeDetectorRef);
   private config = inject(PrimeNG);
-  fileService = inject(FileService);
+  private fileService = inject(FileService);
+  private roleService = inject(RoleService);
 
   ngOnInit(): void {
     this.loadDemoData();
+    this.loadRoles();
   }
 
   applyFilterGlobal($event: Event, stringVal: string) {
@@ -112,6 +125,16 @@ export class UsersComponent implements OnInit {
     }));
   }
 
+  loadRoles() {
+    this.roleService.getRoles().subscribe({
+      next: roles => {
+        this.roles = roles;
+        this.cd.markForCheck();
+      },
+      complete: () => (this.isLoading = false),
+    });
+  }
+
   openNew() {
     this.user = {
       email: '',
@@ -128,6 +151,9 @@ export class UsersComponent implements OnInit {
 
   editUser(user: User) {
     this.user = { ...user };
+    this.selectedRoles = this.roles.filter(role =>
+      user.roles.includes(role.name)
+    );
     this.productDialog = true;
     this.isProductEdit = true;
   }
@@ -174,6 +200,7 @@ export class UsersComponent implements OnInit {
     this.productDialog = false;
     this.submitted = false;
     this.isProductEdit = false;
+    this.selectedRoles = [];
   }
 
   deleteUser(user: User) {
@@ -258,37 +285,42 @@ export class UsersComponent implements OnInit {
     ) {
       if (this.user.id) {
         this.users[this.findIndexById(this.user.id)] = this.user;
-        this.user.profileImage = this.files[0];
-        console.log('im', this.files[0]);
-        
-        this.userService.editUser(this.user).subscribe({
-          next: () => {
-            this.submitted = true;
 
-            this.productDialog = false; // TODO: FALSE
-            this.loadDemoData();
+        console.log('this.proffffff before sending:', this.user.profileImage);
 
-            this.user = {
-              email: '',
-              firstName: '',
-              lastName: '',
-              id: '',
-              roles: [],
-              fullName: '',
-            };
+        console.log('this.file before sending:', this.file);
 
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Successful',
-              detail: 'Product Updated',
-              life: 3000,
-            });
-          },
-        });
+        this.userService
+          .editUser(this.user, this.selectedRoles, this.file)
+          .subscribe({
+            next: () => {
+              this.submitted = true;
+
+              this.productDialog = false; // TODO: FALSE
+              this.loadDemoData();
+
+              this.selectedRoles = [];
+              this.user = {
+                email: '',
+                firstName: '',
+                lastName: '',
+                id: '',
+                roles: [],
+                fullName: '',
+              };
+
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Successful',
+                detail: 'Product Updated',
+                life: 3000,
+              });
+            },
+          });
       } else {
         //this.product.id = this.createId();
         //this.product.image = 'product-placeholder.svg';
-        this.user.profileImage = this.files;
+        //this.user.profileImage = this.file;
         this.userService.addUser(this.user).subscribe({
           next: () => {
             this.users.push(this.user);
@@ -333,12 +365,11 @@ export class UsersComponent implements OnInit {
     this.totalSizePercent = this.totalSize / 10;
   }
 
-  onSelectedFiles(event: any) {
-    this.files = event.currentFiles;
-    console.log('files: ', this.files);
-    this.files.forEach(() => {
-      this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
-    });
+  onSelectedFiles(event: FileSelectEvent) {
+    this.file = event.currentFiles[0] ?? null;
+
+    this.totalSize += parseInt(this.formatSize(1)); // TODO: RECHECK !!!
+
     this.totalSizePercent = this.totalSize / 10;
   }
 
@@ -362,8 +393,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUserImage(user: User) {
-    if (!user.profileImage)
-      return environment.baseUrl + StaticFiles.NotFound;
+    if (!user.profileImage) return environment.baseUrl + StaticFiles.NotFound;
 
     return 'data:image/png;base64,' + user.profileImage.bytes;
   }

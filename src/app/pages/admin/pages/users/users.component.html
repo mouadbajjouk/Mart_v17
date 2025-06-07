@@ -35,89 +35,93 @@
     </ng-template>
   </p-toolbar>
 
-  <p-table
-    #dt
-    [value]="users"
-    [rows]="10"
-    [columns]="cols"
-    [paginator]="true"
-    [globalFilterFields]="[
-      'name',
-      'country.name',
-      'representative.name',
-      'status',
-    ]"
-    [tableStyle]="{ 'min-width': '75rem' }"
-    [(selection)]="selectedProducts"
-    [rowHover]="true"
-    dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true">
-    <ng-template #caption>
-      <div class="flex items-center justify-between">
-        <h5 class="m-0">Manage Users</h5>
-        <p-iconfield>
-          <p-inputicon styleClass="pi pi-search" />
-          <input
-            pInputText
-            type="text"
-            (input)="applyFilterGlobal($event, 'contains')"
-            placeholder="Search..." />
-        </p-iconfield>
-      </div>
-    </ng-template>
-    <ng-template #header>
-      <tr>
-        <th style="width: 3rem">
-          <p-tableHeaderCheckbox />
-        </th>
-        <th style="min-width: 8rem">First Name</th>
-        <th style="min-width: 8rem">Last Name</th>
-        <th pSortableColumn="email" style="min-width: 8rem">
-          Email
-          <p-sortIcon field="email" />
-        </th>
-        <th style="min-width: 12rem">Profile Image</th>
-        <th style="min-width: 12rem"></th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-user>
-      <tr>
-        <td style="width: 3rem">
-          <p-tableCheckbox [value]="user" />
-        </td>
-        <td style="min-width: 12rem">{{ user.firstName }}</td>
-        <td style="min-width: 12rem">{{ user.lastName }}</td>
-        <td style="min-width: 16rem">{{ user.email }}</td>
-        <td>
-          <img
-            [src]="getUserImage(user)"
-            [alt]="user.name"
-            style="width: 64px"
-            class="rounded" />
-        </td>
-        <td>
-          <p-button
-            icon="pi pi-pencil"
-            class="mr-2"
-            [rounded]="true"
-            [outlined]="true"
-            (click)="editUser(user)" />
-          <p-button
-            icon="pi pi-trash"
-            severity="danger"
-            [rounded]="true"
-            [outlined]="true"
-            (click)="deleteUser(user)" />
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #summary>
-      <div class="flex items-center justify-between">
-        In total there are {{ users ? users.length : 0 }} users.
-      </div>
-    </ng-template>
-  </p-table>
+  @if (isLoading) {
+    <app-skeleton [skeletonHeaders]="skeletonCols" />
+  } @else {
+    <p-table
+      #dt
+      [value]="users"
+      [rows]="10"
+      [columns]="cols"
+      [paginator]="true"
+      [globalFilterFields]="[
+        'name',
+        'country.name',
+        'representative.name',
+        'status',
+      ]"
+      [tableStyle]="{ 'min-width': '75rem' }"
+      [(selection)]="selectedProducts"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true">
+      <ng-template #caption>
+        <div class="flex items-center justify-between">
+          <h5 class="m-0">Manage Users</h5>
+          <p-iconfield>
+            <p-inputicon styleClass="pi pi-search" />
+            <input
+              pInputText
+              type="text"
+              (input)="applyFilterGlobal($event, 'contains')"
+              placeholder="Search..." />
+          </p-iconfield>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox />
+          </th>
+          <th style="min-width: 8rem">First Name</th>
+          <th style="min-width: 8rem">Last Name</th>
+          <th pSortableColumn="email" style="min-width: 8rem">
+            Email
+            <p-sortIcon field="email" />
+          </th>
+          <th style="min-width: 12rem">Profile Image</th>
+          <th style="min-width: 12rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-user>
+        <tr>
+          <td style="width: 3rem">
+            <p-tableCheckbox [value]="user" />
+          </td>
+          <td style="min-width: 12rem">{{ user.firstName }}</td>
+          <td style="min-width: 12rem">{{ user.lastName }}</td>
+          <td style="min-width: 16rem">{{ user.email }}</td>
+          <td>
+            <img
+              [src]="getUserImage(user)"
+              [alt]="user.name"
+              style="width: 64px"
+              class="rounded" />
+          </td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              class="mr-2"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="editUser(user)" />
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [rounded]="true"
+              [outlined]="true"
+              (click)="deleteUser(user)" />
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #summary>
+        <div class="flex items-center justify-between">
+          In total there are {{ users ? users.length : 0 }} users.
+        </div>
+      </ng-template>
+    </p-table>
+  }
 
   <p-dialog
     [(visible)]="productDialog"
@@ -127,9 +131,7 @@
     <ng-template #content>
       <div class="flex flex-col gap-6">
         <div>
-          <label for="firstname" class="block font-bold mb-3"
-            >First Name</label
-          >
+          <label for="firstname" class="block font-bold mb-3">First Name</label>
           <input
             type="text"
             pInputText
@@ -168,6 +170,18 @@
             fluid />
         </div>
 
+        <div>
+          <label for="roles" class="block font-bold mb-3">Assign Roles</label>
+          <p-multiselect
+            id="roles"
+            [options]="roles"
+            [(ngModel)]="selectedRoles"
+            optionLabel="name"
+            placeholder="Select Roles"
+            [maxSelectedLabels]="3"
+            styleClass="w-full" />
+        </div>
+
         <!-- <div>
           <label for="date-of-birth" class="block font-bold mb-3"
             >Date Of Birth</label
@@ -183,20 +197,19 @@
         <ng-container *ngIf="isProductEdit">
           <p class="block font-bold mb-3">Profile Image</p>
           <div class="flex">
-              <div class="flex flex-col items-center gap-4">
-                <img
-                  class="block h-[250px] w-auto"
-                  [src]="getUserImage(user)"
-                  alt="" />
-                <p-button
-                  class="block"
-                  icon="pi pi-times"
-                  [rounded]="true"
-                  severity="danger"
-                  [outlined]="true"
-                  (onClick)="deleteImage(user.id!, user.profileImage!.id)" />
-              </div>
-            
+            <div class="flex flex-col items-center gap-4">
+              <img
+                class="block h-[250px] w-auto"
+                [src]="getUserImage(user)"
+                alt="" />
+              <p-button
+                class="block"
+                icon="pi pi-times"
+                [rounded]="true"
+                severity="danger"
+                [outlined]="true"
+                (onClick)="deleteImage(user.id!, user.profileImage!.id)" />
+            </div>
           </div>
         </ng-container>
 

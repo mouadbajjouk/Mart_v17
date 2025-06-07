@@ -22,15 +22,11 @@ import { Table } from 'primeng/table';
 import { FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
-
+import { SkeletonComponent } from "../../../../shared/skeleton/skeleton";
 
 @Component({
   selector: 'app-products',
-  imports: [
-    CommonModule,
-    FormsModule,
-    PRIMENG_MODULES
-  ],
+  imports: [CommonModule, FormsModule, PRIMENG_MODULES, SkeletonComponent],
   providers: [MessageService, ConfirmationService, ProductService, FileService],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
@@ -65,6 +61,18 @@ export class ProductsComponent implements OnInit {
   cols!: Column[];
 
   exportColumns!: ExportColumn[];
+
+  isLoading = true;
+
+  skeletonCols = [
+    'Sku',
+    'Bar Code',
+    'Name',
+    'Image',
+    'Price',
+    'Category',
+    'Quantity',
+  ];
 
   private productService = inject(ProductService);
   private messageService = inject(MessageService);
@@ -124,6 +132,7 @@ export class ProductsComponent implements OnInit {
           name: startCase(category.name),
         }));
       },
+      complete: () => (this.isLoading = false),
     });
   }
 
@@ -243,7 +252,7 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  onUpload(event: FileUploadEvent) { 
+  onUpload(event: FileUploadEvent) {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
@@ -387,7 +396,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  formatSize(bytes: any){
-    return formatSize(bytes, this.config.translation.fileSizeTypes)
+  formatSize(bytes: any) {
+    return formatSize(bytes, this.config.translation.fileSizeTypes);
   }
 }
