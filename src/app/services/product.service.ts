@@ -30,6 +30,17 @@ export class ProductService {
     return this.httpService.patch(Endpoint.EDIT_PRODUCT, formData);
   }
 
+  importProducts(csvFile: File): Observable<boolean> {
+    // TODO: ADD AUTH !!!!
+    let formData = new FormData();
+
+    if (csvFile && csvFile instanceof File) {
+      formData.append('csvFile', csvFile);
+    }
+
+    return this.httpService.post(Endpoint.IMPORT_PRODUCTS, formData);
+  }
+
   private GetProductFormData(product: Product) {
     let formData = new FormData();
 

@@ -19,13 +19,15 @@
     <ng-template #end>
       <p-fileUpload
         mode="basic"
-        accept="image/*"
+        accept=".csv"
         [maxFileSize]="1000000"
         label="Import"
         chooseLabel="Import"
         auto
         customUpload
         class="mr-2 inline-block"
+        [multiple]="false"
+        (onSelect)="importCSV($event)"
         [chooseButtonProps]="{ severity: 'secondary' }" />
       <p-button
         label="Export"

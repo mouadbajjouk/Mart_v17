@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Product } from '../../../../domain/product';
 import { ProductService } from '../../../../services/product.service';
 import { Enum } from '../../../../domain/enum';
-import { startCase } from 'lodash';
+import { startCase, toNumber } from 'lodash';
 import { FileService } from '../../../../services/file.service';
 import { environment } from '../../../../../environments/environment';
 import { StaticFiles } from '../../../../core/enums/staticFiles';
@@ -19,10 +19,10 @@ import { formatSize } from '../../utils/products/formatSize';
 import { PRIMENG_MODULES } from '../../../../shared/primeng/primeng-modules';
 import { PrimeNG } from 'primeng/config';
 import { Table } from 'primeng/table';
-import { FileUploadEvent } from 'primeng/fileupload';
+import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
-import { SkeletonComponent } from "../../../../shared/skeleton/skeleton";
+import { SkeletonComponent } from '../../../../shared/skeleton/skeleton';
 
 @Component({
   selector: 'app-products',
@@ -95,6 +95,37 @@ export class ProductsComponent implements OnInit {
     this.dt.exportCSV();
   }
 
+  importCSV(e: FileSelectEvent) {
+    // One file uploaded at a time
+    const csvFile = e.files[0];
+console.log("ddddddddd");
+
+    if (!csvFile) {
+      return;
+    }
+
+    this.productService.importProducts(csvFile).subscribe({
+      complete: () => {
+        this.loadDemoData();
+        
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Products Import',
+          life: 3000,
+        });
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Failure',
+          detail: 'Failed to import the selected file!',
+          life: 3000,
+        });
+      },
+    });
+  }
+
   loadDemoData() {
     this.productService.getProductsData().subscribe({
       next: data => {
@@ -111,11 +142,13 @@ export class ProductsComponent implements OnInit {
     ];
 
     this.cols = [
-      { field: 'code', header: 'Code', customExportHeader: 'Product Code' },
+      { field: 'sku', header: 'Sku' },
+      { field: 'barCode', header: 'Bar Code' },
       { field: 'name', header: 'Name' },
-      { field: 'image', header: 'Image' },
+      { field: 'description', header: 'Description' },
       { field: 'price', header: 'Price' },
-      { field: 'category', header: 'Category' },
+      { field: 'categoryId', header: 'Category ID' },
+      { field: 'quantity', header: 'Quantity' },
     ];
 
     this.exportColumns = this.cols.map(col => ({
@@ -180,7 +213,7 @@ export class ProductsComponent implements OnInit {
           },
           error: () => {
             this.messageService.add({
-              severity: 'danger',
+              severity: 'error',
               summary: 'Failure',
               detail: 'Failed to delete selected products!',
               life: 3000,

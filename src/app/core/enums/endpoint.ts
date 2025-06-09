@@ -5,6 +5,7 @@ export enum Endpoint {
   GET_PRODUCTS = '/products',
   ADD_PRODUCT = '/products/add',
   EDIT_PRODUCT = '/products',
+  IMPORT_PRODUCTS = '/products/import',
   GET_CATEGORIES = '/products/categories',
   DELETE_FILE = '/files',
   DELETE_PRODUCT = '/products',
