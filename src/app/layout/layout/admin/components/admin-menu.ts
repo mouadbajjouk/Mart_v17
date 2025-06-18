@@ -46,6 +46,11 @@ export class AppAdminMenu {
             routerLink: ['/admin/users'],
           },
           {
+            label: 'Roles & Permissions',
+            icon: 'pi pi-fw pi-lock',
+            routerLink: ['/admin/roles'],
+          },
+          {
             label: 'Input',
             icon: 'pi pi-fw pi-check-square',
             routerLink: ['/uikit/input'],
