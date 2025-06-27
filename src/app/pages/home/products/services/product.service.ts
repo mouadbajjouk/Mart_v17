@@ -1,9 +1,10 @@
-import { Product } from './../domain/product';
-import { Observable } from 'rxjs';
-import { Endpoint } from '../core/enums/endpoint';
-import { HttpService } from './../core/services/http.service';
-import { inject, Injectable } from '@angular/core';
-import { Enum } from '../domain/enum';
+import { inject, Injectable } from "@angular/core";
+import { HttpService } from "../../../../core/services/http.service";
+import { Product } from "../../../../domain/product";
+import { Observable } from "rxjs";
+import { Endpoint } from "../../../../core/enums/endpoint";
+import { Enum } from "../../../../domain/enum";
+
 
 @Injectable({
   providedIn: 'root',

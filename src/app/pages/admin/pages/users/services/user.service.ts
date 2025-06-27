@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpService } from '../core/services/http.service';
-import { User } from '../user.interface';
+import { HttpService } from '../../../../../core/services/http.service';
+import { User } from '../../../../../user.interface';
 import { Observable } from 'rxjs';
-import { Endpoint } from '../core/enums/endpoint';
-import { Role } from '../domain/role';
+import { Endpoint } from '../../../../../core/enums/endpoint';
+import { Role } from '../../../../../domain/role';
 
 @Injectable({
   providedIn: 'root',

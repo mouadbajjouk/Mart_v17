@@ -9,7 +9,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../../domain/product';
-import { ProductService } from '../../../../services/product.service';
 import { Enum } from '../../../../domain/enum';
 import { startCase } from 'lodash';
 import { FileService } from '../../../../services/file.service';
@@ -22,11 +21,11 @@ import { Table } from 'primeng/table';
 import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
-import { UserService } from '../../../../services/user.service';
+import { UserService } from './services/user.service';
 import { User } from '../../../../user.interface';
 import { Role } from '../../../../domain/role';
-import { RoleService } from '../../../../services/role.service';
 import { SkeletonComponent } from '../../../../shared/skeleton/skeleton';
+import { RoleService } from '../roles/services/role.service';
 
 @Component({
   selector: 'app-users',

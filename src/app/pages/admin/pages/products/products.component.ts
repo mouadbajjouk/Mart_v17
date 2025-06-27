@@ -9,7 +9,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../../../domain/product';
-import { ProductService } from '../../../../services/product.service';
 import { Enum } from '../../../../domain/enum';
 import { startCase, toNumber } from 'lodash';
 import { FileService } from '../../../../services/file.service';
@@ -23,6 +22,7 @@ import { FileSelectEvent, FileUploadEvent } from 'primeng/fileupload';
 import { Column } from '../../utils/products/column.interface';
 import { ExportColumn } from '../../utils/products/export-column.interface';
 import { SkeletonComponent } from '../../../../shared/skeleton/skeleton';
+import { ProductService } from '../../../home/products/services/product.service';
 
 @Component({
   selector: 'app-products',

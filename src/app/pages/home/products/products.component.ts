@@ -1,7 +1,7 @@
 import { Product } from './../../../domain/product';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
+import { ProductService } from './services/product.service';
 import { environment } from '../../../../environments/environment';
 import { StaticFiles } from '../../../core/enums/staticFiles';
 

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { Product } from '../../../domain/product';
-import { ProductService } from '../../../services/product.service';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { StaticFiles } from '../../../core/enums/staticFiles';
+import { ProductService } from '../products/services/product.service';
 
 @Component({
   selector: 'app-home',
