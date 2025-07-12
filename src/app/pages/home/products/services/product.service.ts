@@ -1,10 +1,10 @@
-import { inject, Injectable } from "@angular/core";
-import { HttpService } from "../../../../core/services/http.service";
-import { Product } from "../../../../domain/product";
-import { Observable } from "rxjs";
-import { Endpoint } from "../../../../core/enums/endpoint";
-import { Enum } from "../../../../domain/enum";
-
+import { inject, Injectable } from '@angular/core';
+import { HttpService } from '../../../../core/services/http.service';
+import { Product } from '../../../../domain/product';
+import { Observable } from 'rxjs';
+import { Endpoint } from '../../../../core/enums/endpoint';
+import { Enum } from '../../../../domain/enum';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,16 @@ export class ProductService {
 
   getProductsData(): Observable<Product[]> {
     return this.httpService.get<Product[]>(Endpoint.GET_PRODUCTS);
+  }
+
+  getProductsByIds(productsIds: string[]): Observable<Product[]> {
+    let params = new HttpParams();
+
+    productsIds.forEach(productId => params = params.append('productsIds', productId));
+
+    return this.httpService.get<Product[]>(Endpoint.GET_PRODUCTS_BY_IDS, {
+      params,
+    });
   }
 
   addProduct(product: Product): Observable<Product> {

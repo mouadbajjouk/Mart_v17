@@ -3,6 +3,7 @@ export enum Endpoint {
   REGISTER = '/users/register',
   ME = '/users/me',
   GET_PRODUCTS = '/products',
+  GET_PRODUCTS_BY_IDS = '/products/ids',
   ADD_PRODUCT = '/products/add',
   EDIT_PRODUCT = '/products',
   IMPORT_PRODUCTS = '/products/import',

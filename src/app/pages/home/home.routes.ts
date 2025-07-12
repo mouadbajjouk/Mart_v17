@@ -4,6 +4,7 @@ import { ProductsComponent } from './products/products.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from '../../shared/not-found/not-found.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Route[] = [
   {
@@ -27,7 +28,11 @@ export const routes: Route[] = [
     component: ContactComponent,
   },
   {
+    path: 'cart',
+    component: CartComponent,
+  },
+  {
     path: '**',
-    component: NotFoundComponent
-  }
+    component: NotFoundComponent,
+  },
 ];
