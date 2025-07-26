@@ -23,7 +23,7 @@ export class UserService {
   }
 
   editUser(user: User, newRoles: Role[], file: File): Observable<User> {
-    console.log('serv file', file);
+    // Debug log removed
 
     // TODO: ADD AUTH !!!!
     let formData = this.GetUserFormData(user, newRoles, file);

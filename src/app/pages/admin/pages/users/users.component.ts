@@ -101,7 +101,9 @@ export class UsersComponent implements OnInit {
         this.users = data;
         this.cd.markForCheck();
       },
-      error: () => console.log('error here'),
+              error: () => {
+          // Handle error silently
+        },
     });
 
     this.statuses = [
@@ -283,9 +285,7 @@ export class UsersComponent implements OnInit {
       if (this.user.id) {
         this.users[this.findIndexById(this.user.id)] = this.user;
 
-        console.log('this.proffffff before sending:', this.user.profileImage);
-
-        console.log('this.file before sending:', this.file);
+        // Debug logs removed
 
         this.userService
           .editUser(this.user, this.selectedRoles, this.file)

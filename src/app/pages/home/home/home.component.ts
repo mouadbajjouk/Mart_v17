@@ -26,7 +26,9 @@ export class HomeComponent {
   ngOnInit() {
     this.productService.getProductsData().subscribe({
       next: data => (this.products = data.slice(0, 10)),
-      error: () => console.log('rrrrr'),
+              error: () => {
+          // Handle error silently
+        },
     });
 
     this.responsiveOptions = [

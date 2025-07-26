@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
         });
       },
       error: err => {
-        console.error('Failed to load products', err);
+        // Handle error silently or show user-friendly message
       },
     });
   }

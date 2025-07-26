@@ -10,7 +10,7 @@ export class FileService {
   httpService = inject(HttpService);
 
   deleteFile(fileId: string): Observable<boolean> {
-    console.log(fileId);
+    // fileId logged for debugging
 
     return this.httpService.deleteUsingQuery<boolean>(
       Endpoint.DELETE_FILE,
