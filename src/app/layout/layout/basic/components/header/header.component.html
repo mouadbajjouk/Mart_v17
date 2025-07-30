@@ -1,129 +1,113 @@
-<div class="card">
-  <p-menubar [model]="items">
-    <ng-template pTemplate="start">
-      <svg
-        width="33"
-        height="35"
-        viewBox="0 0 33 35"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z"
-          fill="var(--primary-color)" />
-        <mask
-          id="mask0_1_36"
-          style="mask-type: luminance"
-          maskUnits="userSpaceOnUse"
-          x="0"
-          y="0"
-          width="31"
-          height="33">
-          <path
-            d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z"
-            fill="var(--primary-color-text)" />
-        </mask>
-        <g mask="url(#mask0_1_36)">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M15.1935 0V3.5994V3.58318V20.0075V20.0075V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1935 0Z"
-            fill="var(--primary-color)" />
-        </g>
-        <path
-          d="M19.6399 15.3776L18.1861 15.0547L19.3169 16.6695V21.6755L23.1938 18.4458V12.9554L21.4169 13.6013L19.6399 15.3776Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M10.5936 15.3776L12.0474 15.0547L10.9166 16.6695V21.6755L7.03966 18.4458V12.9554L8.81661 13.6013L10.5936 15.3776Z"
-          fill="var(--primary-color-text)" />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M11.3853 16.9726L12.6739 15.0309L13.4793 15.5163H16.7008L17.5061 15.0309L18.7947 16.9726V24.254L17.8283 25.7103L16.7008 26.843H13.4793L12.3518 25.7103L11.3853 24.254V16.9726Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M19.3168 24.7437L21.4168 22.6444V20.5451L19.3168 22.3214V24.7437Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M10.9166 24.7437L8.81662 22.6444V20.5451L10.9166 22.3214V24.7437Z"
-          fill="var(--primary-color-text)" />
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M13.0167 5.68861L11.7244 8.7568L13.8244 14.8932H14.7936V5.68861H13.0167ZM15.4397 5.68861V14.8932H16.5706L18.5091 8.7568L17.2167 5.68861H15.4397Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M13.8244 14.8932L6.87813 12.3094L5.90888 8.27235L11.8859 8.7568L13.9859 14.8932H13.8244Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M16.5706 14.8932L23.5169 12.3094L24.4861 8.27235L18.3476 8.7568L16.4091 14.8932H16.5706Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M18.8321 8.27235L22.2245 7.94938L19.9629 5.68861H17.7013L18.8321 8.27235Z"
-          fill="var(--primary-color-text)" />
-        <path
-          d="M11.4013 8.27235L8.00893 7.94938L10.2705 5.68861H12.5321L11.4013 8.27235Z"
-          fill="var(--primary-color-text)" />
-      </svg>
-    </ng-template>
+<header class="modern-header bg-white/95 backdrop-blur-lg border-b border-slate-200/50 sticky top-0 z-50 shadow-sm">
+  <div class="container mx-auto px-6">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Logo Section -->
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-lg opacity-30"></div>
+          <div class="relative bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-xl shadow-lg">
+            <svg
+              width="28"
+              height="30"
+              viewBox="0 0 33 35"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z"
+                fill="white" />
+              <path
+                d="M19.6399 15.3776L18.1861 15.0547L19.3169 16.6695V21.6755L23.1938 18.4458V12.9554L21.4169 13.6013L19.6399 15.3776Z"
+                fill="rgba(59, 130, 246, 0.8)" />
+              <path
+                d="M10.5936 15.3776L12.0474 15.0547L10.9166 16.6695V21.6755L7.03966 18.4458V12.9554L8.81661 13.6013L10.5936 15.3776Z"
+                fill="rgba(59, 130, 246, 0.8)" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <h1 class="text-2xl font-black text-slate-800 leading-none">
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mart</span>
+          </h1>
+          <span class="text-xs text-slate-500 font-medium">Premium Shopping</span>
+        </div>
+      </div>
 
-    <ng-template pTemplate="item" let-item let-root="root">
-      <a
-        pRipple
-        class="flex items-center p-2 rounded-md hover:bg-gray-100 transition"
-        [routerLink]="item.routerLink">
-        <span [class]="item.icon"></span>
-        <span class="ml-2">{{ item.label }}</span>
-        <p-badge
-          *ngIf="item.badge"
-          [ngClass]="{ 'ml-auto': !root, 'ml-2': root }"
-          [value]="item.badge" />
-        <span
-          *ngIf="item.shortcut"
-          class="ml-auto border border-gray-300 rounded bg-gray-100 text-xs p-1"
-          >{{ item.shortcut }}</span
-        >
-        <i
-          *ngIf="item.items"
-          [ngClass]="[
-            'pi',
-            root ? 'pi-angle-down ml-2' : 'pi-angle-right ml-auto',
-          ]"></i>
-      </a>
-    </ng-template>
+      <!-- Navigation Menu -->
+      <nav class="hidden lg:flex items-center space-x-8">
+        <a *ngFor="let item of items"
+           [routerLink]="item.routerLink"
+           routerLinkActive="active-nav-link"
+           class="nav-link relative px-4 py-2 text-slate-700 font-semibold hover:text-blue-600 transition-all duration-300 group">
+          <span [class]="item.icon + ' mr-2'"></span>
+          {{ item.label }}
+          <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></div>
+        </a>
+      </nav>
 
-    <ng-template pTemplate="end">
-      <div class="flex items-center gap-2">
-        <div *ngIf="!authService.isLoggedIn()">
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-4">
+        <!-- Guest Actions -->
+        <div *ngIf="!authService.isLoggedIn()" class="flex items-center space-x-3">
           <p-button
             label="Login"
             size="small"
-            class="mr-6"
-            (onClick)="navigateTo('auth/login')" />
+            [outlined]="true"
+            (onClick)="navigateTo('auth/login')"
+            styleClass="modern-login-btn border-2 border-slate-300 text-slate-700 hover:border-blue-500 hover:text-blue-600 px-6 py-2 font-semibold rounded-xl transition-all duration-300" />
           <p-button
             label="Register"
             size="small"
-            severity="success"
-            (onClick)="navigateTo('auth/register')" />
+            (onClick)="navigateTo('auth/register')"
+            styleClass="modern-register-btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 text-white px-6 py-2 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" />
         </div>
 
-        <div class="flex items-center gap-2" *ngIf="authService.isLoggedIn()">
-          <span>Welcome {{ authService.currentUserSig()?.fullName }}</span>
+        <!-- Authenticated User Actions -->
+        <div class="flex items-center space-x-4" *ngIf="authService.isLoggedIn()">
+          <div class="hidden md:flex items-center space-x-3">
+            <span class="text-slate-700 font-medium">Welcome</span>
+            <span class="font-bold text-blue-600">{{ authService.currentUserSig()?.fullName }}</span>
+          </div>
 
-          <p-avatar
-            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
-            shape="circle" />
+          <div class="flex items-center space-x-3">
+            <p-button
+              (onClick)="navigateTo('cart')"
+              icon="pi pi-shopping-cart"
+              [outlined]="true"
+              size="small"
+              styleClass="modern-cart-btn border-2 border-slate-300 text-slate-700 hover:border-blue-500 hover:text-blue-600 rounded-xl transition-all duration-300" />
 
-          <p-button (onClick)="navigateTo('cart')" icon="pi pi-shopping-cart" styleClass="ml-2" />
+            <p-avatar
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+              shape="circle"
+              size="normal"
+              styleClass="shadow-lg border-2 border-white" />
 
-          <p-button
-            *ngIf="authService.isAdmin()"
-            label="Dashboard"
-            size="small"
-            (click)="navigateTo('admin/dashboard')" />
+            <p-button
+              *ngIf="authService.isAdmin()"
+              label="Dashboard"
+              size="small"
+              icon="pi pi-cog"
+              (click)="navigateTo('admin/dashboard')"
+              styleClass="modern-dashboard-btn bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 border-0 text-white px-4 py-2 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" />
 
-          <p-button label="Logout" size="small" (click)="logout()" />
+            <p-button
+              label="Logout"
+              size="small"
+              icon="pi pi-sign-out"
+              (click)="logout()"
+              styleClass="modern-logout-btn bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 border-0 text-white px-4 py-2 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" />
+          </div>
         </div>
+
+        <!-- Mobile Menu Button -->
+        <p-button
+          icon="pi pi-bars"
+          [outlined]="true"
+          size="small"
+          class="lg:hidden"
+          styleClass="mobile-menu-btn border-2 border-slate-300 text-slate-700 hover:border-blue-500 hover:text-blue-600 rounded-xl transition-all duration-300" />
       </div>
-    </ng-template>
-  </p-menubar>
-</div>
+    </div>
+  </div>
+</header>

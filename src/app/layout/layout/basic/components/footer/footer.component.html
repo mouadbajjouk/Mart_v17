@@ -1,54 +1,165 @@
-<footer class="bg-primary-500 text-white py-12">
-  <div class="container mx-auto px-6 lg:px-12">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+<footer class="modern-footer bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/30"></div>
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-tr from-indigo-500/10 to-cyan-500/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative container mx-auto px-6 lg:px-12 py-20">
+    <!-- Main Footer Content -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      
       <!-- Company Info Section -->
-      <div class="flex flex-col space-y-4">
-        <h3 class="font-semibold text-xl">MART</h3>
-        <p class="text-sm">
-          Our Mart offers the best deals! We focus on bringing the latest
-          products with the best prices!
+      <div class="flex flex-col space-y-6">
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-lg opacity-30"></div>
+            <div class="relative bg-gradient-to-r from-blue-600 to-purple-600 p-3 rounded-xl shadow-lg">
+              <svg width="24" height="26" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z" fill="white" />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-3xl font-black">
+              <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Mart</span>
+            </h3>
+            <span class="text-sm text-slate-300 font-medium">Premium Shopping</span>
+          </div>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Experience premium shopping with unmatched quality, exceptional service, and the latest trends. Your satisfaction is our commitment.
         </p>
+        <div class="flex space-x-4">
+          <a href="#" class="social-link w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-blue-500 transition-all duration-300 group">
+            <i class="pi pi-facebook text-white group-hover:scale-110 transition-transform duration-300"></i>
+          </a>
+          <a href="#" class="social-link w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-blue-400 transition-all duration-300 group">
+            <i class="pi pi-twitter text-white group-hover:scale-110 transition-transform duration-300"></i>
+          </a>
+          <a href="#" class="social-link w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-pink-500 transition-all duration-300 group">
+            <i class="pi pi-instagram text-white group-hover:scale-110 transition-transform duration-300"></i>
+          </a>
+          <a href="#" class="social-link w-10 h-10 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-blue-600 transition-all duration-300 group">
+            <i class="pi pi-linkedin text-white group-hover:scale-110 transition-transform duration-300"></i>
+          </a>
+        </div>
       </div>
 
-      <!-- Navigation Links -->
-      <div class="flex flex-col space-y-4">
-        <h3 class="font-semibold text-xl">Navigation</h3>
-        <a href="/" class="text-sm hover:text-gray-300">Home</a>
-        <a href="/products" class="text-sm hover:text-gray-300">Products</a>
-        <a href="/about" class="text-sm hover:text-gray-300">About</a>
-        <a href="/contact" class="text-sm hover:text-gray-300">Contact</a>
+      <!-- Quick Links -->
+      <div class="flex flex-col space-y-6">
+        <h3 class="text-xl font-black text-white mb-2">Quick Links</h3>
+        <div class="flex flex-col space-y-3">
+          <a href="/" class="footer-link text-slate-300 hover:text-blue-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-home mr-3 group-hover:text-blue-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Home</span>
+          </a>
+          <a href="/products" class="footer-link text-slate-300 hover:text-blue-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-shopping-bag mr-3 group-hover:text-blue-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Products</span>
+          </a>
+          <a href="/about" class="footer-link text-slate-300 hover:text-blue-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-info-circle mr-3 group-hover:text-blue-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">About Us</span>
+          </a>
+          <a href="/contact" class="footer-link text-slate-300 hover:text-blue-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-phone mr-3 group-hover:text-blue-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Contact</span>
+          </a>
+        </div>
       </div>
 
-      <!-- Portfolio Links -->
-      <div class="flex flex-col space-y-4">
-        <h3 class="font-semibold text-xl">Portfolio</h3>
-        <a href="/portfolio/home-gadgets" class="text-sm hover:text-gray-300"
-          >Home Gadgets</a
-        >
-        <a href="/portfolio/desks" class="text-sm hover:text-gray-300">Desks</a>
-        <a href="/portfolio/electronics" class="text-sm hover:text-gray-300"
-          >Electronics</a
-        >
-        <a href="/portfolio/garden" class="text-sm hover:text-gray-300"
-          >Garden</a
-        >
+      <!-- Categories -->
+      <div class="flex flex-col space-y-6">
+        <h3 class="text-xl font-black text-white mb-2">Categories</h3>
+        <div class="flex flex-col space-y-3">
+          <a href="/products?category=electronics" class="footer-link text-slate-300 hover:text-purple-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-mobile mr-3 group-hover:text-purple-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Electronics</span>
+          </a>
+          <a href="/products?category=home" class="footer-link text-slate-300 hover:text-purple-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-home mr-3 group-hover:text-purple-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Home & Garden</span>
+          </a>
+          <a href="/products?category=fashion" class="footer-link text-slate-300 hover:text-purple-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-user mr-3 group-hover:text-purple-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Fashion</span>
+          </a>
+          <a href="/products?category=sports" class="footer-link text-slate-300 hover:text-purple-400 transition-all duration-300 flex items-center group">
+            <i class="pi pi-heart mr-3 group-hover:text-purple-400 transition-colors duration-300"></i>
+            <span class="group-hover:translate-x-1 transition-transform duration-300">Sports & Health</span>
+          </a>
+        </div>
       </div>
 
       <!-- Contact Info -->
-      <div class="flex flex-col space-y-4">
-        <h3 class="font-semibold text-xl">Get in Touch</h3>
-        <p class="text-sm">contact&commat;mart.com</p>
-        <p class="text-sm">Avenue 16, near Big Mall, Kénitra</p>
+      <div class="flex flex-col space-y-6">
+        <h3 class="text-xl font-black text-white mb-2">Get in Touch</h3>
+        <div class="flex flex-col space-y-4">
+          <div class="flex items-start space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="pi pi-envelope text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-slate-300 font-medium">Email</p>
+              <a href="mailto:contact&#64;mart.com" class="text-blue-400 hover:text-blue-300 transition-colors duration-300">contact&#64;mart.com</a>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="pi pi-map-marker text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-slate-300 font-medium">Address</p>
+              <p class="text-slate-400">Avenue 16, near Big Mall<br>Kénitra, Morocco</p>
+            </div>
+          </div>
+          <div class="flex items-start space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="pi pi-phone text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-slate-300 font-medium">Phone</p>
+              <a href="tel:+212123456789" class="text-orange-400 hover:text-orange-300 transition-colors duration-300">+212 123 456 789</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Footer Bottom Section -->
-    <div class="mt-12 border-t border-gray-600 pt-6">
-      <div class="flex justify-between items-center">
-        <p class="text-sm">© 2025 Mart. All Rights Reserved.</p>
-        <div class="space-x-4">
-          <a href="#" class="hover:text-gray-300">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-300">Terms & Conditions</a>
+    <!-- Newsletter Section -->
+    <div class="border-t border-white/10 pt-12 mb-12">
+      <div class="text-center max-w-2xl mx-auto">
+        <h3 class="text-2xl font-black text-white mb-4">Stay Updated</h3>
+        <p class="text-slate-300 mb-8">Subscribe to our newsletter for exclusive deals and latest product updates.</p>
+        <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-1 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 transition-all duration-300">
+          <button class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="border-t border-white/10 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div class="flex items-center space-x-6">
+          <p class="text-slate-400">© 2025 Mart. All Rights Reserved.</p>
+          <div class="flex items-center space-x-1">
+            <span class="text-slate-400">Made with</span>
+            <i class="pi pi-heart text-red-400 animate-pulse"></i>
+            <span class="text-slate-400">in Morocco</span>
+          </div>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="/privacy" class="text-slate-400 hover:text-blue-400 transition-colors duration-300 font-medium">Privacy Policy</a>
+          <a href="/terms" class="text-slate-400 hover:text-blue-400 transition-colors duration-300 font-medium">Terms & Conditions</a>
+          <a href="/cookies" class="text-slate-400 hover:text-blue-400 transition-colors duration-300 font-medium">Cookie Policy</a>
         </div>
       </div>
     </div>

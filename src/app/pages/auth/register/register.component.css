@@ -1,0 +1,255 @@
+/* Modern Register Page Styling - Matching Home Design System */
+
+/* CSS Variables for consistency */
+:root {
+  --primary-gradient: linear-gradient(135deg, #9333ea, #ec4899);
+  --secondary-gradient: linear-gradient(135deg, #10b981, #059669);
+  --surface-glass: rgba(255, 255, 255, 0.1);
+  --surface-glass-hover: rgba(255, 255, 255, 0.15);
+  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Modern Back Button */
+::ng-deep .modern-back-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-back-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Modern Input Styling */
+::ng-deep .modern-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2) !important;
+  outline: none !important;
+}
+
+::ng-deep .modern-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Modern Password Field */
+::ng-deep .modern-password .p-password {
+  width: 100% !important;
+}
+
+::ng-deep .modern-password .p-inputtext {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-password .p-inputtext:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.2) !important;
+  outline: none !important;
+}
+
+::ng-deep .modern-password .p-inputtext::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+::ng-deep .modern-password .p-password-toggle-icon {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.3s ease !important;
+}
+
+::ng-deep .modern-password .p-password-toggle-icon:hover {
+  color: white !important;
+}
+
+/* Modern Register Submit Button */
+::ng-deep .modern-register-submit {
+  background: linear-gradient(135deg, #9333ea, #ec4899) !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 20px 25px -5px rgba(147, 51, 234, 0.3), 0 10px 10px -5px rgba(147, 51, 234, 0.1) !important;
+}
+
+::ng-deep .modern-register-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7c3aed, #db2777) !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 25px 50px -12px rgba(147, 51, 234, 0.4) !important;
+}
+
+::ng-deep .modern-register-submit:disabled {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Modern Signin Link */
+::ng-deep .modern-signin-link {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.25rem 0.5rem !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep .modern-signin-link:hover {
+  background: rgba(147, 51, 234, 0.1) !important;
+  border-radius: 0.5rem !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Enhanced Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(147, 51, 234, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Glass Morphism Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Grid Enhancements */
+@media (max-width: 768px) {
+  .grid-cols-1.md\\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  ::ng-deep .modern-register-submit {
+    padding: 1rem 2rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  ::ng-deep .modern-register-submit {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Enhanced Input Icons */
+.relative i.pi {
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.modern-input:focus + i.pi,
+.modern-input:focus ~ i.pi {
+  color: #c084fc !important;
+  transform: scale(1.1);
+}
+
+/* Form Validation States */
+::ng-deep .modern-input.ng-invalid.ng-touched {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+::ng-deep .modern-input.ng-valid.ng-touched {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+::ng-deep .modern-password .p-inputtext.ng-invalid.ng-touched {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+::ng-deep .modern-password .p-inputtext.ng-valid.ng-touched {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Accessibility Enhancements */
+.focus-visible:focus {
+  outline: 3px solid #9333ea;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark Mode Compatibility */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Loading States */
+::ng-deep .modern-register-submit.p-button-loading {
+  background: rgba(147, 51, 234, 0.7) !important;
+  cursor: wait !important;
+}
+
+::ng-deep .modern-register-submit.p-button-loading .p-button-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

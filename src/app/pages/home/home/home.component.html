@@ -1,198 +1,422 @@
-<div class="flex flex-col items-center justify-center">
-  <!-- Welcome Section -->
-  <div class="flex items-center my-16 text-center">
-    <p class="text-8xl font-extrabold text-primary">Welcome to Mart!</p>
-  </div>
+<!-- Modern Home Page Layout -->
+<div class="min-h-screen bg-gradient-to-br from-neutral-50 via-white to-slate-50">
+  
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/20"></div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="relative container mx-auto px-6 py-28 lg:py-36">
+      <div class="text-center max-w-5xl mx-auto">
+        <div class="mb-8">
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-blue-100 border border-white/20 mb-6">
+            ✨ Premium Shopping Experience
+          </span>
+        </div>
+        
+        <h1 class="text-6xl md:text-8xl font-black mb-8 leading-tight">
+          <span class="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
+            Welcome to
+          </span>
+          <br>
+          <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            Mart
+          </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl mb-12 text-slate-200 font-light leading-relaxed max-w-3xl mx-auto">
+          Discover extraordinary products with unmatched quality and style. Your premium destination for curated excellence.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <p-button
+            label="Start Shopping"
+            icon="pi pi-shopping-bag"
+            size="large"
+            (onClick)="navigateToProducts()"
+            styleClass="hero-primary-btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 px-10 py-4 text-lg font-bold shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-105" />
+          <p-button
+            label="Explore Collections"
+            icon="pi pi-compass"
+            size="large"
+            [outlined]="true"
+            (onClick)="navigateToCategories()"
+            styleClass="hero-secondary-btn border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-10 py-4 text-lg font-bold transition-all duration-500 hover:border-white/50" />
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Hot Deals Section -->
-  <div class="card w-full mb-20">
-    <div class="flex justify-center items-center mb-2">
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-      <span class="font-semibold text-3xl mx-2">Hot Deals</span>
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-    </div>
-    <p-carousel
-      [value]="products"
-      [numVisible]="3"
-      [numScroll]="1"
-      [responsiveOptions]="responsiveOptions">
-      <ng-template let-product #item>
-        <div
-          class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
-          <div class="mb-4">
-            <div class="relative mx-auto flex justify-center">
-              <img
-                [src]="getProductImage(product)"
-                [alt]="product.name"
-                class="h-[200px] rounded-border" />
-              <p-tag
-                [value]="getInventoryStatus(product.quantity)"
-                [severity]="getSeverity(product.quantity)"
-                class="absolute"
-                styleClass="dark:!bg-surface-900"
-                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+  <section class="py-24 bg-gradient-to-br from-white via-red-50/30 to-orange-50/30">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center justify-center mb-6">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl blur-lg opacity-30"></div>
+            <div class="relative flex items-center bg-gradient-to-r from-red-500 to-orange-500 text-white px-8 py-4 rounded-2xl shadow-xl">
+              <i class="pi pi-bolt text-3xl mr-4 animate-pulse"></i>
+              <h2 class="text-4xl font-black tracking-tight">Hot Deals</h2>
+              <i class="pi pi-bolt text-3xl ml-4 animate-pulse"></i>
             </div>
-          </div>
-          <div class="mb-4 font-medium">{{ product.name }}</div>
-          <div class="flex justify-between items-center">
-            <div class="mt-0 font-semibold text-xl">
-              {{ '$' + product.price }}
-            </div>
-            <span>
-              <p-button
-                icon="pi pi-heart"
-                severity="secondary"
-                [outlined]="true" />
-              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-            </span>
           </div>
         </div>
-      </ng-template>
-    </p-carousel>
-  </div>
+        <p class="text-slate-600 text-xl max-w-3xl mx-auto font-light leading-relaxed">
+          Exclusive limited-time offers on premium products. Don't miss these extraordinary deals.
+        </p>
+      </div>
+      
+      <div class="relative">
+        <p-carousel
+          [value]="products"
+          [numVisible]="3"
+          [numScroll]="1"
+          [responsiveOptions]="responsiveOptions"
+          styleClass="modern-carousel">
+          <ng-template let-product #item>
+            <div class="p-4">
+              <div class="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-red-200 transform hover:-translate-y-2">
+                <!-- Deal Badge -->
+                <div class="absolute top-4 left-4 z-10">
+                  <div class="bg-gradient-to-r from-red-500 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                    🔥 Hot Deal
+                  </div>
+                </div>
+                
+                <div class="relative overflow-hidden">
+                  <img
+                    [src]="getProductImage(product)"
+                    [alt]="product.name"
+                    class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <p-tag
+                    [value]="getInventoryStatus(product.quantity)"
+                    [severity]="getSeverity(product.quantity)"
+                    class="absolute top-4 right-4 shadow-lg backdrop-blur-sm" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                
+                <div class="p-8">
+                  <h3 class="font-bold text-xl mb-4 text-slate-800 line-clamp-2 group-hover:text-red-600 transition-colors duration-300">{{ product.name }}</h3>
+                  <div class="flex justify-between items-center">
+                    <div class="flex flex-col">
+                      <span class="text-3xl font-black text-red-600">${{ product.price }}</span>
+                      <span class="text-sm text-slate-500 line-through">${{ (product.price * 1.3).toFixed(2) }}</span>
+                    </div>
+                    <div class="flex gap-3">
+                      <p-button
+                        icon="pi pi-heart"
+                        severity="secondary"
+                        [outlined]="true"
+                        size="small"
+                        styleClass="modern-heart-btn hover:bg-red-50 hover:border-red-400 hover:text-red-500 transition-all duration-300 rounded-xl" />
+                      <p-button
+                        icon="pi pi-shopping-cart"
+                        size="small"
+                        styleClass="modern-cart-btn bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    </div>
+  </section>
 
-  <!-- Low Cost Section -->
-  <div class="card w-full my-20">
-    <div class="flex justify-center items-center mb-2">
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-      <span class="font-semibold text-3xl mx-2">Low Cost</span>
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-    </div>
-    <p-carousel
-      [value]="products!"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      [responsiveOptions]="responsiveOptions">
-      <ng-template let-product pTemplate="item">
-        <div class="border border-surface rounded-border m-2 p-6">
-          <div class="mb-6">
-            <div class="relative mx-auto flex justify-center">
-              <img
-                [src]="getProductImage(product)"
-                [alt]="product.name"
-                class="h-[200px] rounded-border" />
-              <p-tag
-                [value]="getInventoryStatus(product.quantity)"
-                [severity]="getSeverity(product.quantity)"
-                class="absolute"
-                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+  <!-- Budget Friendly Section -->
+  <section class="py-24 bg-gradient-to-br from-emerald-50/50 via-white to-green-50/50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center justify-center mb-6">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-green-500 rounded-2xl blur-lg opacity-30"></div>
+            <div class="relative flex items-center bg-gradient-to-r from-emerald-500 to-green-500 text-white px-8 py-4 rounded-2xl shadow-xl">
+              <i class="pi pi-dollar text-3xl mr-4"></i>
+              <h2 class="text-4xl font-black tracking-tight">Budget Friendly</h2>
+              <i class="pi pi-dollar text-3xl ml-4"></i>
             </div>
-          </div>
-          <div class="mb-6 font-medium">{{ product.name }}</div>
-          <div class="flex justify-between items-center">
-            <div class="mt-0 font-semibold text-xl">
-              {{ '$' + product.price }}
-            </div>
-            <span>
-              <p-button
-                icon="pi pi-heart"
-                severity="secondary"
-                [outlined]="true" />
-              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-            </span>
           </div>
         </div>
-      </ng-template>
-    </p-carousel>
-  </div>
+        <p class="text-slate-600 text-xl max-w-3xl mx-auto font-light leading-relaxed">
+          Premium quality meets affordability. Exceptional value without compromise.
+        </p>
+      </div>
+      
+      <div class="relative">
+        <p-carousel
+          [value]="products!"
+          [numVisible]="3"
+          [numScroll]="3"
+          [circular]="true"
+          [responsiveOptions]="responsiveOptions"
+          styleClass="modern-carousel">
+          <ng-template let-product pTemplate="item">
+            <div class="p-4">
+              <div class="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-emerald-200 transform hover:-translate-y-2">
+                <!-- Value Badge -->
+                <div class="absolute top-4 left-4 z-10">
+                  <div class="bg-gradient-to-r from-emerald-500 to-green-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+                    💰 Best Value
+                  </div>
+                </div>
+                
+                <div class="relative overflow-hidden">
+                  <img
+                    [src]="getProductImage(product)"
+                    [alt]="product.name"
+                    class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <p-tag
+                    [value]="getInventoryStatus(product.quantity)"
+                    [severity]="getSeverity(product.quantity)"
+                    class="absolute top-4 right-4 shadow-lg backdrop-blur-sm" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                
+                <div class="p-8">
+                  <h3 class="font-bold text-xl mb-4 text-slate-800 line-clamp-2 group-hover:text-emerald-600 transition-colors duration-300">{{ product.name }}</h3>
+                  <div class="flex justify-between items-center">
+                    <div class="flex flex-col">
+                      <span class="text-3xl font-black text-emerald-600">${{ product.price }}</span>
+                      <span class="text-sm text-slate-500 font-medium">Great Value</span>
+                    </div>
+                    <div class="flex gap-3">
+                      <p-button
+                        icon="pi pi-heart"
+                        severity="secondary"
+                        [outlined]="true"
+                        size="small"
+                        styleClass="modern-heart-btn hover:bg-red-50 hover:border-red-400 hover:text-red-500 transition-all duration-300 rounded-xl" />
+                      <p-button
+                        icon="pi pi-shopping-cart"
+                        size="small"
+                        styleClass="modern-cart-btn bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    </div>
+  </section>
 
   <!-- New Arrivals Section -->
-  <div class="card w-full my-20">
-    <div class="flex justify-center items-center mb-2">
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-      <span class="font-semibold text-3xl mx-2">New Arrivals</span>
-      <img
-        src="assets/flame.svg"
-        alt="hot deal icon"
-        class="w-8/12 flame-color" />
-    </div>
-    <p-carousel
-      [value]="products!"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      [responsiveOptions]="responsiveOptions">
-      <ng-template let-product pTemplate="item">
-        <div class="border border-surface rounded-border m-2 p-6">
-          <div class="mb-6">
-            <div class="relative mx-auto flex justify-center">
-              <img
-                [src]="getProductImage(product)"
-                [alt]="product.name"
-                class="h-[200px] rounded-border" />
-              <p-tag
-                [value]="getInventoryStatus(product.quantity)"
-                [severity]="getSeverity(product.quantity)"
-                class="absolute"
-                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+  <section class="py-24 bg-gradient-to-br from-purple-50/50 via-white to-pink-50/50">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center justify-center mb-6">
+          <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-lg opacity-30"></div>
+            <div class="relative flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-2xl shadow-xl">
+              <i class="pi pi-sparkles text-3xl mr-4 animate-pulse"></i>
+              <h2 class="text-4xl font-black tracking-tight">New Arrivals</h2>
+              <i class="pi pi-sparkles text-3xl ml-4 animate-pulse"></i>
             </div>
-          </div>
-          <div class="mb-6 font-medium">{{ product.name }}</div>
-          <div class="flex justify-between items-center">
-            <div class="mt-0 font-semibold text-xl">
-              {{ '$' + product.price }}
-            </div>
-            <span>
-              <p-button
-                icon="pi pi-heart"
-                severity="secondary"
-                [outlined]="true" />
-              <p-button icon="pi pi-shopping-cart" styleClass="ml-2" />
-            </span>
           </div>
         </div>
-      </ng-template>
-    </p-carousel>
-  </div>
+        <p class="text-slate-600 text-xl max-w-3xl mx-auto font-light leading-relaxed">
+          Fresh arrivals, trending now. Be the first to discover the latest collections.
+        </p>
+      </div>
+      
+      <div class="relative">
+        <p-carousel
+          [value]="products!"
+          [numVisible]="3"
+          [numScroll]="3"
+          [circular]="true"
+          [responsiveOptions]="responsiveOptions"
+          styleClass="modern-carousel">
+          <ng-template let-product pTemplate="item">
+            <div class="p-4">
+              <div class="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-purple-200 transform hover:-translate-y-2">
+                <!-- New Badge -->
+                <div class="absolute top-4 left-4 z-10">
+                  <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg animate-pulse">
+                    ✨ New
+                  </div>
+                </div>
+                
+                <div class="relative overflow-hidden">
+                  <img
+                    [src]="getProductImage(product)"
+                    [alt]="product.name"
+                    class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <p-tag
+                    [value]="getInventoryStatus(product.quantity)"
+                    [severity]="getSeverity(product.quantity)"
+                    class="absolute top-4 right-4 shadow-lg backdrop-blur-sm" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+                
+                <div class="p-8">
+                  <h3 class="font-bold text-xl mb-4 text-slate-800 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">{{ product.name }}</h3>
+                  <div class="flex justify-between items-center">
+                    <div class="flex flex-col">
+                      <span class="text-3xl font-black text-purple-600">${{ product.price }}</span>
+                      <span class="text-sm text-slate-500 font-medium">Just Arrived</span>
+                    </div>
+                    <div class="flex gap-3">
+                      <p-button
+                        icon="pi pi-heart"
+                        severity="secondary"
+                        [outlined]="true"
+                        size="small"
+                        styleClass="modern-heart-btn hover:bg-red-50 hover:border-red-400 hover:text-red-500 transition-all duration-300 rounded-xl" />
+                      <p-button
+                        icon="pi pi-shopping-cart"
+                        size="small"
+                        styleClass="modern-cart-btn bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+    </div>
+  </section>
 
   <!-- Advantages Section -->
-  <div class="flex justify-center items-center my-20 text-center">
-    <img
-      src="assets/flame.svg"
-      alt="hot deal icon"
-      class="w-8/12 flame-color" />
-    <span class="font-semibold text-3xl mx-2">OUR ADVANTAGES!</span>
-    <img
-      src="assets/flame.svg"
-      alt="hot deal icon"
-      class="w-8/12 flame-color" />
-  </div>
-
-  <!-- Advantage Icons Section -->
-  <div class="flex w-full justify-around mb-20">
-    <div class="flex flex-col items-center">
-      <i class="pi pi-truck mb-12 text-primary" style="font-size: 4rem"></i>
-      <div class="text-xl font-bold">Fast Delivery Inside Morocco</div>
+  <section class="py-28 bg-gradient-to-br from-slate-50 via-white to-neutral-50 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgb(148 163 184) 1px, transparent 0); background-size: 40px 40px;"></div>
     </div>
+    
+    <div class="container mx-auto px-6 relative">
+      <div class="text-center mb-20">
+        <div class="inline-block mb-6">
+          <span class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 block">Why Choose Us</span>
+          <h2 class="text-5xl md:text-6xl font-black text-slate-800 mb-6 leading-tight">
+            The <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Mart</span> Advantage
+          </h2>
+        </div>
+        <p class="text-slate-600 text-xl max-w-3xl mx-auto font-light leading-relaxed">
+          Experience excellence in every aspect of your shopping journey with our premium services.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <!-- Fast Delivery -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+          <div class="relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 text-center border border-white/50 group-hover:border-blue-200/50 transform group-hover:-translate-y-2">
+            <div class="relative mb-8">
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+              <div class="relative w-24 h-24 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500 shadow-xl">
+                <i class="pi pi-truck text-white text-4xl"></i>
+              </div>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">Lightning Fast Delivery</h3>
+            <p class="text-slate-600 leading-relaxed text-lg font-light">Express delivery across Morocco with real-time tracking. Your orders arrive faster than ever.</p>
+          </div>
+        </div>
 
-    <div class="flex flex-col items-center">
-      <i
-        class="pi pi-check-circle mb-12 text-primary"
-        style="font-size: 4rem"></i>
-      <div class="text-xl font-bold">Agent Warranty</div>
-    </div>
+        <!-- Quality Guarantee -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-green-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+          <div class="relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 text-center border border-white/50 group-hover:border-emerald-200/50 transform group-hover:-translate-y-2">
+            <div class="relative mb-8">
+              <div class="absolute inset-0 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+              <div class="relative w-24 h-24 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500 shadow-xl">
+                <i class="pi pi-check-circle text-white text-4xl"></i>
+              </div>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-emerald-600 transition-colors duration-300">Premium Quality</h3>
+            <p class="text-slate-600 leading-relaxed text-lg font-light">Every product meets our rigorous quality standards with comprehensive warranty protection.</p>
+          </div>
+        </div>
 
-    <div class="flex flex-col items-center">
-      <i
-        class="pi pi-credit-card mb-12 text-primary"
-        style="font-size: 4rem"></i>
-      <div class="text-xl font-bold">Secure Payment</div>
+        <!-- Secure Payment -->
+        <div class="group relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+          <div class="relative bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 text-center border border-white/50 group-hover:border-purple-200/50 transform group-hover:-translate-y-2">
+            <div class="relative mb-8">
+              <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+              <div class="relative w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500 shadow-xl">
+                <i class="pi pi-shield text-white text-4xl"></i>
+              </div>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-4 group-hover:text-purple-600 transition-colors duration-300">Bank-Level Security</h3>
+            <p class="text-slate-600 leading-relaxed text-lg font-light">Advanced encryption and fraud protection ensure your transactions are completely secure.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-32 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/30"></div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="relative container mx-auto px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <div class="mb-8">
+          <span class="inline-block px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full text-sm font-bold text-blue-100 border border-white/20 mb-8">
+            🚀 Start Your Journey
+          </span>
+        </div>
+        
+        <h2 class="text-5xl md:text-7xl font-black mb-8 leading-tight">
+          <span class="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
+            Ready to Experience
+          </span>
+          <br>
+          <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            Excellence?
+          </span>
+        </h2>
+        
+        <p class="text-xl md:text-2xl mb-12 text-slate-200 font-light leading-relaxed max-w-3xl mx-auto">
+          Join thousands of satisfied customers who trust Mart for their premium shopping experience.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <p-button
+            label="Explore All Products"
+            icon="pi pi-arrow-right"
+            size="large"
+            (onClick)="navigateToAllProducts()"
+            styleClass="cta-primary-btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 px-12 py-5 text-xl font-black shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-105" />
+          <p-button
+            label="Contact Us"
+            icon="pi pi-phone"
+            size="large"
+            [outlined]="true"
+            (onClick)="navigateToContact()"
+            styleClass="cta-secondary-btn border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-12 py-5 text-xl font-black transition-all duration-500 hover:border-white/50" />
+        </div>
+        
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div class="text-center">
+            <div class="text-3xl font-black text-blue-400 mb-2">10K+</div>
+            <div class="text-slate-300 font-light">Happy Customers</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-purple-400 mb-2">5K+</div>
+            <div class="text-slate-300 font-light">Premium Products</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-black text-cyan-400 mb-2">99%</div>
+            <div class="text-slate-300 font-light">Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

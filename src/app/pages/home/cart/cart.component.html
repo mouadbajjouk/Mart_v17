@@ -1,56 +1,315 @@
-<div class="min-h-screen">
-  <div class="p-6">
-    <h2 class="text-2xl font-bold text-green-600 mb-6">🛒 Your Cart</h2>
-
-    <div *ngIf="cartItems.length; else emptyCart">
-      <div class="space-y-4">
-        <div>
-          @for (item of cartItems; track item.id) {
-            <div class="flex items-center bg-white shadow rounded-lg p-4 mb-5">
-              <img
-                [src]="getProductImage(item)"
-                alt="Image"
-                class="w-20 h-20 object-cover rounded-lg" />
-
-              <div class="ml-4 flex-1">
-                <h3 class="text-lg font-semibold text-gray-800">
-                  {{ item.name }}
-                </h3>
-                <p class="text-sm text-gray-500">Price: {{ item.price }} MAD</p>
-                <p class="text-sm text-gray-500">
-                  Quantity: {{ item.quantity }}
-                </p>
-                <p class="text-sm font-medium text-green-600">
-                  Total: {{ item.price * item.quantity }} MAD
-                </p>
-              </div>
-
-              <button
-                pButton
-                icon="pi pi-trash"
-                class="p-button-rounded p-button-danger p-button-sm"
-                (click)="removeItem(item.id)"></button>
-            </div>
-          }
+<!-- Modern Cart Page Layout -->
+<div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+  
+  <!-- Enhanced Header Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-20">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/20"></div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="relative container mx-auto px-6">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="mb-6">
+          <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-blue-100 border border-white/20 mb-4">
+            🛒 Your Shopping Cart
+          </span>
         </div>
-      </div>
-
-      <div class="mt-6 text-right text-xl font-semibold text-green-700">
-        Grand Total: {{ total }} MAD
-      </div>
-
-      <div class="text-right mt-4">
-        <button
-          pButton
-          label="Checkout"
-          class="p-button-success px-6 py-2 text-white font-medium rounded-lg shadow"></button>
+        
+        <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">
+          <span class="bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
+            Shopping
+          </span>
+          <span class="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            Cart
+          </span>
+        </h1>
+        
+        <p class="text-xl text-slate-200 font-light leading-relaxed max-w-2xl mx-auto">
+          Review your selected items and proceed to checkout for a premium shopping experience.
+        </p>
       </div>
     </div>
+  </section>
 
-    <ng-template #emptyCart>
-      <div class="flex items-center justify-center min-h-screen">
-        <p class="text-center text-gray-500 text-lg">🛒 Your cart is empty.</p>
+  <!-- Main Cart Content -->
+  <section class="py-16">
+    <div class="container mx-auto px-6 max-w-7xl">
+      
+      <!-- Cart Items Section -->
+      <div *ngIf="cartItems.length; else emptyCart" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Cart Items List -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
+            <div class="flex items-center justify-between mb-8">
+              <h2 class="text-3xl font-black text-slate-800">
+                Cart Items
+                <span class="text-lg font-medium text-slate-500 ml-2">({{ cartItems.length }} items)</span>
+              </h2>
+              <button
+                (click)="clearCart()"
+                class="text-slate-500 hover:text-red-500 transition-colors duration-300 p-2 rounded-xl hover:bg-red-50">
+                <i class="pi pi-trash text-xl"></i>
+                <span class="ml-2 font-medium">Clear All</span>
+              </button>
+            </div>
+            
+            <!-- Cart Items -->
+            <div class="space-y-6">
+              @for (item of cartItems; track item.id) {
+                <div class="cart-item group relative bg-gradient-to-r from-white to-slate-50/50 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-slate-100 hover:border-indigo-200 transform hover:-translate-y-1">
+                  
+                  <!-- Item Content -->
+                  <div class="flex items-center space-x-6">
+                    
+                    <!-- Product Image -->
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 p-2">
+                      <img
+                        [src]="getProductImage(item)"
+                        [alt]="item.name"
+                        class="w-24 h-24 object-cover rounded-xl group-hover:scale-110 transition-transform duration-500" />
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-xl font-bold text-slate-800 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
+                        {{ item.name }}
+                      </h3>
+                      
+                      <div class="flex items-center space-x-4 text-sm text-slate-600 mb-3">
+                        <span class="flex items-center">
+                          <i class="pi pi-tag mr-1"></i>
+                          SKU: {{ item.id }}
+                        </span>
+                        <span class="flex items-center">
+                          <i class="pi pi-check-circle mr-1 text-green-500"></i>
+                          In Stock
+                        </span>
+                      </div>
+                      
+                      <!-- Quantity Controls -->
+                      <div class="flex items-center space-x-4">
+                        <div class="flex items-center bg-slate-100 rounded-xl p-1">
+                          <button
+                            (click)="decreaseQuantity(item.id)"
+                            class="quantity-btn minus-btn p-2 rounded-lg hover:bg-white transition-colors duration-200">
+                            <i class="pi pi-minus text-sm"></i>
+                          </button>
+                          <span class="px-4 py-2 font-bold text-slate-800 min-w-[3rem] text-center">{{ item.quantity }}</span>
+                          <button
+                            (click)="increaseQuantity(item.id)"
+                            class="quantity-btn plus-btn p-2 rounded-lg hover:bg-white transition-colors duration-200">
+                            <i class="pi pi-plus text-sm"></i>
+                          </button>
+                        </div>
+                        
+                        <div
+                          (click)="saveForLater(item.id)"
+                          class="flex items-center space-x-2 text-sm text-slate-500 cursor-pointer hover:text-red-500 transition-colors duration-200">
+                          <i class="pi pi-heart transition-colors duration-200"></i>
+                          <span>Save for later</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- Price Section -->
+                    <div class="text-right">
+                      <div class="mb-2">
+                        <span class="text-sm text-slate-500">Unit Price</span>
+                        <div class="text-lg font-bold text-slate-700">{{ item.price }} MAD</div>
+                      </div>
+                      
+                      <div class="mb-4">
+                        <span class="text-sm text-slate-500">Total</span>
+                        <div class="text-2xl font-black text-indigo-600">{{ item.price * item.quantity }} MAD</div>
+                      </div>
+                      
+                      <!-- Remove Button -->
+                      <button
+                        (click)="removeItem(item.id)"
+                        class="remove-btn group/remove p-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-600 transition-all duration-300 hover:scale-105">
+                        <i class="pi pi-trash group-hover/remove:animate-bounce"></i>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- Hover Shine Effect -->
+                  <!-- <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div> -->
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        
+        <!-- Order Summary Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky top-8">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
+              
+              <!-- Order Summary Header -->
+              <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center mb-4">
+                  <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur-lg opacity-30"></div>
+                    <div class="relative flex items-center bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-3 rounded-2xl shadow-xl">
+                      <i class="pi pi-shopping-cart text-xl mr-3"></i>
+                      <h3 class="text-xl font-black">Order Summary</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Summary Details -->
+              <div class="space-y-4 mb-8">
+                <div class="flex justify-between items-center py-3 border-b border-slate-200">
+                  <span class="text-slate-600">Subtotal ({{ cartItems.length }} items)</span>
+                  <span class="font-bold text-slate-800">{{ total }} MAD</span>
+                </div>
+                
+                <div class="flex justify-between items-center py-3 border-b border-slate-200">
+                  <span class="text-slate-600">Shipping</span>
+                  <span class="font-bold text-green-600">Free</span>
+                </div>
+                
+                <div class="flex justify-between items-center py-3 border-b border-slate-200">
+                  <span class="text-slate-600">Tax</span>
+                  <span class="font-bold text-slate-800">{{ (total * 0.1).toFixed(2) }} MAD</span>
+                </div>
+                
+                <div class="flex justify-between items-center py-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl px-4">
+                  <span class="text-xl font-black text-slate-800">Total</span>
+                  <span class="text-3xl font-black text-indigo-600">{{ (total * 1.1).toFixed(2) }} MAD</span>
+                </div>
+              </div>
+              
+              <!-- Promo Code Section -->
+              <div class="mb-8">
+                <div class="bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl p-4 border border-emerald-200">
+                  <div class="flex items-center mb-3">
+                    <i class="pi pi-gift text-emerald-600 mr-2"></i>
+                    <span class="font-bold text-emerald-800">Promo Code</span>
+                  </div>
+                  <div class="flex space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Enter code"
+                      class="flex-1 px-4 py-3 rounded-xl border border-emerald-200 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300" />
+                    <button class="promo-btn px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-500 text-white rounded-xl font-bold hover:from-emerald-600 hover:to-green-600 transition-all duration-300 hover:scale-105">
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Checkout Button -->
+              <button
+                (click)="navigateToCheckout()"
+                class="checkout-btn w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-black text-lg rounded-2xl shadow-2xl hover:shadow-indigo-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1">
+                <i class="pi pi-credit-card mr-3"></i>
+                Proceed to Checkout
+              </button>
+              
+              <!-- Security Badge -->
+              <div class="mt-6 text-center">
+                <div class="inline-flex items-center text-sm text-slate-500">
+                  <i class="pi pi-shield mr-2 text-green-500"></i>
+                  <span>Secure 256-bit SSL encryption</span>
+                </div>
+              </div>
+              
+              <!-- Continue Shopping -->
+              <div class="mt-6 text-center">
+                <button
+                  (click)="navigateToProducts()"
+                  class="continue-shopping-btn text-indigo-600 hover:text-indigo-800 font-bold transition-colors duration-300">
+                  <i class="pi pi-arrow-left mr-2"></i>
+                  Continue Shopping
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </ng-template>
-  </div>
+      
+      <!-- Empty Cart State -->
+      <ng-template #emptyCart>
+        <div class="text-center py-20">
+          <div class="max-w-2xl mx-auto">
+            
+            <!-- Empty Cart Illustration -->
+            <div class="mb-12">
+              <div class="relative inline-block">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-200 to-slate-300 rounded-full blur-2xl opacity-50"></div>
+                <div class="relative w-32 h-32 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full flex items-center justify-center mx-auto shadow-2xl">
+                  <i class="pi pi-shopping-cart text-6xl text-slate-400"></i>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Empty State Content -->
+            <div class="mb-12">
+              <h2 class="text-4xl md:text-5xl font-black text-slate-800 mb-6">
+                Your Cart is
+                <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Empty</span>
+              </h2>
+              <p class="text-xl text-slate-600 font-light leading-relaxed max-w-lg mx-auto">
+                Looks like you haven't added any items to your cart yet. Start exploring our amazing products!
+              </p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <button
+                (click)="navigateToProducts()"
+                class="empty-cart-primary-btn bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-12 py-4 rounded-2xl font-black text-lg shadow-2xl hover:shadow-indigo-500/25 transition-all duration-500 transform hover:scale-105 hover:-translate-y-1">
+                <i class="pi pi-shopping-bag mr-3"></i>
+                Start Shopping
+              </button>
+              <button class="empty-cart-secondary-btn border-2 border-slate-300 text-slate-700 hover:bg-slate-50 px-12 py-4 rounded-2xl font-black text-lg transition-all duration-500 hover:border-slate-400">
+                <i class="pi pi-heart mr-3"></i>
+                View Wishlist
+              </button>
+            </div>
+            
+            <!-- Popular Categories -->
+            <div class="mt-16">
+              <h3 class="text-2xl font-bold text-slate-800 mb-8">Popular Categories</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="category-card group bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-indigo-200 transform hover:-translate-y-2">
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <i class="pi pi-mobile text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-300">Electronics</h4>
+                  </div>
+                </div>
+                
+                <div class="category-card group bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-purple-200 transform hover:-translate-y-2">
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <i class="pi pi-star text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 group-hover:text-purple-600 transition-colors duration-300">Fashion</h4>
+                  </div>
+                </div>
+                
+                <div class="category-card group bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-emerald-200 transform hover:-translate-y-2">
+                  <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <i class="pi pi-home text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-800 group-hover:text-emerald-600 transition-colors duration-300">Home & Living</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </section>
 </div>

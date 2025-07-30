@@ -1,0 +1,195 @@
+/* Modern Login Page Styling - Matching Home Design System */
+
+/* CSS Variables for consistency */
+:root {
+  --primary-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --secondary-gradient: linear-gradient(135deg, #10b981, #059669);
+  --surface-glass: rgba(255, 255, 255, 0.1);
+  --surface-glass-hover: rgba(255, 255, 255, 0.15);
+  --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Modern Back Button */
+::ng-deep .modern-back-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-back-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Modern Input Styling */
+::ng-deep .modern-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+  outline: none !important;
+}
+
+::ng-deep .modern-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Modern Password Field */
+::ng-deep .modern-password .p-password {
+  width: 100% !important;
+}
+
+::ng-deep .modern-password .p-inputtext {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .modern-password .p-inputtext:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #60a5fa !important;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2) !important;
+  outline: none !important;
+}
+
+::ng-deep .modern-password .p-inputtext::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+::ng-deep .modern-password .p-password-toggle-icon {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.3s ease !important;
+}
+
+::ng-deep .modern-password .p-password-toggle-icon:hover {
+  color: white !important;
+}
+
+/* Modern Forgot Password Button */
+::ng-deep .modern-forgot-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.5rem 0 !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep .modern-forgot-btn:hover {
+  background: transparent !important;
+  text-decoration: underline !important;
+}
+
+/* Modern Login Submit Button */
+::ng-deep .modern-login-submit {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3), 0 10px 10px -5px rgba(59, 130, 246, 0.1) !important;
+}
+
+::ng-deep .modern-login-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #7c3aed) !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4) !important;
+}
+
+::ng-deep .modern-login-submit:disabled {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Modern Signup Link */
+::ng-deep .modern-signup-link {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.25rem 0.5rem !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+::ng-deep .modern-signup-link:hover {
+  background: rgba(59, 130, 246, 0.1) !important;
+  border-radius: 0.5rem !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Enhanced Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+}
+
+/* Glass Morphism Effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  ::ng-deep .modern-login-submit {
+    padding: 1rem 2rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  ::ng-deep .modern-login-submit {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Accessibility Enhancements */
+.focus-visible:focus {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark Mode Compatibility */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}

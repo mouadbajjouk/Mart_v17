@@ -97,4 +97,78 @@ export class CartComponent implements OnInit {
 
     return total;
   }
+
+  updateQuantity(productId: string, newQuantity: number) {
+    if (newQuantity <= 0) {
+      this.removeItem(productId);
+      return;
+    }
+
+    this._cartItems[productId] = newQuantity;
+    
+    // Update the cart item in the array
+    const cartItem = this.cartItems.find(item => item.id === productId);
+    if (cartItem) {
+      cartItem.quantity = newQuantity;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this._cartItems));
+    this.total = this.getTotal();
+
+    // this.messageService.add({
+    //   severity: 'success',
+    //   summary: 'Updated',
+    //   detail: 'Quantity updated successfully!',
+    //   life: 2000,
+    // });
+  }
+
+  increaseQuantity(productId: string) {
+    const currentQuantity = this._cartItems[productId] || 0;
+    this.updateQuantity(productId, currentQuantity + 1);
+  }
+
+  decreaseQuantity(productId: string) {
+    const currentQuantity = this._cartItems[productId] || 0;
+    this.updateQuantity(productId, currentQuantity - 1);
+  }
+
+  clearCart() {
+    this.cartItems = [];
+    this._cartItems = {};
+    this.total = 0;
+    localStorage.removeItem('cart');
+
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Cart Cleared',
+      detail: 'All items removed from cart!',
+      life: 3000,
+    });
+  }
+
+  saveForLater(productId: string) {
+    // For now, just show a message. You can implement wishlist functionality later
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Saved',
+      detail: 'Item saved for later!',
+      life: 2000,
+    });
+  }
+
+  navigateToProducts() {
+    // You can implement navigation logic here
+    window.location.href = '/products';
+  }
+
+  navigateToCheckout() {
+    // You can implement checkout navigation logic here
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Checkout',
+      detail: 'Proceeding to checkout...',
+      life: 2000,
+    });
+  }
 }

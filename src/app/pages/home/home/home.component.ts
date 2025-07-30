@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarouselModule } from 'primeng/carousel';
 import { Product } from '../../../domain/product';
 import { TagModule } from 'primeng/tag';
@@ -16,25 +17,37 @@ import { ProductService } from '../products/services/product.service';
 })
 export class HomeComponent {
   products: Product[] = [];
-
   responsiveOptions: any[] | undefined;
 
-  productService: ProductService = inject(ProductService);
+  private productService: ProductService = inject(ProductService);
+  private router: Router = inject(Router);
 
   constructor() {}
 
   ngOnInit() {
+    this.loadProducts();
+    this.setupResponsiveOptions();
+  }
+
+  private loadProducts() {
     this.productService.getProductsData().subscribe({
       next: data => (this.products = data.slice(0, 10)),
-              error: () => {
-          // Handle error silently
-        },
+      error: () => {
+        // Handle error silently
+      },
     });
+  }
 
+  private setupResponsiveOptions() {
     this.responsiveOptions = [
       {
+        breakpoint: '1400px',
+        numVisible: 3,
+        numScroll: 1,
+      },
+      {
         breakpoint: '1199px',
-        numVisible: 1,
+        numVisible: 2,
         numScroll: 1,
       },
       {
@@ -48,6 +61,23 @@ export class HomeComponent {
         numScroll: 1,
       },
     ];
+  }
+
+  // Navigation methods for hero section buttons
+  navigateToProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  navigateToCategories() {
+    this.router.navigate(['/products']); // Can be updated to categories page when available
+  }
+
+  navigateToAllProducts() {
+    this.router.navigate(['/products']);
+  }
+
+  navigateToContact() {
+    this.router.navigate(['/contact']);
   }
 
   getSeverity(
